@@ -20,7 +20,7 @@ With a key this returns a parcel-grade coordinate, `geometry_wkt` for the outlin
   "lat": 30.2515,
   "lng": -97.7494,
   "matchMethod": "seeded_fallback",
-  "approximate": true, // ← surfaced in the masthead
+  "approximate": true, 
   "provenance": {
     "location": {
       "source": "Groundwork seeded coordinate (no Mireye key present)",
@@ -140,7 +140,7 @@ ATTRIBUTION 2026-07-06..2026-07-14   -22.0%   confidence medium
   "computedAt": "2026-08-20T…",
   "observedTickets": 1590, "baselineTickets": 2038, "deltaPct": -22.0,
   "unexplainedPoints": -2.2,
-  "basketSizeDeltaPct": 0.2,               // flat → reach, not price
+  "basketSizeDeltaPct": 0.2,            
   "confidence": "medium",
   "confidenceReasons": [
     "9-day window — long enough to see a pattern.",
