@@ -1,0 +1,73 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "haqsetu",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/parvbansal/Desktop/haqsetu",
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/parvbansal/Desktop/parv-portfolio-2026",
+        "run",
+        "dev"
+      ],
+      "port": 5173
+    },
+    {
+      "name": "dtu-social",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/parvbansal/Desktop/dtu-social",
+        "run",
+        "dev"
+      ],
+      "port": 3200
+    },
+    {
+      "name": "phishing-app",
+      "runtimeExecutable": "/Users/parvbansal/Desktop/Phishing-Email-Detection/.venv/bin/python",
+      "runtimeArgs": [
+        "/Users/parvbansal/Desktop/Phishing-Email-Detection/app/app.py"
+      ],
+      "port": 5001
+    },
+    {
+      "name": "prospector-api",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/parvbansal/Desktop/prospector && npm run dev:api"
+      ],
+      "port": 4000
+    },
+    {
+      "name": "prospector-web",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/parvbansal/Desktop/prospector && npm run dev:web"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "groundwork",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/parvbansal/Desktop/groundwork && npm run dev"
+      ],
+      "port": 3400
+    }
+  ]
+}

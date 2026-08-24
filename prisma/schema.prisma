@@ -1,0 +1,318 @@
+// Groundwork — persistence.
+//
+// Everything joins on one Site (the parcel key from Mireye /v1/lookup) and a
+// date. That join is the product; see docs/ARCHITECTURE.md § The join.
+//
+// Postgres so the same schema runs locally and on Vercel. Geometry is stored
+// as GeoJSON in Json columns rather than PostGIS types — the demo does its
+// polygon maths in TypeScript, and requiring a PostGIS extension would break
+// the "paste a Neon URL and go" setup.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// A business address, resolved to a parcel. The root of every join.
+model Site {
+  id    String @id @default(cuid())
+  /// Short handle used in seeds and the admin console, e.g. "jos-coffee".
+  slug  String @unique
+  label String
+  /// What the operator typed, before Mireye normalised it.
+  inputAddress String
+
+  // --- Resolver output (Mireye /v1/geocode + /v1/lookup) -------------------
+  resolved          Boolean @default(false)
+  /// "resolved" | "clarify" | "no_match" — Mireye's own vocabulary, kept.
+  disposition       String?
+  resolvedAddress   String?
+  lat               Float?
+  lng               Float?
+  confidence        Float?
+  matchMethod       String?
+  accuracyType      String?
+
+  countyFips        String?
+  county            String?
+  state             String?
+  tractGeoid        String?
+  cbsaName          String?
+  timezone          String?
+  elevationM        Float?
+  femaFloodZone     String?
+  withinFloodplain  Boolean?
+
+  parcelId          String?
+  parcelApn         String?
+  parcelAreaM2      Float?
+  parcelOwner       String?
+  parcelZoning      String?
+  /// GeoJSON geometry of the parcel boundary, straight from Mireye.
+  parcelGeoJson     Json?
+
+  /// The full /v1/lookup body, kept verbatim so a citation can be expanded
+  /// down to the raw response the claim came from.
+  lookupRaw         Json?
+  /// county_market: population, migration, permits, HPI, employment, income.
+  countyMarket      Json?
+  /// Selected /v1/fetch fields (nearest_cafe_distance_m, poi_count_1km, …),
+  /// each with its own source/confidence, as Mireye returns them.
+  siteFields        Json?
+
+  resolvedAt DateTime?
+  createdAt  DateTime @default(now())
+
+  tradeAreas   TradeArea[]
+  ledgerDays   LedgerDay[]
+  worldEvents  WorldEvent[]
+  attributions Attribution[]
+  actions      ProposedAction[]
+  briefs       Brief[]
+  conversations Conversation[]
+}
+
+/// A drive-time trade area, and the naive circle we compare it against.
+///
+/// Mireye has no isochrone endpoint. This polygon is DERIVED: a radial probe
+/// grid is priced through /v1/proximity `op: screen`, and each bearing's
+/// boundary is interpolated between the furthest survivor and the nearest
+/// near-miss. Expensive (~960 credits) so it is computed once and kept.
+model TradeArea {
+  id      String @id @default(cuid())
+  siteId  String
+  site    Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  minutes Int
+
+  /// GeoJSON Polygon of the derived drive-time boundary.
+  polygonGeoJson Json
+  /// GeoJSON Polygon of the naive N-mile circle, for the contrast panel.
+  naiveCircleGeoJson Json
+  naiveRadiusMiles   Float
+
+  /// How the polygon was built, verbatim, for the methodology drawer.
+  method       String
+  bearings     Int
+  probesTested Int
+
+  // --- Reachability, from /v1/proximity op: labor_shed ---------------------
+  laborForce        Int?
+  population        Int?
+  tractsCounted     Int?
+  /// Same figures for the naive circle, so the contrast is a number not a vibe.
+  naivePopulation   Int?
+
+  areaSqMi          Float?
+  naiveAreaSqMi     Float?
+
+  creditsSpent Int      @default(0)
+  computedAt   DateTime @default(now())
+  /// "live" | "record" | "replay" — whether this came off the real API.
+  sourceMode   String   @default("replay")
+
+  @@unique([siteId, minutes])
+}
+
+/// A named, internally-consistent demo story. Switching scenarios swaps both
+/// the ledger and the world events, so the attribution output stays coherent.
+model Scenario {
+  key         String  @id
+  name        String
+  description String
+  /// Written by the scenario author: what the engine SHOULD conclude. Shown in
+  /// the admin console so a demo operator can tell drift from a real finding.
+  expectation String?
+  isActive    Boolean @default(false)
+  sortOrder   Int     @default(0)
+}
+
+/// One day of the owner's till. Mocked — shaped like Square Orders + QuickBooks.
+model LedgerDay {
+  id           String   @id @default(cuid())
+  siteId       String
+  site         Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  scenarioKey  String
+  date         DateTime @db.Date
+
+  tickets      Int
+  basketSizeUsd Float
+  revenueUsd   Float
+  adSpendUsd   Float @default(0)
+  grossMarginPct Float @default(0.62)
+
+  source       String @default("Square Orders API (mock)")
+
+  @@unique([siteId, scenarioKey, date])
+  @@index([siteId, scenarioKey, date])
+}
+
+/// One thing the street did, on one date range. This is the lever the demo
+/// turns: toggling these is what makes the attribution engine say something.
+model WorldEvent {
+  id          String   @id @default(cuid())
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  scenarioKey String
+
+  /// "road_closure" | "rain" | "heat" | "event" | "holiday" | "competitor_open"
+  /// | "fuel_price" | "news". The attribution engine's driver vocabulary.
+  kind        String
+  label       String
+  startDate   DateTime @db.Date
+  endDate     DateTime @db.Date
+
+  /// 0–1. How hard this hit, in the driver's own terms — the share of trade
+  /// area lost to a closure, the normalised intensity of a heat wave.
+  magnitude   Float    @default(0.5)
+  enabled     Boolean  @default(true)
+
+  source      String
+  sourceUrl   String?
+  /// Permit numbers, filing dates, temperatures — whatever the citation shows.
+  meta        Json?
+
+  @@index([siteId, scenarioKey, startDate])
+}
+
+/// One run of the attribution engine over one window. Deterministic: the
+/// numbers here are computed in lib/attribution, never by the model.
+model Attribution {
+  id          String   @id @default(cuid())
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  scenarioKey String
+
+  windowStart DateTime @db.Date
+  windowEnd   DateTime @db.Date
+
+  observedTickets  Int
+  baselineTickets  Float
+  deltaPct         Float
+
+  /// Array of { key, label, points, share, confidence, citations[] }.
+  drivers          Json
+  unexplainedPoints Float
+  confidence       String
+
+  /// The model's prose. Written from `drivers`, never in place of it.
+  narration        String?
+  narrationModel   String?
+
+  computedAt DateTime @default(now())
+
+  @@index([siteId, scenarioKey, windowStart])
+}
+
+/// A module's proposal. Anything that spends, orders, or posts publicly stops
+/// here until a human taps approve.
+model ProposedAction {
+  id          String @id @default(cuid())
+  siteId      String
+  site        Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  scenarioKey String
+
+  /// "advertising" | "product_stock" | "seasonality" | "placement"
+  /// | "threat_watch" | "trade_area"
+  module      String
+  title       String
+  rationale   String
+
+  expectedValueUsd Float?
+  costUsd          Float?
+  /// Free text: "9-day window", "next 14 days".
+  horizon          String?
+
+  /// False for alerts, drafts and analysis; true for spend, orders, posts.
+  requiresApproval Boolean @default(true)
+  /// "draft" | "pending" | "approved" | "rejected" | "executed"
+  status           String  @default("pending")
+
+  /// The simulated actuator payload — a Meta-shaped campaign object, a
+  /// purchase order, an alert. Rendered for review; never dispatched.
+  payload   Json?
+  /// Array of Provenance objects backing every number in `rationale`.
+  evidence  Json?
+
+  createdAt  DateTime  @default(now())
+  decidedAt  DateTime?
+  executedAt DateTime?
+  decidedBy  String?
+
+  @@index([siteId, scenarioKey, status])
+}
+
+/// The weekly one-pager. The habit the dossier says we actually sell.
+model Brief {
+  id          String   @id @default(cuid())
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  scenarioKey String
+
+  periodStart DateTime @db.Date
+  periodEnd   DateTime @db.Date
+  headline    String
+  /// Markdown body with inline citation markers.
+  body        String
+  citations   Json
+
+  createdAt DateTime  @default(now())
+  /// "Sent" means a row was updated. No mail leaves this build.
+  sentAt    DateTime?
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  siteId    String
+  site      Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  scenarioKey String
+  createdAt DateTime @default(now())
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  /// "user" | "assistant" | "tool"
+  role      String
+  content   String
+  /// Which of the six modules answered, when one did.
+  module    String?
+  /// Tool calls the planner made, in order — powers the "watch it work" trace.
+  trace     Json?
+  citations Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+/// Every call to Mireye, logged. Two jobs: it powers citation drill-down to
+/// the raw response, and it is the credit ledger — the demo shows what the
+/// ground layer actually cost.
+model MireyeCall {
+  id       String @id @default(cuid())
+  endpoint String
+  /// "live" | "record" | "replay"
+  mode     String
+
+  request  Json
+  response Json?
+
+  httpStatus       Int?
+  errorCode        String?
+  creditsEstimated Int? @default(0)
+  paidDrivingCalcs Int? @default(0)
+  durationMs       Int?
+
+  siteId    String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

@@ -1,0 +1,42 @@
+{
+  "name": "groundwork",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3400",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed": "tsx prisma/seed.ts",
+    "db:push": "prisma db push",
+    "copy:maplibre": "node scripts/copy-maplibre-worker.mjs",
+    "predev": "node scripts/copy-maplibre-worker.mjs",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs",
+    "mireye:resolve": "node --env-file=.env --import tsx scripts/mireye-record.ts resolve",
+    "mireye:isochrone": "node --env-file=.env --import tsx scripts/mireye-record.ts isochrone",
+    "mireye:iou": "node --env-file=.env --import tsx scripts/mireye-record.ts iou"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.9.1",
+    "date-fns": "^4.4.0",
+    "maplibre-gl": "^6.4.1",
+    "next": "16.3.1",
+    "openai": "^7.5.0",
+    "prisma": "^7.9.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.12",
+    "typescript": "^5"
+  }
+}

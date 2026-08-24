@@ -1,0 +1,104 @@
+{
+  "key": "road-closure-dip",
+  "name": "Road closure dip",
+  "site": "jos-coffee",
+  "description": "Nine days of resurfacing on S Congress takes a bite out of the northbound approach. Real Austin rain lands inside the same window. Tickets fall about 22%, basket size holds. The owner thinks her Tuesdays are broken.",
+  "expectation": "The engine should find roughly a 22% ticket shortfall over 6-14 Jul, attribute the largest share to the closure, a smaller share to the real rain days that fall inside the window, and leave a few points UNEXPLAINED - there is a hidden in-shop failure no feed carries. Basket size holding flat is the tell that this was reach, not price.",
+  "sortOrder": 1,
+  "window": {
+    "start": "2026-05-19",
+    "end": "2026-08-16"
+  },
+  "analysisWindow": {
+    "start": "2026-07-06",
+    "end": "2026-07-14"
+  },
+  "_comment_baseline": "The data-generating process for the mock till. The attribution engine does NOT read this block \u2014 it estimates its own baseline from the series. Comparing the two is how we measure recovery error; see docs/DATA_FLOW.md.",
+  "baseline": {
+    "seed": 4471,
+    "dayOfWeekTickets": {
+      "sun": 262,
+      "mon": 198,
+      "tue": 204,
+      "wed": 211,
+      "thu": 218,
+      "fri": 247,
+      "sat": 288
+    },
+    "basketSizeUsd": 9.4,
+    "grossMarginPct": 0.62,
+    "dailyAdSpendUsd": 48,
+    "noisePct": 0.055,
+    "trendPctPerMonth": 0.4
+  },
+  "_comment_events": "magnitude = how big the thing was in the world (share of the 8-min polygon lost, normalised heat intensity). effect = what it did to the till, and is ground truth the engine must recover without being told.",
+  "events": [
+    {
+      "kind": "road_closure",
+      "label": "S Congress Ave resurfacing, Elizabeth St to Monroe St",
+      "startDate": "2026-07-06",
+      "endDate": "2026-07-14",
+      "magnitude": 0.41,
+      "effect": {
+        "ticketsPct": -0.165,
+        "basketPct": 0.0
+      },
+      "source": "City of Austin right-of-way permit portal (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+      "meta": {
+        "permit": "2026-071198 RW",
+        "filed": "2026-06-19",
+        "agency": "Austin Transportation & Public Works",
+        "work": "Mill and overlay, northbound lanes",
+        "polygonAreaLostPct": 41,
+        "scheduledReopen": "2026-07-15"
+      }
+    },
+    {
+      "kind": "holiday",
+      "label": "Independence Day",
+      "startDate": "2026-07-04",
+      "endDate": "2026-07-04",
+      "magnitude": 1.0,
+      "effect": {
+        "ticketsPct": -0.18,
+        "basketPct": 0.05
+      },
+      "source": "Nager.Date public holidays (mock)",
+      "sourceUrl": "https://date.nager.at/",
+      "meta": {
+        "type": "federal",
+        "note": "Outside the analysis window \u2014 included so the baseline has to cope with it."
+      }
+    }
+  ],
+  "_comment_hidden": "Applied by the generator, never surfaced to the world layer. This is the share of the dip that no API carries \u2014 it is what makes 'unexplained' a real number instead of a rounding artifact.",
+  "hiddenEvents": [
+    {
+      "kind": "news",
+      "label": "Espresso grinder failure, reduced service Tue-Thu",
+      "startDate": "2026-07-07",
+      "endDate": "2026-07-09",
+      "magnitude": 0.5,
+      "effect": {
+        "ticketsPct": -0.09,
+        "basketPct": -0.02
+      },
+      "source": "NOT IN ANY FEED \u2014 generator only",
+      "meta": {
+        "note": "Something that happened inside the shop. The engine cannot see it and must report it as unexplained."
+      }
+    }
+  ],
+  "_comment_weather": "This business's sensitivity to weather, per unit of driver magnitude. The weather DRIVERS themselves are real \u2014 pulled from Open-Meteo for this parcel and scored against its own 1991-2020 normals \u2014 so the till reacts to weather Austin actually had, not weather we invented. Only the response coefficient is authored, because we have no real till to fit it from.",
+  "weatherResponse": {
+    "rain": {
+      "ticketsPct": -0.24,
+      "basketPct": 0.01
+    },
+    "heat": {
+      "ticketsPct": -0.09,
+      "basketPct": 0.07
+    }
+  }
+}
