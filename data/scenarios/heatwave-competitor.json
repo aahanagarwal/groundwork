@@ -1,0 +1,107 @@
+{
+  "key": "heatwave-competitor",
+  "name": "Heat + new competitor",
+  "site": "jos-coffee",
+  "description": "The heat spell Austin actually had - 21-22 July, 4.6C above the 30-year normal for those dates - and a new coffee bar opening 380m up the block on 20 July. Tickets fall but basket size RISES: fewer people, buying iced drinks, later in the day. Two drivers pulling opposite ways on one series, separable only because the competitor is still there after the heat breaks.",
+  "expectation": "Two things should happen, and the second is the point. The competitor should be identified (~-5 pts) because it is still there after the heat breaks - days when only one driver is active are the only days that identify either. The HEAT should come out UNPROVEN: two days is almost no statistical power, so its band crosses zero and the engine says it may have done nothing. That is the correct answer, not a shortfall. A scenario named after a heat wave whose heat the engine refuses to claim is the clearest demonstration in the demo that it does not over-read thin evidence.",
+  "sortOrder": 2,
+  "window": {
+    "start": "2026-05-19",
+    "end": "2026-08-16"
+  },
+  "analysisWindow": {
+    "start": "2026-07-16",
+    "end": "2026-07-31"
+  },
+  "baseline": {
+    "seed": 3822,
+    "dayOfWeekTickets": {
+      "sun": 262,
+      "mon": 198,
+      "tue": 204,
+      "wed": 211,
+      "thu": 218,
+      "fri": 247,
+      "sat": 288
+    },
+    "basketSizeUsd": 9.4,
+    "grossMarginPct": 0.62,
+    "dailyAdSpendUsd": 48,
+    "noisePct": 0.055,
+    "trendPctPerMonth": 0.4
+  },
+  "events": [
+    {
+      "kind": "competitor_open",
+      "label": "New coffee bar, 380m north on S Congress",
+      "startDate": "2026-07-20",
+      "endDate": "2026-08-16",
+      "magnitude": 0.5,
+      "effect": {
+        "ticketsPct": -0.06,
+        "basketPct": -0.01
+      },
+      "source": "City of Austin certificate of occupancy (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/building-permits",
+      "meta": {
+        "permit": "2026-048812 CO",
+        "filed": "2026-05-11",
+        "issued": "2026-07-20",
+        "distanceM": 380,
+        "category": "Coffee shop",
+        "businessName": "South Congress Brew Co.",
+        "googleRating": 4.3,
+        "priceLevel": "$$",
+        "estimatedDailyTraffic": 180,
+        "note": "Persists after the heat breaks. That persistence is the only thing that identifies it separately from the heat, which is why the window extends well past the hot days.",
+        "at": { "lat": 30.2549, "lng": -97.7489 }
+      }
+    },
+    {
+      "kind": "event",
+      "label": "Austin FC home match, Q2 Stadium",
+      "startDate": "2026-07-25",
+      "endDate": "2026-07-25",
+      "magnitude": 0.4,
+      "effect": {
+        "ticketsPct": 0.11,
+        "basketPct": 0.02
+      },
+      "source": "Ticketmaster Discovery API (mock)",
+      "sourceUrl": "https://developer.ticketmaster.com/",
+      "meta": {
+        "venue": "Q2 Stadium",
+        "attendance": 20738,
+        "note": "A positive driver inside a negative window - the engine must not net it away silently.",
+        "at": { "lat": 30.3885, "lng": -97.7194 }
+      }
+    }
+  ],
+  "hiddenEvents": [
+    {
+      "kind": "news",
+      "label": "Lead barista left; slower service at the morning peak",
+      "startDate": "2026-07-27",
+      "endDate": "2026-08-16",
+      "magnitude": 0.5,
+      "effect": {
+        "ticketsPct": -0.05,
+        "basketPct": 0.0
+      },
+      "source": "NOT IN ANY FEED - generator only",
+      "meta": {
+        "note": "Staffing. No permit, no forecast, no feed. Shows up as unexplained."
+      }
+    }
+  ],
+  "weatherResponse": {
+    "rain": {
+      "ticketsPct": -0.24,
+      "basketPct": 0.01
+    },
+    "heat": {
+      "ticketsPct": -0.14,
+      "basketPct": 0.09
+    }
+  }
+}

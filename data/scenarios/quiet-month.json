@@ -1,0 +1,44 @@
+{
+  "key": "quiet-month",
+  "name": "Quiet month",
+  "site": "jos-coffee",
+  "description": "Nothing happened. The street was open, the weather was ordinary, no competitor filed anything. Revenue wobbles within normal variance.",
+  "expectation": "The engine should decline to explain the wobble. No driver should take a meaningful share, unexplained should be nearly all of a small residual, and confidence should be LOW - because there is no signal, not because the model is broken. This scenario exists to prove the engine says 'I don't know' when it doesn't.",
+  "sortOrder": 0,
+  "window": {
+    "start": "2026-05-19",
+    "end": "2026-08-16"
+  },
+  "analysisWindow": {
+    "start": "2026-08-04",
+    "end": "2026-08-12"
+  },
+  "baseline": {
+    "seed": 1801,
+    "dayOfWeekTickets": {
+      "sun": 262,
+      "mon": 198,
+      "tue": 204,
+      "wed": 211,
+      "thu": 218,
+      "fri": 247,
+      "sat": 288
+    },
+    "basketSizeUsd": 9.4,
+    "grossMarginPct": 0.62,
+    "dailyAdSpendUsd": 48,
+    "noisePct": 0.055,
+    "trendPctPerMonth": 0.4
+  },
+  "events": [],
+  "weatherResponse": {
+    "rain": {
+      "ticketsPct": -0.24,
+      "basketPct": 0.01
+    },
+    "heat": {
+      "ticketsPct": -0.09,
+      "basketPct": 0.07
+    }
+  }
+}

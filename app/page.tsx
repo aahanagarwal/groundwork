@@ -1,69 +1,127 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Sheet, Footer } from "@/components/chrome";
+import { DEMO_SITES } from "@/lib/demo-sites";
+import { WelcomeHero } from "@/components/welcome-hero";
+import { ValuePillars } from "@/components/value-pillars";
+import { HowItWorks } from "@/components/how-it-works";
+import { SocialTrends } from "@/components/social-trends";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* --- Hero: the first thing a business owner reads ------------------- */}
+      <WelcomeHero />
+
+      {/* --- Value Pillars: how Groundwork helps your business -------------- */}
+      <Sheet>
+        <ValuePillars />
+      </Sheet>
+
+      {/* --- How It Works: step-by-step walkthrough ------------------------- */}
+      <Sheet className="mt-4">
+        <HowItWorks />
+      </Sheet>
+
+      {/* --- Social & Positioning Intelligence ----------------------------- */}
+      <Sheet className="mt-8">
+        <SocialTrends />
+      </Sheet>
+
+      {/* --- Address Picker ------------------------------------------------- */}
+      <Sheet className="mt-16" id="addresses">
+        <div className="mb-2">
+          <span className="label">Try it now</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <h2 className="font-display text-[clamp(24px,3.5vw,38px)] uppercase font-extrabold leading-[0.98] tracking-[-0.02em]">
+          Pick a real address
+        </h2>
+        <p className="mt-3 mb-8 max-w-[62ch] text-[18px] leading-[1.45] text-ink/80">
+          Three real Austin food-and-beverage businesses, each showing a
+          different story. Pick one to see exactly how Groundwork reads the
+          ground, explains the numbers, and proposes what to do.
+        </p>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {DEMO_SITES.map((site) => (
+            <Link
+              key={site.slug}
+              href={`/site/${site.slug}`}
+              className="card group block p-0 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+            >
+              {/* Top accent bar */}
+              <div className="h-1.5 w-full bg-survey" />
+
+              <div className="p-5">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="label">{site.category}</span>
+                  <span className="inline-block border border-survey bg-survey px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-paper">
+                    Live demo
+                  </span>
+                </div>
+
+                <div className="font-display text-[19px] font-bold uppercase leading-tight">
+                  {site.label}
+                </div>
+                <div className="mt-2 font-mono text-[12px] leading-snug text-stone">
+                  {site.address}
+                </div>
+
+                <p className="mt-3 text-[15px] leading-snug text-ink/75">
+                  {site.whyThisOne}
+                </p>
+
+                {/* Teaser CTA */}
+                <div className="mt-4 pt-3 border-t border-rule flex items-center justify-between">
+                  <span className="font-mono text-[11px] text-survey uppercase tracking-wide">
+                    See the full analysis
+                  </span>
+                  <span className="font-mono text-[14px] text-ink group-hover:translate-x-1 transition-transform duration-200">
+                    →
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </main>
-    </div>
+      </Sheet>
+
+      {/* --- Trust & Credibility -------------------------------------------- */}
+      <Sheet className="mt-16 mb-8">
+        <div className="card-flat p-6">
+          <div className="label mb-3">Built on honesty, not hype</div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Every number cited",
+                desc: "Click any figure and see where it came from, what produced it, and what it cannot claim.",
+              },
+              {
+                title: "Uncertainty named, not hidden",
+                desc: "When we can't measure something, we say so - and we never tell you to act on it.",
+              },
+              {
+                title: "No vanity metrics",
+                desc: "Customers and dollars, not engagement scores. Units you staff and discount with.",
+              },
+              {
+                title: "You approve before anything moves",
+                desc: "Every spend, order, and public post stops at the approval gate. Alerts skip it - they're free.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="flex flex-col gap-1.5">
+                <h3 className="font-display text-[14px] font-bold uppercase leading-tight">
+                  {item.title}
+                </h3>
+                <p className="text-[14px] leading-snug text-ink/70">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Sheet>
+
+      <Footer />
+    </>
   );
 }

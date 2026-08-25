@@ -1,0 +1,1044 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/proximity",
+  "recordedAt": "2026-08-24T12:06:17.255Z",
+  "request": {
+    "op": "screen",
+    "origins": [
+      "30.275887,-97.731278",
+      "30.287466,-97.731278",
+      "30.304834,-97.731278",
+      "30.327991,-97.731278",
+      "30.275447,-97.728713",
+      "30.286144,-97.723581",
+      "30.302189,-97.715882",
+      "30.323581,-97.705612",
+      "30.274192,-97.726538",
+      "30.282378,-97.717057",
+      "30.294657,-97.702832",
+      "30.311026,-97.683860",
+      "30.272313,-97.725085",
+      "30.276743,-97.712698",
+      "30.283385,-97.694115",
+      "30.292238,-97.669335",
+      "30.270098,-97.724575",
+      "30.270096,-97.711168",
+      "30.270092,-97.691059",
+      "30.270081,-97.664246",
+      "30.267882,-97.725085",
+      "30.263450,-97.712700",
+      "30.256800,-97.694125",
+      "30.247929,-97.669363",
+      "30.266004,-97.726538",
+      "30.257816,-97.717060",
+      "30.245533,-97.702846",
+      "30.229153,-97.683899",
+      "30.264749,-97.728713",
+      "30.254052,-97.723584",
+      "30.238006,-97.715892",
+      "30.216610,-97.705640",
+      "30.264309,-97.731278",
+      "30.252730,-97.731278",
+      "30.235362,-97.731278",
+      "30.212205,-97.731278",
+      "30.264749,-97.733843",
+      "30.254052,-97.738972",
+      "30.238006,-97.746664",
+      "30.216610,-97.756916",
+      "30.266004,-97.736018",
+      "30.257816,-97.745496",
+      "30.245533,-97.759710",
+      "30.229153,-97.778657",
+      "30.267882,-97.737471",
+      "30.263450,-97.749856",
+      "30.256800,-97.768431",
+      "30.247929,-97.793193",
+      "30.270098,-97.737981",
+      "30.270096,-97.751388",
+      "30.270092,-97.771497",
+      "30.270081,-97.798310",
+      "30.272313,-97.737471",
+      "30.276743,-97.749858",
+      "30.283385,-97.768441",
+      "30.292238,-97.793221",
+      "30.274192,-97.736018",
+      "30.282378,-97.745499",
+      "30.294657,-97.759724",
+      "30.311026,-97.778696",
+      "30.275447,-97.733843",
+      "30.286144,-97.738975",
+      "30.302189,-97.746674",
+      "30.323581,-97.756944"
+    ],
+    "anchors": [
+      "30.270098,-97.731278"
+    ],
+    "max_minutes": 8,
+    "max_credits": 1200
+  },
+  "response": {
+    "op": "screen",
+    "survivors": [
+      {
+        "origin_index": 0,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 82,
+        "best_duration_minutes": 1.3666666666666667
+      },
+      {
+        "origin_index": 1,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 339,
+        "best_duration_minutes": 5.65
+      },
+      {
+        "origin_index": 2,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 431,
+        "best_duration_minutes": 7.183333333333334
+      },
+      {
+        "origin_index": 4,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 100,
+        "best_duration_minutes": 1.6666666666666667
+      },
+      {
+        "origin_index": 5,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 237,
+        "best_duration_minutes": 3.95
+      },
+      {
+        "origin_index": 6,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 293,
+        "best_duration_minutes": 4.883333333333334
+      },
+      {
+        "origin_index": 8,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 105,
+        "best_duration_minutes": 1.75
+      },
+      {
+        "origin_index": 9,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 221,
+        "best_duration_minutes": 3.683333333333333
+      },
+      {
+        "origin_index": 10,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 401,
+        "best_duration_minutes": 6.683333333333334
+      },
+      {
+        "origin_index": 12,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 109,
+        "best_duration_minutes": 1.8166666666666667
+      },
+      {
+        "origin_index": 13,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 230,
+        "best_duration_minutes": 3.8333333333333335
+      },
+      {
+        "origin_index": 14,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 335,
+        "best_duration_minutes": 5.583333333333333
+      },
+      {
+        "origin_index": 16,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 92,
+        "best_duration_minutes": 1.5333333333333334
+      },
+      {
+        "origin_index": 17,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 218,
+        "best_duration_minutes": 3.6333333333333333
+      },
+      {
+        "origin_index": 18,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 413,
+        "best_duration_minutes": 6.883333333333334
+      },
+      {
+        "origin_index": 20,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 71,
+        "best_duration_minutes": 1.1833333333333333
+      },
+      {
+        "origin_index": 21,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 213,
+        "best_duration_minutes": 3.55
+      },
+      {
+        "origin_index": 22,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 363,
+        "best_duration_minutes": 6.05
+      },
+      {
+        "origin_index": 24,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 163,
+        "best_duration_minutes": 2.716666666666667
+      },
+      {
+        "origin_index": 25,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 229,
+        "best_duration_minutes": 3.816666666666667
+      },
+      {
+        "origin_index": 28,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 100,
+        "best_duration_minutes": 1.6666666666666667
+      },
+      {
+        "origin_index": 29,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 275,
+        "best_duration_minutes": 4.583333333333333
+      },
+      {
+        "origin_index": 30,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 426,
+        "best_duration_minutes": 7.1
+      },
+      {
+        "origin_index": 32,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 106,
+        "best_duration_minutes": 1.7666666666666666
+      },
+      {
+        "origin_index": 33,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 232,
+        "best_duration_minutes": 3.8666666666666667
+      },
+      {
+        "origin_index": 34,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 388,
+        "best_duration_minutes": 6.466666666666667
+      },
+      {
+        "origin_index": 36,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 84,
+        "best_duration_minutes": 1.4
+      },
+      {
+        "origin_index": 37,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 214,
+        "best_duration_minutes": 3.566666666666667
+      },
+      {
+        "origin_index": 38,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 344,
+        "best_duration_minutes": 5.733333333333333
+      },
+      {
+        "origin_index": 40,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 86,
+        "best_duration_minutes": 1.4333333333333333
+      },
+      {
+        "origin_index": 41,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 296,
+        "best_duration_minutes": 4.933333333333334
+      },
+      {
+        "origin_index": 44,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 109,
+        "best_duration_minutes": 1.8166666666666667
+      },
+      {
+        "origin_index": 45,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 234,
+        "best_duration_minutes": 3.9
+      },
+      {
+        "origin_index": 48,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 76,
+        "best_duration_minutes": 1.2666666666666666
+      },
+      {
+        "origin_index": 49,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 237,
+        "best_duration_minutes": 3.95
+      },
+      {
+        "origin_index": 52,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 79,
+        "best_duration_minutes": 1.3166666666666667
+      },
+      {
+        "origin_index": 53,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 208,
+        "best_duration_minutes": 3.466666666666667
+      },
+      {
+        "origin_index": 54,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 478,
+        "best_duration_minutes": 7.966666666666667
+      },
+      {
+        "origin_index": 56,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 137,
+        "best_duration_minutes": 2.283333333333333
+      },
+      {
+        "origin_index": 57,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 269,
+        "best_duration_minutes": 4.483333333333333
+      },
+      {
+        "origin_index": 58,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 417,
+        "best_duration_minutes": 6.95
+      },
+      {
+        "origin_index": 60,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 96,
+        "best_duration_minutes": 1.6
+      },
+      {
+        "origin_index": 61,
+        "best_anchor_index": 0,
+        "best_duration_seconds": 439,
+        "best_duration_minutes": 7.316666666666666
+      }
+    ],
+    "screened_out": [
+      {
+        "origin_index": 3,
+        "best_duration_seconds": 551,
+        "best_duration_minutes": 9.183333333333334
+      },
+      {
+        "origin_index": 7,
+        "best_duration_seconds": 519,
+        "best_duration_minutes": 8.65
+      },
+      {
+        "origin_index": 11,
+        "best_duration_seconds": 602,
+        "best_duration_minutes": 10.033333333333333
+      },
+      {
+        "origin_index": 15,
+        "best_duration_seconds": 582,
+        "best_duration_minutes": 9.7
+      },
+      {
+        "origin_index": 19,
+        "best_duration_seconds": 832,
+        "best_duration_minutes": 13.866666666666667
+      },
+      {
+        "origin_index": 23,
+        "best_duration_seconds": 1142,
+        "best_duration_minutes": 19.033333333333335
+      },
+      {
+        "origin_index": 26,
+        "best_duration_seconds": 666,
+        "best_duration_minutes": 11.1
+      },
+      {
+        "origin_index": 27,
+        "best_duration_seconds": 531,
+        "best_duration_minutes": 8.85
+      },
+      {
+        "origin_index": 31,
+        "best_duration_seconds": 628,
+        "best_duration_minutes": 10.466666666666667
+      },
+      {
+        "origin_index": 35,
+        "best_duration_seconds": 503,
+        "best_duration_minutes": 8.383333333333333
+      },
+      {
+        "origin_index": 39,
+        "best_duration_seconds": 504,
+        "best_duration_minutes": 8.4
+      },
+      {
+        "origin_index": 42,
+        "best_duration_seconds": 485,
+        "best_duration_minutes": 8.083333333333334
+      },
+      {
+        "origin_index": 43,
+        "best_duration_seconds": 608,
+        "best_duration_minutes": 10.133333333333333
+      },
+      {
+        "origin_index": 46,
+        "best_duration_seconds": 499,
+        "best_duration_minutes": 8.316666666666666
+      },
+      {
+        "origin_index": 47,
+        "best_duration_seconds": 773,
+        "best_duration_minutes": 12.883333333333333
+      },
+      {
+        "origin_index": 50,
+        "best_duration_seconds": 497,
+        "best_duration_minutes": 8.283333333333333
+      },
+      {
+        "origin_index": 51,
+        "best_duration_seconds": 669,
+        "best_duration_minutes": 11.15
+      },
+      {
+        "origin_index": 55,
+        "best_duration_seconds": 665,
+        "best_duration_minutes": 11.083333333333334
+      },
+      {
+        "origin_index": 59,
+        "best_duration_seconds": 1187,
+        "best_duration_minutes": 19.783333333333335
+      },
+      {
+        "origin_index": 62,
+        "best_duration_seconds": 505,
+        "best_duration_minutes": 8.416666666666666
+      },
+      {
+        "origin_index": 63,
+        "best_duration_seconds": 642,
+        "best_duration_minutes": 10.7
+      }
+    ],
+    "resolved_origins": [
+      {
+        "query": "30.275887,-97.731278",
+        "lat": 30.275887,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.287466,-97.731278",
+        "lat": 30.287466,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.304834,-97.731278",
+        "lat": 30.304834,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.327991,-97.731278",
+        "lat": 30.327991,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.275447,-97.728713",
+        "lat": 30.275447,
+        "lng": -97.728713,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.286144,-97.723581",
+        "lat": 30.286144,
+        "lng": -97.723581,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.302189,-97.715882",
+        "lat": 30.302189,
+        "lng": -97.715882,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.323581,-97.705612",
+        "lat": 30.323581,
+        "lng": -97.705612,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.274192,-97.726538",
+        "lat": 30.274192,
+        "lng": -97.726538,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.282378,-97.717057",
+        "lat": 30.282378,
+        "lng": -97.717057,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.294657,-97.702832",
+        "lat": 30.294657,
+        "lng": -97.702832,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.311026,-97.683860",
+        "lat": 30.311026,
+        "lng": -97.68386,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.272313,-97.725085",
+        "lat": 30.272313,
+        "lng": -97.725085,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.276743,-97.712698",
+        "lat": 30.276743,
+        "lng": -97.712698,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.283385,-97.694115",
+        "lat": 30.283385,
+        "lng": -97.694115,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.292238,-97.669335",
+        "lat": 30.292238,
+        "lng": -97.669335,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270098,-97.724575",
+        "lat": 30.270098,
+        "lng": -97.724575,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270096,-97.711168",
+        "lat": 30.270096,
+        "lng": -97.711168,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270092,-97.691059",
+        "lat": 30.270092,
+        "lng": -97.691059,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270081,-97.664246",
+        "lat": 30.270081,
+        "lng": -97.664246,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.267882,-97.725085",
+        "lat": 30.267882,
+        "lng": -97.725085,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.263450,-97.712700",
+        "lat": 30.26345,
+        "lng": -97.7127,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.256800,-97.694125",
+        "lat": 30.2568,
+        "lng": -97.694125,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.247929,-97.669363",
+        "lat": 30.247929,
+        "lng": -97.669363,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.266004,-97.726538",
+        "lat": 30.266004,
+        "lng": -97.726538,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.257816,-97.717060",
+        "lat": 30.257816,
+        "lng": -97.71706,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.245533,-97.702846",
+        "lat": 30.245533,
+        "lng": -97.702846,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.229153,-97.683899",
+        "lat": 30.229153,
+        "lng": -97.683899,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.264749,-97.728713",
+        "lat": 30.264749,
+        "lng": -97.728713,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.254052,-97.723584",
+        "lat": 30.254052,
+        "lng": -97.723584,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.238006,-97.715892",
+        "lat": 30.238006,
+        "lng": -97.715892,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.216610,-97.705640",
+        "lat": 30.21661,
+        "lng": -97.70564,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.264309,-97.731278",
+        "lat": 30.264309,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.252730,-97.731278",
+        "lat": 30.25273,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.235362,-97.731278",
+        "lat": 30.235362,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.212205,-97.731278",
+        "lat": 30.212205,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.264749,-97.733843",
+        "lat": 30.264749,
+        "lng": -97.733843,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.254052,-97.738972",
+        "lat": 30.254052,
+        "lng": -97.738972,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.238006,-97.746664",
+        "lat": 30.238006,
+        "lng": -97.746664,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.216610,-97.756916",
+        "lat": 30.21661,
+        "lng": -97.756916,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.266004,-97.736018",
+        "lat": 30.266004,
+        "lng": -97.736018,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.257816,-97.745496",
+        "lat": 30.257816,
+        "lng": -97.745496,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.245533,-97.759710",
+        "lat": 30.245533,
+        "lng": -97.75971,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.229153,-97.778657",
+        "lat": 30.229153,
+        "lng": -97.778657,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.267882,-97.737471",
+        "lat": 30.267882,
+        "lng": -97.737471,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.263450,-97.749856",
+        "lat": 30.26345,
+        "lng": -97.749856,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.256800,-97.768431",
+        "lat": 30.2568,
+        "lng": -97.768431,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.247929,-97.793193",
+        "lat": 30.247929,
+        "lng": -97.793193,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270098,-97.737981",
+        "lat": 30.270098,
+        "lng": -97.737981,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270096,-97.751388",
+        "lat": 30.270096,
+        "lng": -97.751388,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270092,-97.771497",
+        "lat": 30.270092,
+        "lng": -97.771497,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.270081,-97.798310",
+        "lat": 30.270081,
+        "lng": -97.79831,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.272313,-97.737471",
+        "lat": 30.272313,
+        "lng": -97.737471,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.276743,-97.749858",
+        "lat": 30.276743,
+        "lng": -97.749858,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.283385,-97.768441",
+        "lat": 30.283385,
+        "lng": -97.768441,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.292238,-97.793221",
+        "lat": 30.292238,
+        "lng": -97.793221,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.274192,-97.736018",
+        "lat": 30.274192,
+        "lng": -97.736018,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.282378,-97.745499",
+        "lat": 30.282378,
+        "lng": -97.745499,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.294657,-97.759724",
+        "lat": 30.294657,
+        "lng": -97.759724,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.311026,-97.778696",
+        "lat": 30.311026,
+        "lng": -97.778696,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.275447,-97.733843",
+        "lat": 30.275447,
+        "lng": -97.733843,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.286144,-97.738975",
+        "lat": 30.286144,
+        "lng": -97.738975,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.302189,-97.746674",
+        "lat": 30.302189,
+        "lng": -97.746674,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.323581,-97.756944",
+        "lat": 30.323581,
+        "lng": -97.756944,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      }
+    ],
+    "resolved_anchors": [
+      {
+        "query": "30.270098,-97.731278",
+        "lat": 30.270098,
+        "lng": -97.731278,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      }
+    ],
+    "paid_driving_calcs": 64,
+    "notes": [
+      "coverage: US + Canada",
+      "durations reflect typical traffic, not real-time"
+    ],
+    "credits_charged": 768
+  }
+}

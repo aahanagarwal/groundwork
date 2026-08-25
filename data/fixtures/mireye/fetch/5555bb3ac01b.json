@@ -1,0 +1,232 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/fetch",
+  "recordedAt": "2026-08-24T12:05:39.598Z",
+  "request": {
+    "lat": 30.231538,
+    "lng": -97.787811,
+    "fields": [
+      "nearest_cafe_distance_m",
+      "nearest_cafe_name",
+      "nearest_restaurant_distance_m",
+      "nearest_restaurant_name",
+      "nearest_bar_distance_m",
+      "poi_count_1km",
+      "nearest_school_distance_m",
+      "nearest_school_name",
+      "nearest_major_road_name",
+      "nearest_major_road_distance_m",
+      "nearest_road_class",
+      "roads_within_500m_count",
+      "tract_population",
+      "tract_civilian_labor_force",
+      "county_median_household_income",
+      "housing_units_within_1km"
+    ]
+  },
+  "response": {
+    "lat": 30.231538,
+    "lng": -97.787811,
+    "fetched_at": "2026-08-24T12:05:39.430068+00:00",
+    "fields": {
+      "nearest_cafe_distance_m": {
+        "value": 17.00935246984522,
+        "unit": "meters",
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229205+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "geodesic distance to the nearest open cafe / coffee shop; Overture conflation confidence 0.99",
+        "status": "ok"
+      },
+      "nearest_cafe_name": {
+        "value": "Radio Coffee & Beer",
+        "unit": null,
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229213+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "name of the nearest open cafe / coffee shop; Overture conflation confidence 0.99",
+        "status": "ok"
+      },
+      "nearest_restaurant_distance_m": {
+        "value": 0,
+        "unit": "meters",
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229186+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "geodesic distance to the nearest open restaurant; Overture conflation confidence 0.99",
+        "status": "ok"
+      },
+      "nearest_restaurant_name": {
+        "value": "Briscuits",
+        "unit": null,
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229195+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "name of the nearest open restaurant; Overture conflation confidence 0.99",
+        "status": "ok"
+      },
+      "nearest_bar_distance_m": {
+        "value": 604.4884491968959,
+        "unit": "meters",
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229224+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "geodesic distance to the nearest open bar / pub; Overture conflation confidence 0.99",
+        "status": "ok"
+      },
+      "poi_count_1km": {
+        "value": 601,
+        "unit": null,
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229319+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "Overture places within 1 km (confidence >= 0.5, permanently-closed excluded, US only)",
+        "status": "ok"
+      },
+      "nearest_school_distance_m": {
+        "value": 88.39520669286262,
+        "unit": "meters",
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229145+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "geodesic distance to the nearest open school; Overture conflation confidence 0.92",
+        "status": "ok"
+      },
+      "nearest_school_name": {
+        "value": "Austin Eco School",
+        "unit": null,
+        "source": "OVERTURE_PLACES",
+        "source_url": "https://docs.overturemaps.org/guides/places/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:39.229154+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": "name of the nearest open school; Overture conflation confidence 0.92",
+        "status": "ok"
+      },
+      "nearest_major_road_name": {
+        "value": "Menchaca Road",
+        "unit": null,
+        "source": "OVERTURE_TRANSPORTATION",
+        "source_url": "https://overturemaps.org/documentation/transportation/",
+        "confidence": "high",
+        "fetched_at": "2026-08-24T12:05:39.398527+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": null,
+        "status": "ok"
+      },
+      "nearest_major_road_distance_m": {
+        "value": 43.482132911051764,
+        "unit": "meters",
+        "source": "OVERTURE_TRANSPORTATION",
+        "source_url": "https://overturemaps.org/documentation/transportation/",
+        "confidence": "high",
+        "fetched_at": "2026-08-24T12:05:39.398575+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": null,
+        "status": "ok"
+      },
+      "nearest_road_class": {
+        "value": "service",
+        "unit": null,
+        "source": "OVERTURE_TRANSPORTATION",
+        "source_url": "https://overturemaps.org/documentation/transportation/",
+        "confidence": "high",
+        "fetched_at": "2026-08-24T12:05:39.398338+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": null,
+        "status": "ok"
+      },
+      "roads_within_500m_count": {
+        "value": 228,
+        "unit": null,
+        "source": "OVERTURE_TRANSPORTATION",
+        "source_url": "https://overturemaps.org/documentation/transportation/",
+        "confidence": "high",
+        "fetched_at": "2026-08-24T12:05:39.398789+00:00",
+        "dataset_vintage": "2026-07-22.0",
+        "ttl_seconds": 2592000,
+        "notes": null,
+        "status": "ok"
+      },
+      "tract_population": {
+        "value": 3041,
+        "unit": "people",
+        "source": "CENSUS_TRACT_WORKFORCE",
+        "source_url": "https://www.census.gov/programs-surveys/acs/data/summary-file.html",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:33.306263+00:00",
+        "dataset_vintage": "ACS 2019-2023 5-year civilian labor force (B23025) + 2020 Census population-weighted tract centroid (CenPop2020) population",
+        "ttl_seconds": 2592000,
+        "notes": "tract_population for Census tract 48453002004",
+        "status": "ok"
+      },
+      "tract_civilian_labor_force": {
+        "value": 2256,
+        "unit": "people",
+        "source": "CENSUS_TRACT_WORKFORCE",
+        "source_url": "https://www.census.gov/programs-surveys/acs/data/summary-file.html",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:33.306195+00:00",
+        "dataset_vintage": "ACS 2019-2023 5-year civilian labor force (B23025) + 2020 Census population-weighted tract centroid (CenPop2020) population",
+        "ttl_seconds": 2592000,
+        "notes": "tract_civilian_labor_force for Census tract 48453002004",
+        "status": "ok"
+      },
+      "county_median_household_income": {
+        "value": 97169,
+        "unit": "USD",
+        "source": "CENSUS_ACS",
+        "source_url": "https://www.census.gov/programs-surveys/acs/data/summary-file.html",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:33.290175+00:00",
+        "dataset_vintage": "ACS 2019-2023 5-year pooled median household income (table B19013)",
+        "ttl_seconds": 2592000,
+        "notes": "county_median_household_income for county FIPS 48453",
+        "status": "ok"
+      },
+      "housing_units_within_1km": {
+        "value": 6134,
+        "unit": null,
+        "source": "CENSUS_TIGERWEB",
+        "source_url": "https://tigerweb.geo.census.gov/arcgisweb/",
+        "confidence": "medium",
+        "fetched_at": "2026-08-24T12:05:33.657961+00:00",
+        "dataset_vintage": "2020 Census (TIGERweb tabblock; HU100 housing-unit counts)",
+        "ttl_seconds": 31536000,
+        "notes": "2020 housing units across Census blocks intersecting the 1 km band; edge blocks counted whole (conservative-high)",
+        "status": "ok"
+      }
+    },
+    "partial_failures": [],
+    "resolved_location": {
+      "lat": 30.231538,
+      "lng": -97.787811,
+      "source": "coordinate"
+    }
+  }
+}

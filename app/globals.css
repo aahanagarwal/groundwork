@@ -1,26 +1,254 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Groundwork brand tokens.
+   Lifted from the concept dossier (mireye/groundwork.html, Rev A).
+   Survey-sheet palette: limestone ground, ink rule, survey green for labels,
+   ultramarine for the thing being measured, signal yellow for the one number
+   that matters. Nothing else gets a colour.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-limestone: #e9eae4;
+  --color-paper: #f4f5f0;
+  --color-ink: #14201c;
+  --color-survey: #2c5f52;
+  --color-ultra: #2438c8;
+  --color-signal: #ebdd3c;
+  --color-stone: #b7b9ae;
+
+  --color-rule: rgba(20, 32, 28, 0.18);
+  --color-rule-strong: rgba(20, 32, 28, 0.42);
+
+  /* Semantic aliases so components read as intent, not as pigment. */
+  --color-background: var(--color-limestone);
+  --color-surface: var(--color-paper);
+  --color-foreground: var(--color-ink);
+
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), "Newsreader", Georgia, serif;
+  --font-mono: var(--font-dm-mono), "DM Mono", ui-monospace, monospace;
+
+  --text-label: 0.6875rem; /* 11px - the mono caps used on every data label */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* The plat grid. 28px squares, barely there - it reads as paper texture at a
+   glance and as a measuring grid when you look for it. */
+@layer base {
+  body {
+    background-color: var(--color-limestone);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.55;
+    font-optical-sizing: auto;
+    background-image:
+      linear-gradient(rgba(20, 32, 28, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 32, 28, 0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-font-smoothing: antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+
+  /* Numbers must line up in columns. Everywhere. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* The mono caps label that sits above every piece of data in the dossier. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-survey);
+  }
+
+  /* Sheet header rail: [NO] NAME ────────────── OF */
+  .plate {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 1.5px solid var(--color-ink);
+    padding-bottom: 8px;
+  }
+  .plate-no {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    background: var(--color-ink);
+    color: var(--color-limestone);
+    padding: 3px 8px 2px;
+  }
+  .plate-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-rule);
+  }
+
+  /* A bordered card is the default container. Flat = a lighter hairline. */
+  .card {
+    border: 1.5px solid var(--color-ink);
+    background: var(--color-paper);
+  }
+  .card-flat {
+    border: 1px solid var(--color-rule);
+    background: transparent;
+  }
+
+  /* The signal-yellow underline. Reserved for the single claim a panel is
+     making - never decorative. */
+  .hl {
+    background: linear-gradient(
+      transparent 62%,
+      var(--color-signal) 62%
+    );
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes typewriter {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--color-ink); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ping {
+    75%, 100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  /* MapLibre competitor popup overrides */
+  .maplibregl-popup-content {
+    border-radius: 8px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.18) !important;
+    padding: 12px !important;
+    border: 1.5px solid #14201C !important;
+  }
+  .maplibregl-popup-close-button {
+    font-size: 18px !important;
+    padding: 2px 6px !important;
+    color: #666 !important;
+  }
+  .maplibregl-popup-close-button:hover {
+    color: #14201C !important;
+    background: transparent !important;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s ease-out both;
+  }
+
+  .animate-slide-left {
+    animation: slideInLeft 0.6s ease-out both;
+  }
+
+  .animate-slide-right {
+    animation: slideInRight 0.6s ease-out both;
+  }
+
+  .animate-fade-in-up-delay-1 {
+    animation: fadeInUp 0.7s ease-out 0.15s both;
+  }
+
+  .animate-fade-in-up-delay-2 {
+    animation: fadeInUp 0.7s ease-out 0.3s both;
+  }
+
+  .animate-fade-in-up-delay-3 {
+    animation: fadeInUp 0.7s ease-out 0.45s both;
+  }
+
+  .animate-fade-in-up-delay-4 {
+    animation: fadeInUp 0.7s ease-out 0.6s both;
+  }
+
+  .typing-cursor {
+    border-right: 2px solid var(--color-ink);
+    animation: typewriter 1s step-end infinite;
+  }
+
+  .glass-card {
+    background: rgba(244, 245, 240, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(20, 32, 28, 0.1);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, #e9eae4 0%, #f0f1eb 50%, #e5e8df 100%);
+  }
+
+  .hover-lift {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(20, 32, 28, 0.08);
+  }
+
+  .step-connector {
+    border-left: 2px dashed var(--color-rule);
+    margin-left: 19px;
+    padding-left: 24px;
+  }
 }
