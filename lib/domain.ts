@@ -111,6 +111,26 @@ export interface WorldEventRecord {
    */
   fixtureHash: string | null;
   /**
+   * How far this driver actually is by road, measured once and kept.
+   *
+   * Straight-line distance is the wrong unit for this product and always has
+   * been: the entire argument the trade-area map makes is that a circle drawn
+   * round an address lies about who can reach it. Reporting a competitor as
+   * "400m away" repeats that lie at the level of a single pin - 400m across a
+   * closed bridge or the wrong side of a divided highway is not 400m.
+   *
+   * Null when we have no coordinate for the driver, or when no Mireye key is
+   * present. Surfaces MUST fall back to straight-line and say which they are
+   * showing, rather than passing one off as the other.
+   */
+  driveTime: {
+    minutes: number | null;
+    miles: number | null;
+    /** "mireye_distance" when routed; "haversine" when it is the fallback. */
+    method: "mireye_distance" | "haversine";
+    measuredAt: string;
+  } | null;
+  /**
    * Why this row survived the polygon filter - or that it was not spatially
    * filtered at all. Recorded so the citation drawer can show a reader why a
    * given closure was counted and another was thrown away.

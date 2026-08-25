@@ -159,6 +159,7 @@ export default async function SitePage({
         insidePolygon: e.polygonMembership.inside,
         membershipReason: e.polygonMembership.reason,
         distanceM: e.polygonMembership.distanceM,
+        driveTime: e.driveTime,
         meta: e.meta ?? undefined,
         unidentifiableReason: unidentifiableReason.get(e.id),
         impact: impact

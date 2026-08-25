@@ -89,12 +89,34 @@ export function readAll(): LedgerEntry[] {
   }
 }
 
+/**
+ * Refusals where no request ever reached Mireye, and so nothing was billed.
+ *
+ * The distinction matters because the ceiling is spend control, not a request
+ * counter. Counting a connection that was never established burns budget for
+ * calls that cost nothing - and it is self-reinforcing: a burst of dropped
+ * connections exhausts the day's ceiling, which then refuses the legitimate
+ * calls that follow. That happened here: 43 dropped /v1/proximity connections
+ * booked ~1,548 phantom credits against a 1,500 ceiling.
+ *
+ * An HTTP error response is deliberately NOT in this list. The server saw that
+ * request and may have billed part of it - a geocode inside a failed proximity
+ * call, say - so it keeps the estimate as an honest upper bound.
+ */
+const UNBILLED_REFUSALS = new Set([
+  "network_error",
+  "budget_exceeded",
+  "fixture_missing",
+  "no_api_key",
+]);
+
 /** Credits spent by one agent today (UTC), read back from the ledger so the
  *  ceiling survives a process restart. */
 export function spentToday(agent: AgentId): number {
   const today = new Date().toISOString().slice(0, 10);
   return readAll()
     .filter((e) => e.agent === agent && e.at.slice(0, 10) === today)
+    .filter((e) => !(e.refused && UNBILLED_REFUSALS.has(e.refusalCode ?? "")))
     .reduce((sum, e) => sum + (e.creditsActual ?? e.creditsEstimated ?? 0), 0);
 }
 

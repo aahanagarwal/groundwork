@@ -73,6 +73,16 @@ export interface MapPin {
   membershipReason?: string;
   /** Straight-line metres from the site, as the pipeline measured it. */
   distanceM?: number | null;
+  /**
+   * How far this driver is by road. Preferred over `distanceM` wherever it is
+   * present and routed - a straight line across a closed bridge is not a
+   * distance anyone can drive. Labelled either way, never silently swapped.
+   */
+  driveTime?: {
+    minutes: number | null;
+    miles: number | null;
+    method: "mireye_distance" | "haversine";
+  } | null;
   /** Rich metadata for interactive popups */
   meta?: Record<string, unknown>;
   /**
@@ -129,6 +139,30 @@ const COLORS = {
 
 const money = (n: number) =>
   `${n < 0 ? "-" : ""}$${Math.abs(Math.round(n)).toLocaleString()}`;
+
+/**
+ * How far away, said the most truthful way the data allows.
+ *
+ * A routed drive time is the answer this product is actually about, so it wins
+ * whenever we have one. When we do not, the straight line is shown with "as
+ * the crow flies" attached rather than dressed up as a travel time - the whole
+ * point of the polygon next to it is that those two are not the same number.
+ */
+function distanceLabel(pin: MapPin): { short: string; long: string } | null {
+  const dt = pin.driveTime;
+  if (dt?.method === "mireye_distance" && dt.minutes !== null) {
+    const miles = dt.miles !== null ? `${dt.miles.toFixed(1)} mi` : null;
+    return {
+      short: `${dt.minutes.toFixed(0)} min drive`,
+      long: [`${dt.minutes.toFixed(0)} min drive`, miles].filter(Boolean).join(" · "),
+    };
+  }
+  const miles =
+    dt?.miles ?? (pin.distanceM != null ? pin.distanceM / 1609.344 : null);
+  if (miles === null) return null;
+  const short = miles < 0.6 ? `${Math.round(miles * 1609.344)}m` : `${miles.toFixed(1)} mi`;
+  return { short, long: `${short} as the crow flies` };
+}
 
 const CERTAINTY_COPY: Record<
   DriverImpactView["certainty"],
@@ -791,9 +825,12 @@ function CompetitorRoster({
                 <span className="font-display text-[14px] font-bold leading-tight text-ink">
                   {name}
                 </span>
-                {c.distanceM ? (
-                  <span className="shrink-0 font-mono text-[11px] tabular text-ink/50">
-                    {Math.round(c.distanceM)}m
+                {distanceLabel(c) ? (
+                  <span
+                    className="shrink-0 font-mono text-[11px] tabular text-ink/50"
+                    title={distanceLabel(c)!.long}
+                  >
+                    {distanceLabel(c)!.short}
                   </span>
                 ) : null}
               </div>
@@ -846,7 +883,7 @@ function CompetitorRoster({
                 className="mt-1 block w-full text-left font-mono text-[11px] leading-snug text-ink/50 hover:text-ink"
               >
                 <span className="underline decoration-dotted">{d.label}</span>
-                {d.distanceM ? ` - ${(d.distanceM / 1609.344).toFixed(1)} mi out` : ""}
+                {distanceLabel(d) ? ` - ${distanceLabel(d)!.long} out` : ""}
               </button>
             ))}
           </div>
@@ -904,7 +941,7 @@ function competitorPopup(
   const name = (m["businessName"] as string) || pin.label;
   const category = (m["category"] as string) || "Business";
   const price = (m["priceLevel"] as string) || "";
-  const dist = pin.distanceM ? `${Math.round(pin.distanceM)}m away` : "";
+  const dist = distanceLabel(pin)?.long ?? "";
   const rating = m["googleRating"] ? `${m["googleRating"]} / 5.0` : "n/a";
   const note = (m["note"] as string) || "";
 
@@ -922,6 +959,14 @@ function competitorPopup(
         <span style="color:#666;text-transform:uppercase;letter-spacing:.05em;">Rating</span>
         <span style="font-family:ui-monospace,monospace;font-weight:700;color:${COLORS.ink};">${esc(rating)}</span>
       </div>
+      ${
+        pin.driveTime?.method === "mireye_distance"
+          ? `<div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-top:1px solid #E5E5E5;">
+        <span style="color:#666;text-transform:uppercase;letter-spacing:.05em;">Drive time</span>
+        <span style="font-family:ui-monospace,monospace;font-weight:700;color:${COLORS.ink};">${esc(distanceLabel(pin)?.long ?? "")}</span>
+      </div>`
+          : ""
+      }
       <div style="display:flex;justify-content:space-between;font-size:11px;padding:6px 0;border-top:1px solid #E5E5E5;">
         <span style="color:#666;text-transform:uppercase;letter-spacing:.05em;">${minutes}-min shed</span>
         <span style="font-family:ui-monospace,monospace;font-weight:700;color:${pin.insidePolygon ? COLORS.threat : "#78716C"};">${pin.insidePolygon ? "INSIDE" : "OUTSIDE"}</span>

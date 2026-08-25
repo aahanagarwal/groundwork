@@ -14,8 +14,9 @@ import {
 } from "@/lib/domain";
 import { generateLedger } from "@/lib/fixtures/generate-ledger";
 import { resolveSite } from "@/lib/resolver";
+import { mireye } from "@/lib/mireye/client";
 import { loadScenario, loadScenarios, type Scenario } from "@/lib/scenarios";
-import { haversineMeters, pointInRing } from "@/lib/geo";
+import { haversineMeters, pointInRing, METERS_PER_MILE, type LatLng } from "@/lib/geo";
 import { deriveWeatherEvents } from "@/lib/world/derive-events";
 import { fetchNormals, fetchObserved, scoreAnomalies } from "@/lib/world/weather";
 
@@ -97,6 +98,11 @@ export async function buildDashboard(
   ]
     .filter((e) => e.enabled)
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
+
+  // Measured before the polygon filter, so a driver that gets rejected can
+  // still say how far away it actually was - that rejection is the argument
+  // the map makes, and "9.7 miles" makes it better than "outside".
+  await ensureDriveTimes(site, events, stages);
 
   const { kept: filtered, discarded: discardedEvents } = filterByPolygon(
     events,
@@ -311,6 +317,142 @@ function persistTradeArea(
 }
 
 /**
+ * MEASURE HOW FAR THE DRIVERS ACTUALLY ARE, BY ROAD
+ *
+ * Everything else in this file already knows that a circle round an address
+ * lies about who can reach it - that is what the isochrone is for. Until now
+ * the pins on that map contradicted it, because each one reported a
+ * straight-line distance. This closes the gap: the same routing engine that
+ * draws the polygon also measures the drivers standing inside it.
+ *
+ * Three properties this has to hold, in priority order:
+ *
+ *   PERSISTED. A drive time between two fixed points does not change between
+ *     page loads, so it is bought once and kept. Without that this would bill
+ *     on every render and break the rule the Budget Broker exists to enforce -
+ *     a 90-day backtest must not cost more than a one-day run.
+ *   BATCHED. One request carrying every origin, not one per competitor.
+ *     Mireye prices the matrix by leg either way, but each extra request adds
+ *     latency and another chance to be refused halfway through a page.
+ *   HONEST WHEN ABSENT. No key, no fixture, or a refusal leaves driveTime as a
+ *     haversine reading explicitly labelled as such. A surface may show the
+ *     straight line; it may not call it a drive time.
+ */
+const driveTimesInFlight = new Map<string, Promise<unknown>>();
+
+export async function ensureDriveTimes(
+  site: SiteRecord,
+  events: WorldEventRecord[],
+  stages: DashboardStageStatus[],
+  opts: { force?: boolean } = {},
+): Promise<WorldEventRecord[]> {
+  if (site.lat === null || site.lng === null) return events;
+  const origin = { lat: site.lat, lng: site.lng };
+
+  const locatable = events.filter(
+    (e) => (e.meta?.["at"] as LatLng | undefined) !== undefined,
+  );
+
+  // Retry policy, and it is load-bearing.
+  //
+  // A routed measurement is kept forever - two fixed points do not move. But a
+  // FAILED one used to leave the record on its haversine fallback, which reads
+  // as "not measured yet", so the next render tried again. Under a dev server
+  // re-rendering on every request that is a retry on every page load: 48 calls
+  // where there should have been one, until the Budget Broker started refusing
+  // them. The broker did its job, but a component that needs a circuit breaker
+  // to be safe is not safe.
+  //
+  // So a failed attempt is remembered too, and not retried until the window
+  // has passed. Transient breakage still heals; a persistent one costs one call
+  // an hour instead of one per render.
+  const RETRY_FAILED_AFTER_MS = 60 * 60 * 1000;
+  const unmeasured = locatable.filter((e) => {
+    if (opts.force) return true;
+    if (e.driveTime?.method === "mireye_distance") return false;
+    if (!e.driveTime) return true;
+    return Date.now() - Date.parse(e.driveTime.measuredAt) > RETRY_FAILED_AFTER_MS;
+  });
+  if (unmeasured.length === 0) return events;
+
+  // Concurrent renders of the same page would each fire the same call before
+  // any of them persisted a result. One in-flight measurement per site.
+  const inflightKey = `${site.id}:${unmeasured.map((e) => e.id).join(",")}`;
+  const existing = driveTimesInFlight.get(inflightKey);
+  if (existing) {
+    await existing;
+    return events;
+  }
+
+  // The straight line is written first, unconditionally. If the routed call
+  // refuses we still have a number and a truthful label for where it came from.
+  const now = new Date().toISOString();
+  for (const e of unmeasured) {
+    const at = e.meta!["at"] as LatLng;
+    e.driveTime = {
+      minutes: null,
+      miles: haversineMeters(origin, at) / METERS_PER_MILE,
+      method: "haversine",
+      measuredAt: now,
+    };
+  }
+
+  const locator = (p: LatLng) => `${p.lat.toFixed(6)},${p.lng.toFixed(6)}`;
+  const pending = mireye.distance(
+    {
+      // Coordinate locators skip Mireye's geocoding gate and cost no extra
+      // credit; an address locator would add one apiece.
+      origins: unmeasured.map((e) => locator(e.meta!["at"] as LatLng)),
+      destinations: [locator(origin)],
+      mode: "driving",
+    },
+    { agent: "world_ingest", siteId: site.id },
+  );
+  driveTimesInFlight.set(inflightKey, pending);
+  let result;
+  try {
+    result = await pending;
+  } finally {
+    driveTimesInFlight.delete(inflightKey);
+  }
+
+  if (!result.ok) {
+    worldEvents.putMany(unmeasured);
+    stages.push({
+      stage: "drive_times",
+      ok: false,
+      refusal: result.refusal,
+      note: `Falling back to straight-line distance for ${unmeasured.length} driver${unmeasured.length === 1 ? "" : "s"}, labelled as such.`,
+    });
+    return events;
+  }
+
+  for (const leg of result.data.legs) {
+    const event = unmeasured[leg.origin_index];
+    if (!event) continue;
+    // A leg with no duration is unroutable - water, a private road, the wrong
+    // side of a barrier. Keeping the haversine reading with its own label is
+    // more useful than writing null and losing the fact entirely.
+    if (leg.duration_minutes === null) continue;
+    event.driveTime = {
+      minutes: leg.duration_minutes,
+      miles: leg.distance_miles,
+      method: "mireye_distance",
+      measuredAt: now,
+    };
+  }
+
+  worldEvents.putMany(unmeasured);
+  const routed = unmeasured.filter((e) => e.driveTime?.method === "mireye_distance").length;
+  stages.push({
+    stage: "drive_times",
+    ok: true,
+    note: `${routed} of ${unmeasured.length} drivers measured by road via Mireye /v1/proximity distance (${result.data.paid_driving_calcs} paid driving calcs). Persisted - repeat views cost nothing.`,
+  });
+  return events;
+}
+
+/**
  * Fingerprint the authored event block of a scenario.
  *
  * Cheap, order-sensitive, and content-sensitive: adding a competitor, moving a
@@ -361,6 +503,7 @@ function loadScenarioEvents(site: SiteRecord, scenario: Scenario): WorldEventRec
     sourceUrl: e.sourceUrl ?? null,
     meta: (e.meta as Record<string, unknown>) ?? null,
     fixtureHash,
+    driveTime: null,
     polygonMembership: {
       filtered: false,
       inside: true,

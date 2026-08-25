@@ -81,6 +81,7 @@ export function deriveWeatherEvents(
           normalForPeriodC: Number((run[0].normalApparentMaxC ?? 0).toFixed(1)),
         },
         fixtureHash: null,
+    driveTime: null,
     polygonMembership: {
           filtered: false,
           inside: true,
@@ -125,6 +126,7 @@ export function deriveWeatherEvents(
         anomalyMm: Number((day.precipitationAnomalyMm ?? 0).toFixed(2)),
       },
       fixtureHash: null,
+    driveTime: null,
     polygonMembership: {
         filtered: false,
         inside: true,

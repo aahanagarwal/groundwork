@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { setDefaultResultOrder } from "node:dns";
+import { setDefaultAutoSelectFamily } from "node:net";
 
 import { config } from "@/lib/config";
 import type { Provenance, Refusal, SourceResult } from "@/lib/datasource";
@@ -17,6 +19,7 @@ import {
 import type {
   AskRequest,
   AskResponse,
+  DistanceOp,
   DistanceResponse,
   FetchRequest,
   FetchResponse,
@@ -56,6 +59,36 @@ import type {
  * or a credit balance. A missing fixture in replay mode is a typed refusal
  * naming the exact call to record - never a silent empty result.
  */
+
+/**
+ * Force IPv4 for outbound calls, unless told not to.
+ *
+ * api.mireye.com publishes both an A and an AAAA record, and on networks where
+ * the AAAA route is advertised but not actually reachable, Node's Happy
+ * Eyeballs implementation races the two and stalls on the dead one until the
+ * socket times out. The symptom is miserable to diagnose: `fetch failed` with
+ * an AggregateError of ETIMEDOUT, roughly 300ms, on a host that answers curl
+ * instantly - because curl falls back to IPv4 and undici does not.
+ *
+ * It cost this project a day of phantom credits before it was found: every
+ * failed attempt was retried on the next render, and the Budget Broker
+ * eventually refused a whole day's legitimate calls on the strength of
+ * connections that never opened.
+ *
+ * Set GROUNDWORK_FORCE_IPV4=0 on a network where IPv6 genuinely works and this
+ * is unwanted.
+ */
+if (process.env.GROUNDWORK_FORCE_IPV4 !== "0") {
+  try {
+    setDefaultResultOrder("ipv4first");
+    // Reordering DNS results is not enough on its own - undici still races
+    // both families. This is the half that actually stops it.
+    setDefaultAutoSelectFamily(false);
+  } catch {
+    // Older runtime, or an environment that forbids it. Not fatal: the calls
+    // either work anyway or fail with the refusal they already handle.
+  }
+}
 
 const FIXTURE_ROOT = path.join(process.cwd(), "data", "fixtures", "mireye");
 
@@ -284,19 +317,27 @@ async function call<T>(
       signal: AbortSignal.timeout(opts.timeoutMs ?? 130_000),
     });
   } catch (error) {
+    const timedOut = error instanceof Error && error.name === "TimeoutError";
     const refusal: Refusal = {
       code: "network_error",
       message: error instanceof Error ? error.message : "The request never completed.",
       retryable: true,
+      hint: timedOut
+        ? "The server may still have processed and billed this request."
+        : "The connection never completed, so nothing was billed.",
     };
     record({
       ...base,
       mode,
       cacheHit: false,
       creditsEstimated,
+      // A timeout may have been served and billed anyway; a connection that
+      // never opened certainly was not.
+      creditsActual: timedOut ? null : 0,
       durationMs: Date.now() - started,
       refused: true,
       refusalCode: refusal.code,
+      response: { error: refusal.message },
     });
     return refuse(refusal);
   }
@@ -428,6 +469,19 @@ export const mireye = {
 
   screen(op: Omit<ScreenOp, "op">, opts: Omit<CallOptions, "creditsEstimated">) {
     return mireye.proximity<ScreenResponse>({ op: "screen", ...op }, opts);
+  },
+
+  /**
+   * The full origin x destination matrix, with a duration on every leg.
+   *
+   * `screen` answers "which of these are within N minutes" and is the right
+   * call for drawing a boundary. `distance` answers "how far is each of these,
+   * exactly", which is what you want when the points are already known to
+   * matter and the number itself is the product - a competitor's drive time,
+   * for instance. Same price per leg; different question.
+   */
+  distance(op: Omit<DistanceOp, "op">, opts: Omit<CallOptions, "creditsEstimated">) {
+    return mireye.proximity<DistanceResponse>({ op: "distance", ...op }, opts);
   },
 
   laborShed(op: Omit<LaborShedOp, "op">, opts: Omit<CallOptions, "creditsEstimated">) {
