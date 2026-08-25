@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { buildDashboard } from "@/lib/pipeline";
 import { narrate } from "@/lib/agent/narrate";
-import { buildInsight } from "@/lib/insight";
+import { buildInsight, perEventImpact } from "@/lib/insight";
 import { advertisingModule, threatWatchModule } from "@/lib/modules";
 import { checkins, proposedActions, type ProposedActionRecord } from "@/lib/domain";
 import { CitationProvider, Cited } from "@/components/citations";
 import { VerdictBlock, DriverCards } from "@/components/verdict";
 import { DailyCheckin } from "@/components/checkin";
 import { Capabilities } from "@/components/capabilities";
-import { AttributionWaterfall } from "@/components/attribution";
 import { MathBreakdown } from "@/components/math-breakdown";
 import { RevenueChart } from "@/components/revenue-chart";
 import { TradeAreaMap, type MapPin } from "@/components/trade-area-map";
@@ -62,8 +61,17 @@ export default async function SitePage({
     );
   }
 
-  const { site, scenario, scenarios, tradeArea, events, attribution, ledger, stages } =
-    result.data;
+  const {
+    site,
+    scenario,
+    scenarios,
+    tradeArea,
+    events,
+    discardedEvents,
+    attribution,
+    ledger,
+    stages,
+  } = result.data;
 
   const insight = attribution ? buildInsight(attribution, ledger) : null;
 
@@ -111,14 +119,37 @@ export default async function SitePage({
           .join("  ·  ")
       : null;
 
-  const pins: MapPin[] = events
+  // What the engine concluded about each driver individually. The verdict page
+  // groups drivers by kind, which is right there and wrong here: two coffee
+  // shops on one street are one row in the verdict and two separate pins on a
+  // map, and a pin has to answer for itself.
+  const impactByEvent =
+    attribution ? perEventImpact(attribution, ledger) : new Map();
+
+  // Drivers the engine could not size at all, with the structural reason why.
+  // A pin with no number needs to say which of the two it is: "measured at
+  // roughly zero" and "impossible to measure from this data" look identical
+  // on a map and mean completely different things.
+  const unidentifiableReason = new Map<string, string>(
+    (attribution?.unidentifiable ?? []).map((u) => [u.eventId, u.reason]),
+  );
+
+  // Rejected drivers are drawn too, hollow. The polygon's argument is "we
+  // looked at this and it does not reach you", and that cannot be made with
+  // the rejects deleted - which is what the map used to receive.
+  const pins: MapPin[] = [...events, ...discardedEvents]
     .map((e): MapPin | null => {
       const at = e.meta?.["at"] as { lat: number; lng: number } | undefined;
       if (!at) return null;
-      const kind = e.kind === "competitor_open" ? "competitor" 
-        : e.kind === "road_closure" ? "closure"
-        : e.kind === "event" ? "event"
-        : "permit";
+      const kind =
+        e.kind === "competitor_open"
+          ? "competitor"
+          : e.kind === "road_closure"
+            ? "closure"
+            : e.kind === "event"
+              ? "event"
+              : "permit";
+      const impact = impactByEvent.get(e.id) ?? null;
       return {
         id: e.id,
         lat: at.lat,
@@ -126,7 +157,21 @@ export default async function SitePage({
         kind,
         label: e.label,
         insidePolygon: e.polygonMembership.inside,
+        membershipReason: e.polygonMembership.reason,
+        distanceM: e.polygonMembership.distanceM,
         meta: e.meta ?? undefined,
+        unidentifiableReason: unidentifiableReason.get(e.id),
+        impact: impact
+          ? {
+              customers: impact.customers,
+              customersLow: impact.customersLow,
+              customersHigh: impact.customersHigh,
+              marginUsd: impact.marginUsd,
+              activeDays: impact.activeDays,
+              certainty: impact.certainty,
+              certaintyReason: impact.certaintyReason,
+            }
+          : null,
       };
     })
     .filter((p): p is MapPin => p !== null);
@@ -228,7 +273,7 @@ export default async function SitePage({
                     The real 8-minute drive polygon vs a naive 5-mile radius.
                   </p>
                 </header>
-                <div className="h-[450px] border-b-[1.5px] border-ink relative">
+                <div className="relative h-[560px] border-b-[1.5px] border-ink lg:h-[520px]">
                   {site.lat !== null && site.lng !== null ? (
                     <TradeAreaMap
                       center={{ lat: site.lat, lng: site.lng }}
@@ -345,6 +390,35 @@ export default async function SitePage({
                     </li>
                   ))}
                 </ul>
+
+                {discardedEvents.length > 0 ? (
+                  <div className="border-t-[1.5px] border-ink bg-limestone/40 px-5 py-4">
+                    <h3 className="label mb-2 text-ink/50">
+                      Considered, then discarded &middot; {discardedEvents.length}
+                    </h3>
+                    <p className="mb-3 text-[13px] leading-snug text-ink/60">
+                      Found in the feeds for this window, then dropped for
+                      falling outside the {tradeArea?.minutes ?? 8}-minute drive
+                      polygon. They are listed because a driver you can see was
+                      rejected is worth more than one you never hear about.
+                    </p>
+                    <ul className="space-y-2">
+                      {discardedEvents.map((event) => (
+                        <li
+                          key={event.id}
+                          className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-[12px] text-ink/55"
+                        >
+                          <span>{event.label}</span>
+                          <span className="tabular">
+                            {event.polygonMembership.distanceM
+                              ? `${(event.polygonMembership.distanceM / 1609.344).toFixed(1)} mi from the door`
+                              : "outside the polygon"}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </section>
             </div>
           }

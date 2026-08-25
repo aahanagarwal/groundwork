@@ -185,6 +185,13 @@
     box-shadow: 0 8px 30px rgba(0,0,0,0.18) !important;
     padding: 12px !important;
     border: 1.5px solid #14201C !important;
+    /* The map panel is a fixed height and the card around it clips overflow,
+       so a popup opened on a marker near the bottom edge would lose its last
+       rows off-screen with no way to reach them. Bounding it here and letting
+       it scroll keeps every figure readable wherever the pin happens to sit. */
+    max-height: 360px !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
   }
   .maplibregl-popup-close-button {
     font-size: 18px !important;

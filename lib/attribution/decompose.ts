@@ -91,6 +91,17 @@ export interface AttributionResult {
   deltaPct: number;
 
   drivers: Driver[];
+  /**
+   * Drivers that were present but structurally impossible to size from this
+   * series - almost always because they predate it and never end. Listed so a
+   * surface can explain the absence rather than imply the driver is harmless.
+   */
+  unidentifiable: Array<{
+    eventId: string;
+    kind: EventKind;
+    label: string;
+    reason: string;
+  }>;
   /** Points of baseline the drivers do not account for. Signed. */
   unexplainedPoints: number;
 
@@ -135,11 +146,40 @@ export function attribute(
 ): AttributionResult {
   const rows = [...ledger].sort((a, b) => a.date.localeCompare(b.date));
 
+  /**
+   * Drivers that were already running before this data starts and never stop.
+   *
+   * A competitor that opened two years ago is active on every row. Treated as
+   * an event it does two fatal things at once: it marks every day
+   * "contaminated" so the baseline has no clean days left to fit against, and
+   * it contributes a column of constant magnitude that is perfectly collinear
+   * with the intercept. The first is what actually bit - a scenario carrying
+   * two long-standing coffee shops produced a baseline of zero, a delta of
+   * zero, and no drivers at all, which reads on screen as "nothing happened"
+   * rather than as the failure it is.
+   *
+   * The honest treatment is that such a driver IS the baseline. Its effect is
+   * already inside the normal week we measure against, and no amount of
+   * regression can separate a constant from a constant. So it is set aside
+   * here, named, and reported as unidentifiable rather than silently fitted.
+   *
+   * This is not a fixture quirk. Pull competitors from a live Places feed and
+   * most of them will have been there for years.
+   */
+  const alwaysOn = rows.length > 0
+    ? events.filter((e) => rows.every((r) => isActive(e, r.date)))
+    : [];
+  const alwaysOnIds = new Set(alwaysOn.map((e) => e.id));
+  const separable = events.filter((e) => !alwaysOnIds.has(e.id));
+
   const baseline = estimateBaseline(
     rows.map((r) => ({
       date: r.date,
       tickets: r.tickets,
-      contaminated: events.some((e) => isActive(e, r.date)),
+      // Only drivers that start or stop inside the sample can contaminate a
+      // day. An always-on driver contaminates nothing precisely because it
+      // contaminates everything.
+      contaminated: separable.some((e) => isActive(e, r.date)),
     })),
   );
 
@@ -152,7 +192,7 @@ export function attribute(
   // Only drivers that were actually active somewhere in the fitting sample get
   // a column. An all-zero column is unidentifiable and would poison the SEs.
   const fitRows = series.filter((p) => !p.warmup);
-  const candidates = events.filter((e) =>
+  const candidates = separable.filter((e) =>
     fitRows.some((p) => isActive(e, p.date)),
   );
 
@@ -245,6 +285,17 @@ export function attribute(
     windowPoints.length > 0 &&
     windowPoints.every((p) => candidates.some((e) => isActive(e, p.date)));
 
+  // Named so a surface can say WHY a driver has no number, instead of leaving
+  // a pin on the map with an empty panel behind it.
+  const unidentifiable = alwaysOn.map((e) => ({
+    eventId: e.id,
+    kind: e.kind,
+    label: e.label,
+    reason:
+      "Active on every day of the available till data, so its effect is already " +
+      "inside the baseline we measure against. Nothing in this series separates it.",
+  }));
+
   // --- 4. Confidence --------------------------------------------------------
   const { confidence, reasons } = gradeConfidence({
     windowDays: windowPoints.length,
@@ -285,6 +336,7 @@ export function attribute(
     baselineTickets: Math.round(baselineTickets),
     deltaPct,
     drivers: reported.sort((a, b) => Math.abs(b.points) - Math.abs(a.points)),
+    unidentifiable,
     unexplainedPoints,
     confidence,
     confidenceReasons: reasons,

@@ -99,6 +99,18 @@ export interface WorldEventRecord {
   sourceUrl: string | null;
   meta: Record<string, unknown> | null;
   /**
+   * Fingerprint of the scenario fixture block this row was seeded from.
+   *
+   * Seeded world events are cached in the store so a page load does not
+   * re-derive them. That cache used to be unconditional, which meant editing a
+   * scenario JSON - adding a competitor, attaching coordinates - changed
+   * nothing on screen: the stale rows still answered, forever. Recording what
+   * the fixture looked like at seed time lets the loader notice the fixture
+   * moved and re-seed. Null on rows written before this field existed, which
+   * is treated as "stale" and re-seeded once.
+   */
+  fixtureHash: string | null;
+  /**
    * Why this row survived the polygon filter - or that it was not spatially
    * filtered at all. Recorded so the citation drawer can show a reader why a
    * given closure was counted and another was thrown away.

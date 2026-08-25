@@ -43,6 +43,14 @@ export interface Dashboard {
   scenarios: Array<{ key: string; name: string; description: string }>;
   tradeArea: TradeAreaRecord | null;
   events: WorldEventRecord[];
+  /**
+   * Drivers that were considered and then rejected for falling outside the
+   * drive polygon. Attribution never sees these - that is the point of the
+   * filter - but the map draws them hollow, because "we looked at this and it
+   * does not reach you" is the argument the polygon exists to make, and it
+   * cannot be made with the rejects thrown away.
+   */
+  discardedEvents: WorldEventRecord[];
   ledger: LedgerDayRecord[];
   attribution: AttributionResult | null;
   /** Real weather drivers found in the window, kept separate from scenario
@@ -90,7 +98,11 @@ export async function buildDashboard(
     .filter((e) => e.enabled)
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
 
-  const filtered = filterByPolygon(events, site, tradeArea);
+  const { kept: filtered, discarded: discardedEvents } = filterByPolygon(
+    events,
+    site,
+    tradeArea,
+  );
   stages.push({
     stage: "world_ingest",
     ok: true,
@@ -163,6 +175,7 @@ export async function buildDashboard(
       })),
       tradeArea,
       events: filtered,
+      discardedEvents,
       ledger,
       attribution,
       liveWeatherEvents,
@@ -297,11 +310,42 @@ function persistTradeArea(
   return record;
 }
 
+/**
+ * Fingerprint the authored event block of a scenario.
+ *
+ * Cheap, order-sensitive, and content-sensitive: adding a competitor, moving a
+ * coordinate, or changing a magnitude all produce a different string. That is
+ * the whole requirement - it only has to answer "is what I cached still what
+ * the fixture says?".
+ */
+function fixtureFingerprint(scenario: Scenario): string {
+  const canonical = JSON.stringify(
+    scenario.events.map((e) => [e.kind, e.label, e.startDate, e.endDate, e.magnitude, e.meta ?? null]),
+  );
+  // djb2. A hash collision here would re-use a stale cache entry, which the
+  // next fixture edit corrects - not worth a crypto import.
+  let h = 5381;
+  for (let i = 0; i < canonical.length; i++) h = ((h << 5) + h + canonical.charCodeAt(i)) | 0;
+  return `${scenario.events.length}-${(h >>> 0).toString(36)}`;
+}
+
 function loadScenarioEvents(site: SiteRecord, scenario: Scenario): WorldEventRecord[] {
+  const fixtureHash = fixtureFingerprint(scenario);
   const stored = worldEvents.filter(
     (e) => e.siteId === site.id && e.scenarioKey === scenario.key,
   );
-  if (stored.length > 0) return stored;
+
+  // Only trust the cache when it was seeded from the fixture as it reads now.
+  // Without this check, edits to data/scenarios/*.json were silently inert:
+  // the competitors added to road-closure-dip never loaded, and because the
+  // cached rows predated the `at` coordinates, every map pin was dropped for
+  // having no geometry. The map looked empty and the fixture looked fine.
+  if (stored.length > 0 && stored.every((e) => e.fixtureHash === fixtureHash)) {
+    return stored;
+  }
+  if (stored.length > 0) {
+    worldEvents.remove((e) => e.siteId === site.id && e.scenarioKey === scenario.key);
+  }
 
   const records: WorldEventRecord[] = scenario.events.map((e, i) => ({
     id: `${site.id}-${scenario.key}-${i}`,
@@ -316,6 +360,7 @@ function loadScenarioEvents(site: SiteRecord, scenario: Scenario): WorldEventRec
     source: e.source,
     sourceUrl: e.sourceUrl ?? null,
     meta: (e.meta as Record<string, unknown>) ?? null,
+    fixtureHash,
     polygonMembership: {
       filtered: false,
       inside: true,
@@ -378,11 +423,25 @@ function filterByPolygon(
   events: WorldEventRecord[],
   site: SiteRecord,
   tradeArea: TradeAreaRecord | null,
-): WorldEventRecord[] {
-  if (!tradeArea || site.lat === null || site.lng === null) return events;
+): { kept: WorldEventRecord[]; discarded: WorldEventRecord[] } {
+  if (!tradeArea || site.lat === null || site.lng === null) {
+    return { kept: events, discarded: [] };
+  }
   const ring = tradeArea.polygonGeoJson.coordinates[0];
+  // Bound locally so the nested predicate keeps the non-null narrowing.
+  const minutes = tradeArea.minutes;
+  const origin = { lat: site.lat, lng: site.lng };
 
-  return events.filter((event) => {
+  const kept: WorldEventRecord[] = [];
+  const discarded: WorldEventRecord[] = [];
+
+  for (const event of events) {
+    if (survives(event)) kept.push(event);
+    else discarded.push(event);
+  }
+  return { kept, discarded };
+
+  function survives(event: WorldEventRecord): boolean {
     const at = event.meta?.["at"] as { lat: number; lng: number } | undefined;
     if (!at) {
       // No geometry on this event - it was authored for this address, or it is
@@ -402,13 +461,13 @@ function filterByPolygon(
     event.polygonMembership = {
       filtered: true,
       inside,
-      distanceM: haversineMeters({ lat: site.lat!, lng: site.lng! }, at),
+      distanceM: haversineMeters(origin, at),
       reason: inside
-        ? `Inside the ${tradeArea.minutes}-minute drive polygon.`
-        : `Outside the ${tradeArea.minutes}-minute drive polygon - discarded rather than passed downstream.`,
+        ? `Inside the ${minutes}-minute drive polygon.`
+        : `Outside the ${minutes}-minute drive polygon - considered, then discarded.`,
     };
     return inside;
-  });
+  }
 }
 
 function loadLedger(

@@ -389,3 +389,64 @@ export const VERDICT_TONE: Record<
   mostly_you: { chip: "Inside the shop", accent: "signal" },
   nothing_happened: { chip: "Normal week", accent: "stone" },
 };
+
+/**
+ * OWNER UNITS, PER EVENT
+ *
+ * `buildInsight` groups drivers by kind for display, which is right for the
+ * verdict page and wrong for the map: two competitors on one street are one
+ * row in the verdict and two distinct pins on the map, and a pin has to speak
+ * for itself.
+ *
+ * This is the same arithmetic as `buildInsight` - deliberately sharing
+ * `certaintyOf` and the same basket/margin averages - keyed by the world event
+ * id so a marker can look up what the engine actually concluded about the
+ * thing under the pin. Events the engine could not measure are simply absent
+ * from the map, and callers must say so rather than inventing a number.
+ */
+export function perEventImpact(
+  attribution: AttributionResult,
+  ledger: LedgerDayRecord[],
+): Map<string, DriverImpact> {
+  const inWindow = ledger.filter(
+    (d) => d.date >= attribution.windowStart && d.date <= attribution.windowEnd,
+  );
+  const basketSizeUsd =
+    inWindow.length > 0
+      ? inWindow.reduce((s, d) => s + d.basketSizeUsd, 0) / inWindow.length
+      : 0;
+  const grossMarginPct =
+    inWindow.length > 0
+      ? inWindow.reduce((s, d) => s + d.grossMarginPct, 0) / inWindow.length
+      : 0.62;
+  const toCustomers = (points: number) => (points / 100) * attribution.baselineTickets;
+
+  const out = new Map<string, DriverImpact>();
+  for (const d of attribution.drivers) {
+    const { certainty, reason } = certaintyOf(d);
+    const customers = toCustomers(d.points);
+    out.set(d.eventId, {
+      customers,
+      customersLow: toCustomers(d.pointsLow),
+      customersHigh: toCustomers(d.pointsHigh),
+      marginUsd: customers * basketSizeUsd * grossMarginPct,
+      points: d.points,
+      activeDays: d.activeDays,
+      certainty,
+      certaintyReason: reason,
+    });
+  }
+  return out;
+}
+
+export interface DriverImpact {
+  /** Signed. Negative means customers lost to this driver. */
+  customers: number;
+  customersLow: number;
+  customersHigh: number;
+  marginUsd: number;
+  points: number;
+  activeDays: number;
+  certainty: Certainty;
+  certaintyReason: string;
+}

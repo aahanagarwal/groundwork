@@ -65,7 +65,7 @@
       "runtimeExecutable": "sh",
       "runtimeArgs": [
         "-c",
-        "cd /Users/parvbansal/Desktop/groundwork && npm run dev"
+        "cd /Users/sparshtyagi/Downloads/groundwork && npm run dev"
       ],
       "port": 3400
     }
