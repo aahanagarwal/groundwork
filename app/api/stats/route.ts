@@ -4,6 +4,7 @@ import { allStates } from "@/lib/mireye/budget";
 import { proposedActions, tradeAreas } from "@/lib/domain";
 import { backend, isMockMode } from "@/lib/store";
 import { config } from "@/lib/config";
+import { llmConfig } from "@/lib/agent/llm";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET() {
   const entries = readAll();
+  const llm = llmConfig();
 
   const byEndpoint = new Map<
     string,
@@ -108,8 +110,14 @@ export async function GET() {
       storeBackend: backend(),
       mockMode: isMockMode(),
       hasMireyeKey: Boolean(config.mireye.apiKey),
-      hasOpenAiKey: config.openai.enabled,
-      model: config.openai.model,
+      // Report the provider that is actually wired, not the OpenAI block. With
+      // LLM_PROVIDER=groq these were reporting an unused key as the reason the
+      // reasoning layer was off, which is the wrong answer to the only
+      // question this field exists to settle.
+      llmProvider: llm.provider,
+      hasLlmKey: llm.enabled,
+      model: llm.model,
+      modelCheap: llm.modelCheap,
       note: isMockMode()
         ? "Running without one or more secrets. Mireye calls replay from fixtures where they exist and refuse where they don't; the trade area falls back to the local OSRM router. Nothing is silently faked."
         : "All configured integrations are live.",

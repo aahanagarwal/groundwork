@@ -199,14 +199,22 @@ export function projectWeekAhead(
 const PREP_SYSTEM = [
   "You are Groundwork, advising the owner of one small business on the next few weeks.",
   "",
-  "You are given a projection built entirely from that business's own till data. Your job is to turn it into concrete preparation.",
+  "WHO YOU ARE WRITING TO: the owner of ONE shop, named in `yourBusiness`. They own nothing else.",
+  "",
+  "WHAT `externalForces` IS: things happening OUTSIDE that shop which are acting ON it - a rival opening nearby, a road being dug up, a heatwave. The owner does NOT own, operate, staff or stock any of them. A competitor is a threat to defend against, never a location to manage.",
+  "Advising the owner to staff, stock, supervise or sign a competitor's premises is the single worst failure available to you. Do not do it.",
+  "Neither may you advise them to publicise a competitor to their own customers. Never put a rival's name on their door, window, menu, receipt or signage - that advertises the rival for free, on the owner's premises, at the owner's expense. Defend by being better, not by pointing.",
   "",
   "HARD RULES:",
-  "1. Never state a number that is not in the input. Do not recompute, round differently, or extrapolate.",
-  "2. Everything in the projection is already measured. Do not hedge what is confirmed, and do not firm up what is marked likely.",
-  "3. Advice must be physical and specific to running a shop: staffing a shift, ordering stock, opening hours, signage, where to put a person. Not marketing theory, not 'engage your community'.",
-  "4. If a driver has an end date, say what changes on that date.",
-  "5. No headings, no bullets characters, no preamble. Return 2 to 4 short standalone sentences, one per line.",
+  "1. Never state a number, percentage or dollar figure. Not one. The projection contains the numbers; the owner can already see them. Your job is what to DO.",
+  "2. Do not hedge what is marked confirmed, and do not firm up what is marked likely.",
+  "3. Advice must be physical and specific to running THEIR shop: which shift to staff, what to order, opening hours, signage on their own door, where to put a person. Not marketing theory, not 'engage your community'.",
+  "4. If a force has an end date, say what changes for them on that date.",
+  "5. Use the day-of-week shape: concentrate effort on the busiest days, cut it on the quietest.",
+  "6. WHAT YOU DO NOT KNOW: their opening hours, how many staff they have, their menu, their prices, their suppliers, their floor plan. You have never been there. Never state or assume any of these - say 'open earlier on Saturday', never 'open at 7am'; say 'add a second person to the morning shift', never 'staff two baristas from 8'.",
+  "",
+  "FORMAT - this is strict:",
+  "Return 2 to 4 sentences. ONE SENTENCE PER LINE, separated by newlines. Each sentence stands alone as a single instruction and is at most 20 words. No paragraphs, no headings, no bullet characters, no preamble, no numbering.",
 ].join("\n");
 
 /**
@@ -227,25 +235,35 @@ export async function writePrepNotes(
     system: PREP_SYSTEM,
     user: JSON.stringify(
       {
-        business: site.label,
+        yourBusiness: site.label,
         asOf: plan.asOf,
         horizonDays: plan.horizonDays,
-        stillRunning: plan.persisting.map((p) => ({
-          what: p.label,
-          customersPerDay: Number(p.customersPerDay.toFixed(1)),
-          marginPerDayUsd: Number(p.marginPerDayUsd.toFixed(0)),
-          overNextDays: plan.horizonDays,
-          projectedCustomers: Math.round(p.projectedCustomers),
-          projectedMarginUsd: Math.round(p.projectedMarginUsd),
+        // Figures are deliberately withheld.
+        //
+        // The rule is "state no number", and the reliable way to enforce it is
+        // to make it impossible rather than to ask nicely - a model given a
+        // ticket count will eventually quote it back, and then the prose and
+        // the panel disagree by a rounding step. The panel already renders
+        // every exact figure directly above this text. What the model needs is
+        // the ORDERING, so it knows which day and which force to prioritise.
+        externalForces: plan.persisting.map((p) => ({
+          thisIs: "an outside force acting on your business - you do not own or run it",
+          description: p.label,
+          direction: p.customersPerDay < 0 ? "costing you customers" : "bringing you customers",
+          severity:
+            Math.abs(p.projectedCustomers) > 200
+              ? "major"
+              : Math.abs(p.projectedCustomers) > 50
+                ? "moderate"
+                : "minor",
           endsOn: p.endsOn,
+          stillRunningAfterHorizon: p.endsOn === null,
           certainty: p.certainty,
         })),
-        typicalWeek: plan.weekShape.map((d) => ({
-          day: d.label,
-          tickets: d.typicalTickets,
-        })),
-        busiestDay: plan.busiest?.label,
-        quietestDay: plan.quietest?.label,
+        // Ranked busiest to quietest. No counts.
+        daysRankedBusiestFirst: [...plan.weekShape]
+          .sort((a, b) => b.typicalTickets - a.typicalTickets)
+          .map((d) => d.label),
       },
       null,
       2,
@@ -262,12 +280,22 @@ export async function writePrepNotes(
     };
   }
 
-  return {
-    ...plan,
-    prep: result.text
-      .split("\n")
-      .map((l) => l.replace(/^[-*\d.\s]+/, "").trim())
-      .filter(Boolean)
-      .slice(0, 4),
-  };
+  // One instruction per line is asked for and usually delivered, but not
+  // reliably - the same prompt returns four lines for one scenario and one
+  // crammed paragraph for the next. Splitting on sentence boundaries when the
+  // line count comes back short is cheaper and steadier than another round of
+  // prompt argument, and the panel numbers each line either way.
+  let lines = result.text
+    .split("\n")
+    .map((l) => l.replace(/^[-*\d.)\s]+/, "").trim())
+    .filter(Boolean);
+
+  if (lines.length < 2) {
+    lines = (lines[0] ?? "")
+      .split(/(?<=[.!?])\s+(?=[A-Z“"])/)
+      .map((l) => l.trim())
+      .filter(Boolean);
+  }
+
+  return { ...plan, prep: lines.slice(0, 4) };
 }

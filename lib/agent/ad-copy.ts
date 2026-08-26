@@ -85,9 +85,11 @@ const SYSTEM = [
   "1. Never state a number, percentage, price, discount or dollar figure. Not one. The diagnosis contains numbers; your copy must not repeat them or invent others.",
   "2. Do not promise results, growth, or a return.",
   "3. If the diagnosis says REACH, do not write a discount. Getting this wrong gives away margin on customers who never left.",
-  "4. Write like a local shop, not a brand agency. No 'elevate', no 'journey', no 'curated', no exclamation marks.",
-  "5. Body copy is at most 25 words. It has to work on a phone, at a glance.",
-  "6. Ground every concept in something specific you were told - a road closure, a competitor, the day of the week, the weather. Generic coffee-shop copy is a failure.",
+  "4. NEVER mention, name, hint at or allude to a competitor. Not 'the new place', not 'the competition', not 'the other bar'. The reader is a customer who may not know it exists, and pointing at it advertises it for free. A competitor tells YOU how to position; it never appears in the copy.",
+  "5. Only reference conditions that are STILL TRUE. Weather that happened weeks ago is history, not a hook - `pastDriversDoNotAdvertiseThese` lists what is already over.",
+  "6. Write like a local shop, not a brand agency. No 'elevate', no 'journey', no 'curated', no exclamation marks.",
+  "7. Body copy is at most 25 words. It has to work on a phone, at a glance.",
+  "8. Ground every concept in something specific and still true - the drive-time audience, a closure that is still shut, the day of the week, what this shop is actually good at.",
   "",
   'Return JSON exactly: {"concepts":[{"angle":"...","body":"...","cta":"...","groundedIn":"...","audienceNote":"..."}]}',
   "Exactly 3 concepts, each with a genuinely different angle.",
@@ -115,16 +117,22 @@ export async function draftAdCreative(input: {
           business: site.label,
           address: site.resolvedAddress ?? site.inputAddress,
           diagnosis,
-          whatIsActuallyHappening: attribution.drivers
+          pastDriversDoNotAdvertiseThese: attribution.drivers
             .filter((d) => !d.indistinguishableFromZero)
-            .map((d) => `${d.label} (${d.kind})`),
-          competitorsInDriveShed: events
-            .filter((e) => e.kind === "competitor_open")
-            .map((e) => ({
-              name: (e.meta?.["businessName"] as string) ?? e.label,
-              driveMinutes: e.driveTime?.minutes ?? null,
-              note: e.meta?.["note"] ?? null,
-            })),
+            .map((d) => `${d.label} (${d.kind}) - already over, do not use as a hook`),
+          // Deliberately stripped of names. The model is told how much pressure
+          // it is under and from how far away, and nothing it could quote.
+          competitivePressure: {
+            note: "Positioning input only. Never name or allude to these in copy.",
+            rivalsInsideDriveShed: events.filter(
+              (e) => e.kind === "competitor_open" && e.polygonMembership.inside,
+            ).length,
+            nearestDriveMinutes:
+              events
+                .filter((e) => e.kind === "competitor_open" && e.driveTime?.minutes != null)
+                .map((e) => e.driveTime!.minutes!)
+                .sort((a, b) => a - b)[0] ?? null,
+          },
           closures: events
             .filter((e) => e.kind === "road_closure")
             .map((e) => ({
