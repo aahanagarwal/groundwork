@@ -11,33 +11,42 @@ const questions = [
   "Was that the weather, or was that me?"
 ];
 
+const TYPE_MS = 40;
+const HOLD_MS = 2000;
+
 export function WelcomeHero() {
-  const [qIndex, setQIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isWaiting, setIsWaiting] = useState(false);
+  const [typed, setTyped] = useState({ qIndex: 0, charIndex: 0 });
 
   useEffect(() => {
-    if (isWaiting) {
-      const timeout = setTimeout(() => {
-        setIsWaiting(false);
-        setQIndex((prev) => (prev + 1) % questions.length);
-        setCharIndex(0);
-      }, 2000);
-      return () => clearTimeout(timeout);
-    }
+    // One self-scheduling timer owns the animation: it holds the cursor
+    // position in local variables and pushes each frame into React, so the
+    // effect never reads state it also writes.
+    let qIndex = 0;
+    let charIndex = 0;
+    let timeout: ReturnType<typeof setTimeout>;
 
-    const currentText = questions[qIndex];
-    if (charIndex < currentText.length) {
-      const timeout = setTimeout(() => {
-        setCharIndex((prev) => prev + 1);
-      }, 40);
-      return () => clearTimeout(timeout);
-    } else {
-      setIsWaiting(true);
-    }
-  }, [charIndex, qIndex, isWaiting]);
+    const step = () => {
+      const full = questions[qIndex];
+      let delay = TYPE_MS;
 
-  const currentText = questions[qIndex].substring(0, charIndex);
+      if (charIndex < full.length) {
+        charIndex += 1;
+        // Sit on the finished question before clearing it.
+        if (charIndex === full.length) delay = HOLD_MS;
+      } else {
+        qIndex = (qIndex + 1) % questions.length;
+        charIndex = 0;
+      }
+
+      setTyped({ qIndex, charIndex });
+      timeout = setTimeout(step, delay);
+    };
+
+    timeout = setTimeout(step, TYPE_MS);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const currentText = questions[typed.qIndex].substring(0, typed.charIndex);
 
   return (
     <section className="w-full pt-20 pb-16 bg-paper text-ink">
@@ -54,7 +63,7 @@ export function WelcomeHero() {
         {/* Animated typing effect */}
         <div className="mb-8 font-serif text-[24px] text-survey h-[32px] flex items-center">
           <span className="inline-block relative">
-            "{currentText}"
+            &quot;{currentText}&quot;
             <span className="inline-block w-[2px] h-[24px] bg-survey ml-1 align-middle animate-pulse" />
           </span>
         </div>

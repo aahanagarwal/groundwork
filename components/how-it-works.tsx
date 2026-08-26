@@ -57,7 +57,7 @@ export function HowItWorks() {
                 <span className="bg-ink text-limestone px-2 py-1 font-mono text-[10px] uppercase rounded-sm whitespace-nowrap">NOT YOUR FAULT</span>
               </h3>
               <p className="font-serif text-ink/80 text-base leading-relaxed">
-                Before you finish your coffee, you see the answer: 'This wasn’t you - it was the street.' or 'You ran ahead, and it wasn’t luck.' In customers and dollars, not percentages.
+                Before you finish your coffee, you see the answer: &apos;This wasn’t you - it was the street.&apos; or &apos;You ran ahead, and it wasn’t luck.&apos; In customers and dollars, not percentages.
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export function HowItWorks() {
                 <span className="label bg-paper px-2 py-0.5 border border-ink/10 text-ink/80">Competitor</span>
               </div>
               <p className="font-serif text-ink/80 text-base leading-relaxed">
-                A road closure on Menchaca. Three days of 102°F heat. A new competitor 200m away. Each one shows how many customers it cost you and how certain we are - 'confirmed', 'likely', or 'unproven'. We never tell you to act on something we couldn’t measure.
+                A road closure on Menchaca. Three days of 102°F heat. A new competitor 200m away. Each one shows how many customers it cost you and how certain we are - &apos;confirmed&apos;, &apos;likely&apos;, or &apos;unproven&apos;. We never tell you to act on something we couldn’t measure.
               </p>
             </div>
           </div>
