@@ -1,8 +1,8 @@
 import type { AttributionResult } from "@/lib/attribution/decompose";
 import type { SiteRecord, TradeAreaRecord, WorldEventRecord } from "@/lib/domain";
 import { EVENT_KIND_META } from "@/lib/scenario-kinds";
-import { config } from "@/lib/config";
-import { getMarketContext } from "./researcher";
+import { getMarketContext, type LocalResearch } from "./researcher";
+import { complete } from "./llm";
 
 /**
  * THE NARRATOR
@@ -29,6 +29,11 @@ export interface NarrationInput {
   tradeArea: TradeAreaRecord | null;
   events: WorldEventRecord[];
   scenarioName: string;
+  /**
+   * Local hypotheses from the research agent, when it ran. Passed in so the
+   * brief and the panel that lists them cannot disagree.
+   */
+  research?: LocalResearch;
 }
 
 export interface Narration {
@@ -156,13 +161,14 @@ export function narrateDeterministic(input: NarrationInput): Narration {
  */
 export async function narrate(input: NarrationInput): Promise<Narration> {
   const deterministic = narrateDeterministic(input);
-  if (!config.openai.enabled) return deterministic;
 
-  const { default: OpenAI } = await import("openai");
-  const client = new OpenAI({ apiKey: config.openai.apiKey });
-  
-  // Call the Research Sub-Agent to get localized, business-centric context
-  const marketContext = await getMarketContext(input.site);
+  // The research is passed in rather than fetched here. The Action Center
+  // renders the same hypotheses and questions on screen, and generating them
+  // twice would mean paying twice for two answers that could differ - the
+  // brief would then cite context the panel below it never showed.
+  const marketContext = input.research
+    ? await getMarketContext(input.site, input.research)
+    : "";
 
   const system = [
     "You are Groundwork, a consultant that explains a local business's revenue using the physical facts of its address.",
@@ -182,14 +188,13 @@ export async function narrate(input: NarrationInput): Promise<Narration> {
     "A reference narration written by a deterministic template is included. It is factually correct. Do not contradict it; improve only its readability.",
   ].join("\n");
 
-  try {
-    const response = await client.chat.completions.create({
-      model: config.openai.model,
-      messages: [
-        { role: "system", content: system },
-        {
-          role: "user",
-          content: JSON.stringify(
+  const completion = await complete({
+    agent: "brief",
+    siteId: input.site.id,
+    system,
+    temperature: 0.4,
+    maxTokens: 900,
+    user: JSON.stringify(
             {
               business: input.site.label,
               address: input.site.resolvedAddress ?? input.site.inputAddress,
@@ -209,26 +214,26 @@ export async function narrate(input: NarrationInput): Promise<Narration> {
               })),
               referenceNarration: deterministic,
             },
-            null,
-            2,
-          ),
-        },
-      ],
-    });
+      null,
+      2,
+    ),
+  });
 
-    const text = response.choices[0]?.message?.content?.trim();
-    if (!text) return deterministic;
+  // A model outage, a missing key, or an empty completion all land on the
+  // deterministic brief, which is factually complete on its own.
+  if (!completion.ok) return deterministic;
 
-    const paragraphs = text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
-    return {
-      headline: deterministic.headline,
-      body: paragraphs,
-      narratedBy: config.openai.model,
-    };
-  } catch {
-    // A model outage must never take down the brief.
-    return deterministic;
-  }
+  const paragraphs = completion.text
+    .split(/\n\s*\n/)
+    .map((p: string) => p.trim())
+    .filter(Boolean);
+  if (paragraphs.length === 0) return deterministic;
+
+  return {
+    headline: deterministic.headline,
+    body: paragraphs,
+    narratedBy: `${completion.provider}:${completion.model}`,
+  };
 }
 
 function formatDate(iso: string): string {

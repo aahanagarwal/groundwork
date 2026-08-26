@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { buildDashboard } from "@/lib/pipeline";
 import { narrate } from "@/lib/agent/narrate";
+import { researchLocalContext, EMPTY_RESEARCH } from "@/lib/agent/researcher";
+import { projectWeekAhead, writePrepNotes } from "@/lib/agent/week-ahead";
+import { WeekAheadPanel, ResearchPanel, AdCreativePanel } from "@/components/agents";
+import { draftAdCreative } from "@/lib/agent/ad-copy";
 import { buildInsight, perEventImpact } from "@/lib/insight";
 import { advertisingModule, threatWatchModule } from "@/lib/modules";
 import { checkins, proposedActions, type ProposedActionRecord } from "@/lib/domain";
@@ -75,9 +79,37 @@ export default async function SitePage({
 
   const insight = attribution ? buildInsight(attribution, ledger) : null;
 
+  // --- The reasoning layer --------------------------------------------------
+  // Research runs first and is then handed to the narrator, so the brief and
+  // the panel that lists the hypotheses cannot tell different stories. Both
+  // degrade to their deterministic halves when no model is configured.
+  const research =
+    attribution && insight
+      ? await researchLocalContext({ site, attribution, insight, tradeArea, events })
+      : EMPTY_RESEARCH;
+
   const narration = attribution
-    ? await narrate({ site, attribution, tradeArea, events, scenarioName: scenario.name })
+    ? await narrate({
+        site,
+        attribution,
+        tradeArea,
+        events,
+        scenarioName: scenario.name,
+        research,
+      })
     : null;
+
+  // Forward-looking, and computed from the attribution object rather than from
+  // a forecasting model - see lib/agent/week-ahead.ts.
+  const weekAhead =
+    attribution && insight
+      ? await writePrepNotes(site, projectWeekAhead(attribution, insight, ledger, events))
+      : null;
+
+  const adCreative =
+    attribution && insight
+      ? await draftAdCreative({ site, attribution, insight, tradeArea, events })
+      : null;
 
   // --- Decision modules -----------------------------------------------------
   const proposals: ProposedActionRecord[] = [];
@@ -260,7 +292,14 @@ export default async function SitePage({
           }
           actions={
             <div className="space-y-10">
+              {weekAhead ? <WeekAheadPanel plan={weekAhead} /> : null}
               <ActionCenter actions={proposals} />
+              {insight ? (
+                <ResearchPanel
+                  research={research}
+                  unexplainedCustomers={insight.unexplainedCustomers}
+                />
+              ) : null}
             </div>
           }
           advertising={
@@ -345,6 +384,8 @@ export default async function SitePage({
               ) : null}
             </section>
             
+            {adCreative ? <AdCreativePanel creative={adCreative} /> : null}
+
             {attribution ? (
               <section className="card p-5 mt-10">
                 <RevenueChart attribution={attribution} />

@@ -34,11 +34,20 @@ export async function GET() {
     }
   >();
 
+  // Same split as the Ops view: the operation is what carries the cost on
+  // /v1/proximity, so reporting the bare path aggregates three very different
+  // things into one uninterpretable row.
+  const labelFor = (e: (typeof entries)[number]): string => {
+    const op = (e.request as { op?: unknown } | null)?.op;
+    return typeof op === "string" ? `${e.endpoint} · ${op}` : e.endpoint;
+  };
+
   for (const e of entries) {
+    const key = labelFor(e);
     const row =
-      byEndpoint.get(e.endpoint) ??
+      byEndpoint.get(key) ??
       {
-        endpoint: e.endpoint,
+        endpoint: key,
         calls: 0,
         cacheHits: 0,
         refusals: 0,
@@ -54,7 +63,7 @@ export async function GET() {
     row.creditsActual += e.creditsActual ?? 0;
     row.totalMs += e.durationMs;
     row.latencies.push(e.durationMs);
-    byEndpoint.set(e.endpoint, row);
+    byEndpoint.set(key, row);
   }
 
   const endpoints = [...byEndpoint.values()].map((r) => {

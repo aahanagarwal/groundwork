@@ -4,6 +4,7 @@ import { allStates } from "@/lib/mireye/budget";
 import { proposedActions, tradeAreas } from "@/lib/domain";
 import { backend, isMockMode } from "@/lib/store";
 import { config, TRADE_AREA_MINUTES } from "@/lib/config";
+import { llmConfig } from "@/lib/agent/llm";
 import { RIDGE_FRACTION } from "@/lib/attribution/ols";
 import { Sheet, Plate, Footer } from "@/components/chrome";
 
@@ -20,16 +21,36 @@ export const dynamic = "force-dynamic";
  */
 export default async function OpsPage() {
   const entries = readAll();
+  const llm = llmConfig();
   const budgets = allStates();
   const polygons = tradeAreas.all();
   const decisions = proposedActions.all();
+
+  // Break /v1/proximity out by operation.
+  //
+  // Grouping on the endpoint alone hides the only thing worth knowing about it.
+  // Nearly every credit this app spends goes through /v1/proximity, but the
+  // three operations behind that one path have wildly different economics: a
+  // `screen` draws the whole isochrone at ~960 credits, a `distance` prices a
+  // handful of legs at 12 each, and a `labor_shed` is not knowable in advance
+  // at all. One row saying "/v1/proximity - 54 calls" tells an operator
+  // nothing about which of those to worry about.
+  const opOf = (e: (typeof entries)[number]): string | null => {
+    const op = (e.request as { op?: unknown } | null)?.op;
+    return typeof op === "string" ? op : null;
+  };
+  const labelFor = (e: (typeof entries)[number]): string => {
+    const op = opOf(e);
+    return op ? `${e.endpoint} · ${op}` : e.endpoint;
+  };
 
   const byEndpoint = new Map<
     string,
     { calls: number; cacheHits: number; refusals: number; credits: number; totalMs: number }
   >();
   for (const e of entries) {
-    const row = byEndpoint.get(e.endpoint) ?? {
+    const key = labelFor(e);
+    const row = byEndpoint.get(key) ?? {
       calls: 0,
       cacheHits: 0,
       refusals: 0,
@@ -41,7 +62,7 @@ export default async function OpsPage() {
     if (e.refused) row.refusals += 1;
     row.credits += e.creditsActual ?? e.creditsEstimated ?? 0;
     row.totalMs += e.durationMs;
-    byEndpoint.set(e.endpoint, row);
+    byEndpoint.set(key, row);
   }
 
   const totalCalls = entries.length;
@@ -84,9 +105,13 @@ export default async function OpsPage() {
             />
             <Field label="Store backend" value={backend()} warn={backend() === "files"} />
             <Field
-              label="Narrator"
-              value={config.openai.enabled ? config.openai.model : "deterministic template"}
-              warn={!config.openai.enabled}
+              label="Reasoning layer"
+              value={
+                llm.enabled
+                  ? `${llm.provider}: ${llm.model}`
+                  : `${llm.provider}: NO KEY - templates only`
+              }
+              warn={!llm.enabled}
             />
           </dl>
           {isMockMode() ? (
