@@ -1,0 +1,96 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/proximity",
+  "recordedAt": "2026-08-26T20:48:33.950Z",
+  "request": {
+    "op": "distance",
+    "origins": [
+      "30.247500,-97.749800",
+      "30.255800,-97.748500",
+      "30.253500,-97.749400"
+    ],
+    "destinations": [
+      "30.404982,-97.873411"
+    ],
+    "mode": "driving",
+    "max_credits": 1200
+  },
+  "response": {
+    "op": "distance",
+    "legs": [
+      {
+        "origin_index": 0,
+        "destination_index": 0,
+        "distance_miles": 17.9,
+        "distance_km": 28.7,
+        "duration_seconds": 1877,
+        "duration_minutes": 31.283333333333335,
+        "flag": null
+      },
+      {
+        "origin_index": 1,
+        "destination_index": 0,
+        "distance_miles": 17.5,
+        "distance_km": 28.2,
+        "duration_seconds": 1852,
+        "duration_minutes": 30.866666666666667,
+        "flag": null
+      },
+      {
+        "origin_index": 2,
+        "destination_index": 0,
+        "distance_miles": 17.6,
+        "distance_km": 28.3,
+        "duration_seconds": 1884,
+        "duration_minutes": 31.4,
+        "flag": null
+      }
+    ],
+    "resolved_origins": [
+      {
+        "query": "30.247500,-97.749800",
+        "lat": 30.2475,
+        "lng": -97.7498,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.255800,-97.748500",
+        "lat": 30.2558,
+        "lng": -97.7485,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      },
+      {
+        "query": "30.253500,-97.749400",
+        "lat": 30.2535,
+        "lng": -97.7494,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      }
+    ],
+    "resolved_destinations": [
+      {
+        "query": "30.404982,-97.873411",
+        "lat": 30.404982,
+        "lng": -97.873411,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      }
+    ],
+    "paid_driving_calcs": 3,
+    "notes": [
+      "coverage: US + Canada",
+      "durations reflect typical traffic, not real-time"
+    ],
+    "credits_charged": 36
+  }
+}

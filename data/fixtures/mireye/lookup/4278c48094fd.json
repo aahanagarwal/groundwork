@@ -1,0 +1,73 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/lookup",
+  "recordedAt": "2026-08-26T20:48:08.856Z",
+  "request": {
+    "input": "6550 Comanche Trail, Austin, TX 78732",
+    "include_parcel": true
+  },
+  "response": {
+    "disposition": "resolved",
+    "lat": 30.404982,
+    "lng": -97.873411,
+    "resolved_address": "6550 Comanche Trl, Austin, TX 78732",
+    "resolved_location": {
+      "lat": 30.404982,
+      "lng": -97.873411,
+      "source": "address"
+    },
+    "county_fips": "48453",
+    "county": "Travis County",
+    "tract_geoid": "48453035800",
+    "state_fips": "48",
+    "state": "Texas",
+    "block_group_geoid": "484530358002",
+    "block_geoid": "484530358002029",
+    "congressional_district": "TX-37",
+    "cbsa_name": "Austin-Round Rock-San Marcos, TX Metro Area",
+    "cbsa_code": "12420",
+    "elevation_m": 309.23773193359375,
+    "fema_flood_zone": "X",
+    "within_floodplain": false,
+    "coastal_high_hazard": false,
+    "county_market": {
+      "population": 1389670,
+      "population_growth_1yr_pct": 1.0727,
+      "net_domestic_migration": -6590,
+      "building_permits_total_annual": 15059,
+      "building_permits_sf_annual": 4727,
+      "building_permits_yoy_pct": -11.3655,
+      "hpi_yoy_pct": -5.65,
+      "employment_total": 932839,
+      "employment_yoy_pct": 3.2663,
+      "median_household_income_usd": 97169
+    },
+    "in_opportunity_zone": false,
+    "timezone": "America/Chicago",
+    "parcel": {
+      "parcel_id": "a48d28c3-61a1-4ecf-850a-261646783604",
+      "apn": "768427",
+      "address": "6550 COMANCHE TRL",
+      "match_confidence": "high",
+      "match_note": "Regrid exact point lookup; point intersects returned parcel. Regrid freshness metadata: last_refresh=2026-08-19; updated_at=2026-08-19 23:45:45 -0400; last_ownership_transfer_date=2014-10-24; saledate=2014-09-02.",
+      "area_m2": 24511.971224733697,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-97.873341,30.405064],[-97.873404,30.4051155],[-97.8734635,30.40517],[-97.873611,30.405056],[-97.873621,30.4050495],[-97.873632,30.4050445],[-97.8736435,30.405041],[-97.8736555,30.405039],[-97.873668,30.405039],[-97.8736805,30.40504],[-97.873692,30.405043],[-97.8737035,30.405048],[-97.8741435,30.4052665],[-97.8741685,30.4053065],[-97.8741995,30.405344],[-97.8742355,30.4053775],[-97.8742755,30.4054075],[-97.87432,30.405433],[-97.874367,30.4054535],[-97.874302,30.405579],[-97.8747925,30.4057705],[-97.8775835,30.407059],[-97.877459,30.40645],[-97.876253,30.4058785],[-97.8751095,30.405337],[-97.8740405,30.40483],[-97.8733095,30.4044835],[-97.8732005,30.4046535],[-97.8733615,30.404731],[-97.873207,30.4049735],[-97.873273,30.405015],[-97.873336,30.4050605],[-97.873341,30.405064]]]}",
+      "geometry_wkt": "POLYGON((-97.873341 30.405064, -97.873404 30.4051155, -97.8734635 30.40517, -97.873611 30.405056, -97.873621 30.4050495, -97.873632 30.4050445, -97.8736435 30.405041, -97.8736555 30.405039, -97.873668 30.405039, -97.8736805 30.40504, -97.873692 30.405043, -97.8737035 30.405048, -97.8741435 30.4052665, -97.8741685 30.4053065, -97.8741995 30.405344, -97.8742355 30.4053775, -97.8742755 30.4054075, -97.87432 30.405433, -97.874367 30.4054535, -97.874302 30.405579, -97.8747925 30.4057705, -97.8775835 30.407059, -97.877459 30.40645, -97.876253 30.4058785, -97.8751095 30.405337, -97.8740405 30.40483, -97.8733095 30.4044835, -97.8732005 30.4046535, -97.8733615 30.404731, -97.873207 30.4049735, -97.873273 30.405015, -97.873336 30.4050605, -97.873341 30.405064))",
+      "interior_point_lat": 30.4058245,
+      "interior_point_lng": -97.87552421766355,
+      "owner": "THERIOT OASIS LLC",
+      "zoning": "PUD",
+      "land_use": "COMMERCIAL REAL PROPERTY",
+      "assessed_value_usd": 9950000,
+      "last_sale_date": "2014-09-02",
+      "match_type": "exact_intersect",
+      "match_distance_m": 0,
+      "match_radius_m": 0,
+      "source": "regrid_paid"
+    },
+    "parcel_unavailable": false,
+    "match_method": "geocode_rooftop+point_in_parcel",
+    "confidence": 0.95,
+    "parcel_grade": true
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/lookup",
+  "recordedAt": "2026-08-26T20:49:20.836Z",
+  "request": {
+    "input": "1003 Barton Springs Rd, Austin, TX 78704",
+    "include_parcel": true
+  },
+  "response": {
+    "disposition": "resolved",
+    "lat": 30.259866,
+    "lng": -97.754972,
+    "resolved_address": "1003 Barton Springs Rd, Austin, TX 78704",
+    "resolved_location": {
+      "lat": 30.259866,
+      "lng": -97.754972,
+      "source": "address"
+    },
+    "county_fips": "48453",
+    "county": "Travis County",
+    "tract_geoid": "48453001312",
+    "state_fips": "48",
+    "state": "Texas",
+    "block_group_geoid": "484530013123",
+    "block_geoid": "484530013123000",
+    "congressional_district": "TX-37",
+    "cbsa_name": "Austin-Round Rock-San Marcos, TX Metro Area",
+    "cbsa_code": "12420",
+    "elevation_m": 137.00469970703125,
+    "fema_flood_zone": "AE",
+    "within_floodplain": true,
+    "coastal_high_hazard": false,
+    "county_market": {
+      "population": 1389670,
+      "population_growth_1yr_pct": 1.0727,
+      "net_domestic_migration": -6590,
+      "building_permits_total_annual": 15059,
+      "building_permits_sf_annual": 4727,
+      "building_permits_yoy_pct": -11.3655,
+      "hpi_yoy_pct": -5.65,
+      "employment_total": 932839,
+      "employment_yoy_pct": 3.2663,
+      "median_household_income_usd": 97169
+    },
+    "in_opportunity_zone": false,
+    "timezone": "America/Chicago",
+    "parcel": {
+      "parcel_id": "86358d7b-cd1c-4b0d-81cd-460e3563f0c4",
+      "apn": "102027",
+      "address": "1003 BARTON SPRINGS RD",
+      "match_confidence": "high",
+      "match_note": "Regrid exact point lookup; point intersects returned parcel. Regrid freshness metadata: last_refresh=2026-08-19; updated_at=2026-08-19 23:45:45 -0400; last_ownership_transfer_date=2009-12-15; saledate=2009-12-01.",
+      "area_m2": 2637.700547556096,
+      "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-97.7547855,30.2595015],[-97.754715,30.259478],[-97.754529,30.2597685],[-97.7546005,30.2597945],[-97.754675,30.259821],[-97.754752,30.259847],[-97.7548265,30.2598735],[-97.754901,30.2598995],[-97.754973,30.259926],[-97.755047,30.259952],[-97.755122,30.2599785],[-97.7551785,30.259996],[-97.755193,30.260002],[-97.7552225,30.2600135],[-97.755223,30.2600125],[-97.7554075,30.259723],[-97.75538,30.259714],[-97.7553075,30.259688],[-97.755247,30.2596675],[-97.755232,30.2596615],[-97.7551895,30.2596445],[-97.755158,30.259634],[-97.7550855,30.259608],[-97.7550545,30.2595975],[-97.75504,30.2595915],[-97.755013,30.259583],[-97.7549435,30.259557],[-97.7548665,30.259529],[-97.7547855,30.2595015]]]}",
+      "geometry_wkt": "POLYGON((-97.7547855 30.2595015, -97.754715 30.259478, -97.754529 30.2597685, -97.7546005 30.2597945, -97.754675 30.259821, -97.754752 30.259847, -97.7548265 30.2598735, -97.754901 30.2598995, -97.754973 30.259926, -97.755047 30.259952, -97.755122 30.2599785, -97.7551785 30.259996, -97.755193 30.260002, -97.7552225 30.2600135, -97.755223 30.2600125, -97.7554075 30.259723, -97.75538 30.259714, -97.7553075 30.259688, -97.755247 30.2596675, -97.755232 30.2596615, -97.7551895 30.2596445, -97.755158 30.259634, -97.7550855 30.259608, -97.7550545 30.2595975, -97.75504 30.2595915, -97.755013 30.259583, -97.7549435 30.259557, -97.7548665 30.259529, -97.7547855 30.2595015))",
+      "interior_point_lat": 30.25974575,
+      "interior_point_lng": -97.75496828378022,
+      "owner": "DANIEL-DANIEL LTD",
+      "zoning": "CS-V-NP",
+      "land_use": "COMMERCIAL REAL PROPERTY",
+      "assessed_value_usd": 3815481,
+      "last_sale_date": "2009-12-01",
+      "match_type": "exact_intersect",
+      "match_distance_m": 0,
+      "match_radius_m": 0,
+      "source": "regrid_paid"
+    },
+    "parcel_unavailable": false,
+    "match_method": "geocode_rooftop+point_in_parcel",
+    "confidence": 0.95,
+    "parcel_grade": true
+  }
+}

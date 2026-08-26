@@ -1,0 +1,52 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/lookup",
+  "recordedAt": "2026-08-26T20:45:52.764Z",
+  "request": {
+    "input": "1704 E Cesar Chavez St, Austin, TX 78702",
+    "include_parcel": false
+  },
+  "response": {
+    "disposition": "resolved",
+    "lat": 30.257942,
+    "lng": -97.726042,
+    "resolved_address": "1704 E Cesar Chavez St, Austin, TX 78702",
+    "resolved_location": {
+      "lat": 30.257942,
+      "lng": -97.726042,
+      "source": "address"
+    },
+    "county_fips": "48453",
+    "county": "Travis County",
+    "tract_geoid": "48453000902",
+    "state_fips": "48",
+    "state": "Texas",
+    "block_group_geoid": "484530009024",
+    "block_geoid": "484530009024055",
+    "congressional_district": "TX-35",
+    "cbsa_name": "Austin-Round Rock-San Marcos, TX Metro Area",
+    "cbsa_code": "12420",
+    "elevation_m": 140.78147888183594,
+    "fema_flood_zone": "X",
+    "within_floodplain": false,
+    "coastal_high_hazard": false,
+    "county_market": {
+      "population": 1389670,
+      "population_growth_1yr_pct": 1.0727,
+      "net_domestic_migration": -6590,
+      "building_permits_total_annual": 15059,
+      "building_permits_sf_annual": 4727,
+      "building_permits_yoy_pct": -11.3655,
+      "hpi_yoy_pct": -5.65,
+      "employment_total": 932839,
+      "employment_yoy_pct": 3.2663,
+      "median_household_income_usd": 97169
+    },
+    "in_opportunity_zone": false,
+    "timezone": "America/Chicago",
+    "parcel_unavailable": false,
+    "match_method": "geocode_rooftop",
+    "confidence": 0.95,
+    "parcel_grade": true
+  }
+}
