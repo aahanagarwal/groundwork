@@ -198,19 +198,52 @@ export async function narrate(input: NarrationInput): Promise<Narration> {
             {
               business: input.site.label,
               address: input.site.resolvedAddress ?? input.site.inputAddress,
-              attribution: input.attribution,
+              // `series` is 90 daily points and the narrator has no use for a
+              // single one of them - it writes about the window, not the
+              // chart. Sending the whole attribution object pushed one request
+              // past 11,000 tokens against an 8,000/min ceiling, so the brief
+              // failed with a 413 on every render and silently fell back to
+              // the template. `diagnostics` goes the same way for the same
+              // reason: the confidence GRADE is narratable, the condition
+              // number is not.
+              attribution: {
+                windowStart: input.attribution.windowStart,
+                windowEnd: input.attribution.windowEnd,
+                windowDays: input.attribution.windowDays,
+                observedTickets: input.attribution.observedTickets,
+                baselineTickets: input.attribution.baselineTickets,
+                deltaPct: input.attribution.deltaPct,
+                basketSizeDeltaPct: input.attribution.basketSizeDeltaPct,
+                unexplainedPoints: input.attribution.unexplainedPoints,
+                confidence: input.attribution.confidence,
+                confidenceReasons: input.attribution.confidenceReasons,
+                saturatedWindow: input.attribution.diagnostics.saturatedWindow,
+                drivers: input.attribution.drivers.map((d) => ({
+                  label: d.label,
+                  kind: d.kind,
+                  points: Number(d.points.toFixed(2)),
+                  pointsLow: Number(d.pointsLow.toFixed(2)),
+                  pointsHigh: Number(d.pointsHigh.toFixed(2)),
+                  activeDays: d.activeDays,
+                  mayHaveDoneNothing: d.indistinguishableFromZero,
+                })),
+                unidentifiable: input.attribution.unidentifiable.map((u) => u.label),
+              },
               tradeArea: input.tradeArea && {
                 minutes: input.tradeArea.minutes,
                 areaSqMi: input.tradeArea.areaSqMi,
                 naiveAreaSqMi: input.tradeArea.naiveAreaSqMi,
                 naiveRadiusMiles: input.tradeArea.naiveRadiusMiles,
               },
+              // Trimmed for the same reason - a scenario's meta block carries
+              // permit numbers, notes and coordinates that cost tokens and
+              // narrate nothing.
               events: input.events.map((e) => ({
                 kind: e.kind,
                 label: e.label,
                 startDate: e.startDate,
                 endDate: e.endDate,
-                meta: e.meta,
+                reopens: e.meta?.["scheduledReopen"] ?? null,
               })),
               referenceNarration: deterministic,
             },

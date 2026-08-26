@@ -97,6 +97,33 @@ export function llmConfig(): LlmConfig {
   };
 }
 
+/**
+ * ONE ANSWER PER QUESTION, NOT ONE PER RENDER
+ *
+ * A page render fans out to several agents, and this page is force-dynamic:
+ * every request re-runs all of them. Left alone that produced 12,663 calls in
+ * a session, most of them asking a question that had already been answered,
+ * and enough of them at once to hit Groq's per-minute token ceiling - so the
+ * agents that mattered got 429s caused by duplicates of themselves.
+ *
+ * The prompt is the cache key, which is exactly right here: these agents are
+ * pure functions of the attribution object. Same window, same drivers, same
+ * question, same answer - and if any of those change the key changes with
+ * them. In-flight requests are shared rather than duplicated, so a burst of
+ * concurrent renders makes one call between them.
+ *
+ * Deliberately in-memory and process-local. It is a cache, not a store: a
+ * restart should re-ask, and nothing here is worth persisting.
+ */
+const TTL_MS = 10 * 60 * 1000;
+const MAX_ENTRIES = 200;
+const answers = new Map<string, { at: number; result: CompleteResult }>();
+const inFlight = new Map<string, Promise<CompleteResult>>();
+
+function cacheKey(model: string, opts: CompleteOptions): string {
+  return `${model}\u0000${opts.temperature ?? ""}\u0000${opts.json ? "j" : "t"}\u0000${opts.system}\u0000${opts.user}`;
+}
+
 export interface CompleteOptions {
   agent: AgentId;
   system: string;
@@ -133,6 +160,39 @@ export interface CompleteResult {
 export async function complete(opts: CompleteOptions): Promise<CompleteResult> {
   const cfg = llmConfig();
   const model = opts.cheap ? cfg.modelCheap : cfg.model;
+  const key = cacheKey(model, opts);
+
+  const hit = answers.get(key);
+  if (hit && Date.now() - hit.at < TTL_MS) return hit.result;
+  const pending = inFlight.get(key);
+  if (pending) return pending;
+
+  const run = completeUncached(opts, cfg, model);
+  inFlight.set(key, run);
+  try {
+    const result = await run;
+    // Only successes are cached. A 429 or a timeout is a transient condition,
+    // and remembering it for ten minutes would turn one rate limit into a
+    // ten-minute outage of the panel it belongs to.
+    if (result.ok) {
+      if (answers.size >= MAX_ENTRIES) {
+        const oldest = [...answers.entries()].sort((a, b) => a[1].at - b[1].at)[0];
+        if (oldest) answers.delete(oldest[0]);
+      }
+      answers.set(key, { at: Date.now(), result });
+    }
+    return result;
+  } finally {
+    inFlight.delete(key);
+  }
+}
+
+async function completeUncached(
+  opts: CompleteOptions,
+  cfg: LlmConfig,
+  model: string,
+  attempt = 0,
+): Promise<CompleteResult> {
   const started = Date.now();
 
   const base = {
@@ -230,6 +290,24 @@ export async function complete(opts: CompleteOptions): Promise<CompleteResult> {
     return { ok: true, text, model, provider: cfg.provider };
   } catch (error) {
     const detail = error instanceof Error ? error.message : String(error);
+
+    // A rate limit is a queueing problem, not a failure, and the provider says
+    // exactly how long to wait: "Please try again in 3.87s". Honouring that
+    // turns a dropped panel into a short pause. Free tiers are measured in
+    // tokens per MINUTE, and a cold cache legitimately needs several calls at
+    // once, so this is the normal path on a first page load rather than an
+    // edge case.
+    //
+    // Bounded to one retry: if the ceiling is still hit after waiting the
+    // suggested time, the honest answer is the deterministic fallback rather
+    // than a page that hangs while it queues.
+    const retryAfter = /try again in ([\d.]+)s/i.exec(detail)?.[1];
+    if (retryAfter && attempt === 0) {
+      const waitMs = Math.min(Number(retryAfter) * 1000 + 250, 12_000);
+      await new Promise((r) => setTimeout(r, waitMs));
+      return completeUncached(opts, cfg, model, attempt + 1);
+    }
+
     record({
       ...base,
       mode: "live",

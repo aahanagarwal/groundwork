@@ -1,0 +1,58 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/proximity",
+  "recordedAt": "2026-08-26T15:52:55.700Z",
+  "request": {
+    "op": "distance",
+    "origins": [
+      "30.266700,-97.743100"
+    ],
+    "destinations": [
+      "30.251077,-97.749518"
+    ],
+    "mode": "driving",
+    "max_credits": 1200
+  },
+  "response": {
+    "op": "distance",
+    "legs": [
+      {
+        "origin_index": 0,
+        "destination_index": 0,
+        "distance_miles": 1.2,
+        "distance_km": 1.9,
+        "duration_seconds": 213,
+        "duration_minutes": 3.55,
+        "flag": null
+      }
+    ],
+    "resolved_origins": [
+      {
+        "query": "30.266700,-97.743100",
+        "lat": 30.2667,
+        "lng": -97.7431,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      }
+    ],
+    "resolved_destinations": [
+      {
+        "query": "30.251077,-97.749518",
+        "lat": 30.251077,
+        "lng": -97.749518,
+        "formatted_address": null,
+        "accuracy_type": null,
+        "accuracy": null,
+        "error": null
+      }
+    ],
+    "paid_driving_calcs": 1,
+    "notes": [
+      "coverage: US + Canada",
+      "durations reflect typical traffic, not real-time"
+    ],
+    "credits_charged": 12
+  }
+}
