@@ -1,5 +1,6 @@
 import { appendFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { writablePath } from "@/lib/paths";
 
 /**
  * The call ledger.
@@ -51,7 +52,7 @@ export interface LedgerEntry {
   response?: unknown;
 }
 
-const LEDGER_DIR = path.join(process.cwd(), "data", "telemetry");
+const LEDGER_DIR = writablePath("data", "telemetry");
 const LEDGER_FILE = path.join(LEDGER_DIR, "mireye-calls.jsonl");
 
 function ensureDir(): void {

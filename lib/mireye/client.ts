@@ -5,6 +5,7 @@ import { setDefaultResultOrder } from "node:dns";
 import { setDefaultAutoSelectFamily } from "node:net";
 
 import { config } from "@/lib/config";
+import { writablePath, bundledPath } from "@/lib/paths";
 import type { Provenance, Refusal, SourceResult } from "@/lib/datasource";
 import { ok, refuse } from "@/lib/datasource";
 import * as broker from "./budget";
@@ -90,15 +91,18 @@ if (process.env.GROUNDWORK_FORCE_IPV4 !== "0") {
   }
 }
 
-const FIXTURE_ROOT = path.join(process.cwd(), "data", "fixtures", "mireye");
-
-function fixturePath(endpoint: string, body: unknown): string {
+// Recorded fixtures are READ from the copy bundled with the deployment (the
+// committed data/fixtures/mireye) and WRITTEN, in record mode, to the writable
+// root - which is /tmp on serverless, where new recordings simply do not
+// persist between cold starts. The deployed demo runs in replay mode off the
+// committed set, so it never writes at all.
+function fixtureRel(endpoint: string, body: unknown): string {
   const slug = endpoint.replace(/^\/v1\//, "").replace(/\//g, "-");
   const hash = createHash("sha1")
     .update(stableStringify(body))
     .digest("hex")
     .slice(0, 12);
-  return path.join(FIXTURE_ROOT, slug, `${hash}.json`);
+  return path.join("data", "fixtures", "mireye", slug, `${hash}.json`);
 }
 
 /** Key order must not change the cache key, or the cache silently misses. */
@@ -112,8 +116,10 @@ function stableStringify(value: unknown): string {
 }
 
 function readFixture<T>(endpoint: string, body: unknown): T | null {
-  const file = fixturePath(endpoint, body);
-  if (!existsSync(file)) return null;
+  const rel = fixtureRel(endpoint, body);
+  // A recording written this session (writable) shadows the bundled one.
+  const file = [writablePath(rel), bundledPath(rel)].find((f) => existsSync(f));
+  if (!file) return null;
   try {
     return JSON.parse(readFileSync(file, "utf8")).response as T;
   } catch {
@@ -122,7 +128,7 @@ function readFixture<T>(endpoint: string, body: unknown): T | null {
 }
 
 function writeFixture(endpoint: string, body: unknown, response: unknown): void {
-  const file = fixturePath(endpoint, body);
+  const file = writablePath(fixtureRel(endpoint, body));
   mkdirSync(path.dirname(file), { recursive: true });
   writeFileSync(
     file,
@@ -249,7 +255,7 @@ async function call<T>(
         config.mireye.apiKey ? "" : " (no MIREYE_API_KEY is set)"
       }.`,
       retryable: false,
-      hint: `Set MIREYE_API_KEY and MIREYE_MODE=record, then run \`npm run mireye:record\`. Expected fixture: ${path.relative(process.cwd(), fixturePath(endpoint, body))}`,
+      hint: `Set MIREYE_API_KEY and MIREYE_MODE=record, then run \`npm run mireye:record\`. Expected fixture: ${fixtureRel(endpoint, body)}`,
     };
     record({
       ...base,

@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { writablePath } from "@/lib/paths";
 
 import type { Provenance, SourceResult } from "@/lib/datasource";
 import { ok, refuse } from "@/lib/datasource";
@@ -26,7 +27,11 @@ import type { LatLng } from "@/lib/geo";
  * be silly.
  */
 
-const CACHE_DIR = path.join(process.cwd(), "data", "fixtures", "world");
+// Writable on serverless (/tmp); the project dir locally. Weather is fetched
+// live from Open-Meteo on a cache miss - reachable on Vercel, no key - and the
+// pipeline already falls back to the scenario's authored weather if that call
+// fails, so this cache is a speed-up, never a hard dependency.
+const CACHE_DIR = writablePath("data", "fixtures", "world");
 const ARCHIVE = "https://archive-api.open-meteo.com/v1/archive";
 
 /** The reference period WMO uses for climate normals. */

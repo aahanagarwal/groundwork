@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { writablePath, bundledPath } from "@/lib/paths";
 
 /**
  * The persistence layer, with two backends behind one interface.
@@ -15,7 +16,13 @@ import path from "node:path";
  * shows it, so nobody mistakes file-backed state for a real database.
  */
 
-const STORE_DIR = path.join(process.cwd(), "data", "store");
+// Where the store WRITES - the project dir locally, /tmp on serverless.
+const STORE_DIR = writablePath("data", "store");
+// A committed, read-only snapshot of the resolved data (sites, trade areas,
+// tills). On a serverless cold start the writable store is empty, so reads
+// fall back here - the demo then has its pre-resolved 13 addresses without
+// recomputing anything or spending a credit.
+const SEED_DIR = bundledPath("data", "seed", "store");
 
 export type Backend = "postgres" | "files";
 
@@ -37,13 +44,21 @@ function fileFor(collection: string): string {
 }
 
 function readCollection<T>(collection: string): T[] {
-  const file = fileFor(collection);
-  if (!existsSync(file)) return [];
-  try {
-    return JSON.parse(readFileSync(file, "utf8")) as T[];
-  } catch {
-    return [];
+  // The writable copy wins - it has anything written this session on top of the
+  // seed. When it does not exist yet (a fresh serverless instance), fall back
+  // to the committed seed so the page still has its resolved data.
+  for (const file of [
+    path.join(STORE_DIR, `${collection}.json`),
+    path.join(SEED_DIR, `${collection}.json`),
+  ]) {
+    if (!existsSync(file)) continue;
+    try {
+      return JSON.parse(readFileSync(file, "utf8")) as T[];
+    } catch {
+      return [];
+    }
   }
+  return [];
 }
 
 function writeCollection<T>(collection: string, rows: T[]): void {

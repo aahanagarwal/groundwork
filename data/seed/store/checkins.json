@@ -1,0 +1,36 @@
+[
+  {
+    "id": "jos-coffee-2026-07-08",
+    "siteId": "jos-coffee",
+    "date": "2026-07-08",
+    "pulse": "slow",
+    "tags": [
+      "equipment_down",
+      "short_staffed"
+    ],
+    "note": "Grinder packed up Tuesday to Thursday. Ran one machine all week.",
+    "createdAt": "2026-08-20T19:32:59.281Z"
+  },
+  {
+    "id": "jos-coffee-2026-08-20",
+    "siteId": "jos-coffee",
+    "date": "2026-08-20",
+    "pulse": "normal",
+    "tags": [
+      "equipment_down"
+    ],
+    "note": "",
+    "createdAt": "2026-08-20T20:41:51.762Z"
+  },
+  {
+    "id": "jos-coffee-2026-08-25",
+    "siteId": "jos-coffee",
+    "date": "2026-08-25",
+    "pulse": "busy",
+    "tags": [
+      "short_staffed"
+    ],
+    "note": "",
+    "createdAt": "2026-08-25T08:31:09.254Z"
+  }
+]

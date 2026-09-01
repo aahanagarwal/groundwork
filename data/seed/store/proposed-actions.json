@@ -1,0 +1,2644 @@
+[
+  {
+    "id": "jos-coffee-road-closure-dip-advertising",
+    "siteId": "jos-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 17.4 points of the 22.0% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.2%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Jo's Coffee - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Jo's Coffee",
+              "polygon": [
+                {
+                  "latitude": 30.283839,
+                  "longitude": -97.749518
+                },
+                {
+                  "latitude": 30.284271,
+                  "longitude": -97.733595
+                },
+                {
+                  "latitude": 30.274561,
+                  "longitude": -97.722322
+                },
+                {
+                  "latitude": 30.26332,
+                  "longitude": -97.715284
+                },
+                {
+                  "latitude": 30.251074,
+                  "longitude": -97.723701
+                },
+                {
+                  "latitude": 30.239862,
+                  "longitude": -97.718188
+                },
+                {
+                  "latitude": 30.225269,
+                  "longitude": -97.719654
+                },
+                {
+                  "latitude": 30.212981,
+                  "longitude": -97.731258
+                },
+                {
+                  "latitude": 30.221208,
+                  "longitude": -97.749518
+                },
+                {
+                  "latitude": 30.199743,
+                  "longitude": -97.774119
+                },
+                {
+                  "latitude": 30.223923,
+                  "longitude": -97.780939
+                },
+                {
+                  "latitude": 30.23945,
+                  "longitude": -97.781998
+                },
+                {
+                  "latitude": 30.251072,
+                  "longitude": -97.784125
+                },
+                {
+                  "latitude": 30.261294,
+                  "longitude": -97.778085
+                },
+                {
+                  "latitude": 30.277818,
+                  "longitude": -97.780487
+                },
+                {
+                  "latitude": 30.277537,
+                  "longitude": -97.76221
+                },
+                {
+                  "latitude": 30.283839,
+                  "longitude": -97.749518
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-25T21:02:29.502Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-24T12:06:01.886Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:54:30.649Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:54:47.818Z",
+    "decidedAt": null
+  },
+  {
+    "id": "jos-coffee-road-closure-dip-threat-watch",
+    "siteId": "jos-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 398.6661009013891,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-25T21:02:29.502Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:54:47.818Z",
+    "decidedAt": null
+  },
+  {
+    "id": "radio-coffee-road-closure-dip-advertising",
+    "siteId": "radio-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 17.3 points of the 21.8% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at -0.1%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Radio Coffee & Beer - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Radio Coffee & Beer",
+              "polygon": [
+                {
+                  "latitude": 30.269149,
+                  "longitude": -97.787811
+                },
+                {
+                  "latitude": 30.261051,
+                  "longitude": -97.773657
+                },
+                {
+                  "latitude": 30.261211,
+                  "longitude": -97.753451
+                },
+                {
+                  "latitude": 30.247103,
+                  "longitude": -97.744293
+                },
+                {
+                  "latitude": 30.231527,
+                  "longitude": -97.734812
+                },
+                {
+                  "latitude": 30.208201,
+                  "longitude": -97.722663
+                },
+                {
+                  "latitude": 30.210535,
+                  "longitude": -97.763509
+                },
+                {
+                  "latitude": 30.194567,
+                  "longitude": -97.770094
+                },
+                {
+                  "latitude": 30.191227,
+                  "longitude": -97.787811
+                },
+                {
+                  "latitude": 30.196451,
+                  "longitude": -97.804626
+                },
+                {
+                  "latitude": 30.199122,
+                  "longitude": -97.825311
+                },
+                {
+                  "latitude": 30.215417,
+                  "longitude": -97.832828
+                },
+                {
+                  "latitude": 30.231532,
+                  "longitude": -97.827926
+                },
+                {
+                  "latitude": 30.244153,
+                  "longitude": -97.823078
+                },
+                {
+                  "latitude": 30.26152,
+                  "longitude": -97.822529
+                },
+                {
+                  "latitude": 30.272386,
+                  "longitude": -97.807403
+                },
+                {
+                  "latitude": 30.269149,
+                  "longitude": -97.787811
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-25T21:23:22.721Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-24T12:06:14.824Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:54:30.649Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:55:30.440Z",
+    "decidedAt": null
+  },
+  {
+    "id": "radio-coffee-road-closure-dip-threat-watch",
+    "siteId": "radio-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 4060.0202788235097,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-25T21:23:22.721Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:55:30.440Z",
+    "decidedAt": null
+  },
+  {
+    "id": "franklin-barbecue-road-closure-dip-advertising",
+    "siteId": "franklin-barbecue",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 16.7 points of the 23.8% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.6%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Franklin Barbecue - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Franklin Barbecue",
+              "polygon": [
+                {
+                  "latitude": 30.317531,
+                  "longitude": -97.731278
+                },
+                {
+                  "latitude": 30.322719,
+                  "longitude": -97.706026
+                },
+                {
+                  "latitude": 30.298928,
+                  "longitude": -97.697882
+                },
+                {
+                  "latitude": 30.290071,
+                  "longitude": -97.675404
+                },
+                {
+                  "latitude": 30.270091,
+                  "longitude": -97.687124
+                },
+                {
+                  "latitude": 30.255268,
+                  "longitude": -97.689849
+                },
+                {
+                  "latitude": 30.248304,
+                  "longitude": -97.706052
+                },
+                {
+                  "latitude": 30.232942,
+                  "longitude": -97.713465
+                },
+                {
+                  "latitude": 30.224367,
+                  "longitude": -97.731278
+                },
+                {
+                  "latitude": 30.229327,
+                  "longitude": -97.750823
+                },
+                {
+                  "latitude": 30.245858,
+                  "longitude": -97.759334
+                },
+                {
+                  "latitude": 30.257253,
+                  "longitude": -97.767165
+                },
+                {
+                  "latitude": 30.270093,
+                  "longitude": -97.768753
+                },
+                {
+                  "latitude": 30.284177,
+                  "longitude": -97.770657
+                },
+                {
+                  "latitude": 30.295862,
+                  "longitude": -97.761121
+                },
+                {
+                  "latitude": 30.30089,
+                  "longitude": -97.746051
+                },
+                {
+                  "latitude": 30.317531,
+                  "longitude": -97.731278
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-25T21:44:12.136Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-24T12:06:18.300Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:28.616Z",
+    "decidedAt": null
+  },
+  {
+    "id": "franklin-barbecue-road-closure-dip-threat-watch",
+    "siteId": "franklin-barbecue",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 3078.7636655040706,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-25T21:44:12.136Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:28.616Z",
+    "decidedAt": null
+  },
+  {
+    "id": "jos-coffee-quiet-month-advertising",
+    "siteId": "jos-coffee",
+    "scenarioKey": "quiet-month",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 16.7 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Jo's Coffee - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Jo's Coffee",
+              "polygon": [
+                {
+                  "latitude": 30.283839,
+                  "longitude": -97.749518
+                },
+                {
+                  "latitude": 30.284271,
+                  "longitude": -97.733595
+                },
+                {
+                  "latitude": 30.274561,
+                  "longitude": -97.722322
+                },
+                {
+                  "latitude": 30.26332,
+                  "longitude": -97.715284
+                },
+                {
+                  "latitude": 30.251074,
+                  "longitude": -97.723701
+                },
+                {
+                  "latitude": 30.239862,
+                  "longitude": -97.718188
+                },
+                {
+                  "latitude": 30.225269,
+                  "longitude": -97.719654
+                },
+                {
+                  "latitude": 30.212981,
+                  "longitude": -97.731258
+                },
+                {
+                  "latitude": 30.221208,
+                  "longitude": -97.749518
+                },
+                {
+                  "latitude": 30.199743,
+                  "longitude": -97.774119
+                },
+                {
+                  "latitude": 30.223923,
+                  "longitude": -97.780939
+                },
+                {
+                  "latitude": 30.23945,
+                  "longitude": -97.781998
+                },
+                {
+                  "latitude": 30.251072,
+                  "longitude": -97.784125
+                },
+                {
+                  "latitude": 30.261294,
+                  "longitude": -97.778085
+                },
+                {
+                  "latitude": 30.277818,
+                  "longitude": -97.780487
+                },
+                {
+                  "latitude": 30.277537,
+                  "longitude": -97.76221
+                },
+                {
+                  "latitude": 30.283839,
+                  "longitude": -97.749518
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Jo's Coffee - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-24T12:06:01.886Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-25T20:29:52.631Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-25T20:55:50.502Z",
+    "decidedAt": null
+  },
+  {
+    "id": "jos-coffee-heatwave-competitor-advertising",
+    "siteId": "jos-coffee",
+    "scenarioKey": "heatwave-competitor",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 19.6 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "16 days",
+    "requiresApproval": true,
+    "status": "approved",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Jo's Coffee - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 76800
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Jo's Coffee",
+              "polygon": [
+                {
+                  "latitude": 30.285221,
+                  "longitude": -97.7494
+                },
+                {
+                  "latitude": 30.285362,
+                  "longitude": -97.733157
+                },
+                {
+                  "latitude": 30.275705,
+                  "longitude": -97.721369
+                },
+                {
+                  "latitude": 30.264341,
+                  "longitude": -97.713492
+                },
+                {
+                  "latitude": 30.251498,
+                  "longitude": -97.724228
+                },
+                {
+                  "latitude": 30.238919,
+                  "longitude": -97.714255
+                },
+                {
+                  "latitude": 30.226624,
+                  "longitude": -97.720613
+                },
+                {
+                  "latitude": 30.2139,
+                  "longitude": -97.731378
+                },
+                {
+                  "latitude": 30.208209,
+                  "longitude": -97.7494
+                },
+                {
+                  "latitude": 30.203329,
+                  "longitude": -97.772486
+                },
+                {
+                  "latitude": 30.223262,
+                  "longitude": -97.782075
+                },
+                {
+                  "latitude": 30.239229,
+                  "longitude": -97.783678
+                },
+                {
+                  "latitude": 30.251496,
+                  "longitude": -97.783572
+                },
+                {
+                  "latitude": 30.265985,
+                  "longitude": -97.789907
+                },
+                {
+                  "latitude": 30.279161,
+                  "longitude": -97.781436
+                },
+                {
+                  "latitude": 30.287316,
+                  "longitude": -97.766581
+                },
+                {
+                  "latitude": 30.285221,
+                  "longitude": -97.7494
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Jo's Coffee - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - local OSRM (Austin extract)",
+        "fetchedAt": "2026-08-20T18:24:57.166Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-20T19:29:10.306Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-20T20:42:02.158Z",
+    "decidedAt": "2026-08-20T20:42:13.979Z"
+  },
+  {
+    "id": "jos-coffee-heatwave-competitor-threat-watch",
+    "siteId": "jos-coffee",
+    "scenarioKey": "heatwave-competitor",
+    "module": "threat_watch",
+    "title": "New competitor filed 380m away",
+    "rationale": "New coffee bar, 380m north on S Congress, 380m from your door. Certificate of occupancy 2026-048812 CO, filed 2026-05-11, issued 2026-07-20. It currently accounts for 4.8 points of your ticket movement, and unlike the weather it does not go away.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "New coffee bar, 380m north on S Congress",
+      "distanceM": 380,
+      "permit": "2026-048812 CO",
+      "filed": "2026-05-11",
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 429.2232050880594,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin certificate of occupancy (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/building-permits",
+        "fetchedAt": "2026-08-25T21:02:29.890Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T10:15:15.391Z",
+    "decidedAt": null
+  },
+  {
+    "id": "radio-coffee-heatwave-competitor-advertising",
+    "siteId": "radio-coffee",
+    "scenarioKey": "heatwave-competitor",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 24.0 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "16 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Radio Coffee & Beer - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 76800
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Radio Coffee & Beer",
+              "polygon": [
+                {
+                  "latitude": 30.269149,
+                  "longitude": -97.787811
+                },
+                {
+                  "latitude": 30.261051,
+                  "longitude": -97.773657
+                },
+                {
+                  "latitude": 30.261211,
+                  "longitude": -97.753451
+                },
+                {
+                  "latitude": 30.247103,
+                  "longitude": -97.744293
+                },
+                {
+                  "latitude": 30.231527,
+                  "longitude": -97.734812
+                },
+                {
+                  "latitude": 30.208201,
+                  "longitude": -97.722663
+                },
+                {
+                  "latitude": 30.210535,
+                  "longitude": -97.763509
+                },
+                {
+                  "latitude": 30.194567,
+                  "longitude": -97.770094
+                },
+                {
+                  "latitude": 30.191227,
+                  "longitude": -97.787811
+                },
+                {
+                  "latitude": 30.196451,
+                  "longitude": -97.804626
+                },
+                {
+                  "latitude": 30.199122,
+                  "longitude": -97.825311
+                },
+                {
+                  "latitude": 30.215417,
+                  "longitude": -97.832828
+                },
+                {
+                  "latitude": 30.231532,
+                  "longitude": -97.827926
+                },
+                {
+                  "latitude": 30.244153,
+                  "longitude": -97.823078
+                },
+                {
+                  "latitude": 30.26152,
+                  "longitude": -97.822529
+                },
+                {
+                  "latitude": 30.272386,
+                  "longitude": -97.807403
+                },
+                {
+                  "latitude": 30.269149,
+                  "longitude": -97.787811
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Radio Coffee & Beer - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-24T12:06:14.824Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-24T21:11:39.643Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-24T21:58:01.718Z",
+    "decidedAt": null
+  },
+  {
+    "id": "radio-coffee-heatwave-competitor-threat-watch",
+    "siteId": "radio-coffee",
+    "scenarioKey": "heatwave-competitor",
+    "module": "threat_watch",
+    "title": "New competitor filed 380m away",
+    "rationale": "New coffee bar, 380m north on S Congress, 380m from your door. Certificate of occupancy 2026-048812 CO, filed 2026-05-11, issued 2026-07-20. It currently accounts for 5.1 points of your ticket movement, and unlike the weather it does not go away.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "New coffee bar, 380m north on S Congress",
+      "distanceM": 380,
+      "permit": "2026-048812 CO",
+      "filed": "2026-05-11",
+      "polygonMembership": {
+        "filtered": false,
+        "inside": true,
+        "distanceM": null,
+        "reason": "Authored for this address in the scenario fixture."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin certificate of occupancy (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/building-permits",
+        "fetchedAt": "2026-08-24T12:19:02.170Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-24T21:58:01.718Z",
+    "decidedAt": null
+  },
+  {
+    "id": "radio-coffee-quiet-month-advertising",
+    "siteId": "radio-coffee",
+    "scenarioKey": "quiet-month",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 24.0 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Radio Coffee & Beer - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Radio Coffee & Beer",
+              "polygon": [
+                {
+                  "latitude": 30.269149,
+                  "longitude": -97.787811
+                },
+                {
+                  "latitude": 30.261051,
+                  "longitude": -97.773657
+                },
+                {
+                  "latitude": 30.261211,
+                  "longitude": -97.753451
+                },
+                {
+                  "latitude": 30.247103,
+                  "longitude": -97.744293
+                },
+                {
+                  "latitude": 30.231527,
+                  "longitude": -97.734812
+                },
+                {
+                  "latitude": 30.208201,
+                  "longitude": -97.722663
+                },
+                {
+                  "latitude": 30.210535,
+                  "longitude": -97.763509
+                },
+                {
+                  "latitude": 30.194567,
+                  "longitude": -97.770094
+                },
+                {
+                  "latitude": 30.191227,
+                  "longitude": -97.787811
+                },
+                {
+                  "latitude": 30.196451,
+                  "longitude": -97.804626
+                },
+                {
+                  "latitude": 30.199122,
+                  "longitude": -97.825311
+                },
+                {
+                  "latitude": 30.215417,
+                  "longitude": -97.832828
+                },
+                {
+                  "latitude": 30.231532,
+                  "longitude": -97.827926
+                },
+                {
+                  "latitude": 30.244153,
+                  "longitude": -97.823078
+                },
+                {
+                  "latitude": 30.26152,
+                  "longitude": -97.822529
+                },
+                {
+                  "latitude": 30.272386,
+                  "longitude": -97.807403
+                },
+                {
+                  "latitude": 30.269149,
+                  "longitude": -97.787811
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Radio Coffee & Beer - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-24T12:06:14.824Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-24T21:11:39.643Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-25T07:33:23.959Z",
+    "decidedAt": null
+  },
+  {
+    "id": "mozarts-coffee-road-closure-dip-advertising",
+    "siteId": "mozarts-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 10.0 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Mozart's Coffee Roasting - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Mozart's Coffee Roasting",
+              "polygon": [
+                {
+                  "latitude": 30.300326,
+                  "longitude": -97.784238
+                },
+                {
+                  "latitude": 30.313858,
+                  "longitude": -97.775303
+                },
+                {
+                  "latitude": 30.314553,
+                  "longitude": -97.76186
+                },
+                {
+                  "latitude": 30.307279,
+                  "longitude": -97.750551
+                },
+                {
+                  "latitude": 30.295232,
+                  "longitude": -97.746354
+                },
+                {
+                  "latitude": 30.278838,
+                  "longitude": -97.738415
+                },
+                {
+                  "latitude": 30.266585,
+                  "longitude": -97.751069
+                },
+                {
+                  "latitude": 30.267064,
+                  "longitude": -97.770727
+                },
+                {
+                  "latitude": 30.270326,
+                  "longitude": -97.784238
+                },
+                {
+                  "latitude": 30.269388,
+                  "longitude": -97.796635
+                },
+                {
+                  "latitude": 30.277224,
+                  "longitude": -97.805094
+                },
+                {
+                  "latitude": 30.284944,
+                  "longitude": -97.813005
+                },
+                {
+                  "latitude": 30.295233,
+                  "longitude": -97.817336
+                },
+                {
+                  "latitude": 30.29724,
+                  "longitude": -97.789838
+                },
+                {
+                  "latitude": 30.307936,
+                  "longitude": -97.798948
+                },
+                {
+                  "latitude": 30.300054,
+                  "longitude": -97.786549
+                },
+                {
+                  "latitude": 30.300326,
+                  "longitude": -97.784238
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Mozart's Coffee Roasting - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:48:04.113Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T21:05:06.469Z",
+    "decidedAt": null
+  },
+  {
+    "id": "the-oasis-road-closure-dip-advertising",
+    "siteId": "the-oasis",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 12.6 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - The Oasis on Lake Travis - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, The Oasis on Lake Travis",
+              "polygon": [
+                {
+                  "latitude": 30.444112,
+                  "longitude": -97.873411
+                },
+                {
+                  "latitude": 30.423857,
+                  "longitude": -97.864344
+                },
+                {
+                  "latitude": 30.430042,
+                  "longitude": -97.844343
+                },
+                {
+                  "latitude": 30.416625,
+                  "longitude": -97.840804
+                },
+                {
+                  "latitude": 30.404978,
+                  "longitude": -97.839372
+                },
+                {
+                  "latitude": 30.386926,
+                  "longitude": -97.822905
+                },
+                {
+                  "latitude": 30.384789,
+                  "longitude": -97.850005
+                },
+                {
+                  "latitude": 30.381894,
+                  "longitude": -97.862325
+                },
+                {
+                  "latitude": 30.373757,
+                  "longitude": -97.873411
+                },
+                {
+                  "latitude": 30.372357,
+                  "longitude": -97.889074
+                },
+                {
+                  "latitude": 30.383805,
+                  "longitude": -97.897957
+                },
+                {
+                  "latitude": 30.391159,
+                  "longitude": -97.912084
+                },
+                {
+                  "latitude": 30.404981,
+                  "longitude": -97.891822
+                },
+                {
+                  "latitude": 30.414032,
+                  "longitude": -97.898754
+                },
+                {
+                  "latitude": 30.423039,
+                  "longitude": -97.894354
+                },
+                {
+                  "latitude": 30.423225,
+                  "longitude": -97.882174
+                },
+                {
+                  "latitude": 30.444112,
+                  "longitude": -97.873411
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "The Oasis on Lake Travis - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:48:25.334Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:30.907Z",
+    "decidedAt": null
+  },
+  {
+    "id": "home-slice-road-closure-dip-advertising",
+    "siteId": "home-slice",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 17.5 points of the 22.0% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.2%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Home Slice Pizza - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Home Slice Pizza",
+              "polygon": [
+                {
+                  "latitude": 30.281657,
+                  "longitude": -97.749445
+                },
+                {
+                  "latitude": 30.283501,
+                  "longitude": -97.732995
+                },
+                {
+                  "latitude": 30.273187,
+                  "longitude": -97.721676
+                },
+                {
+                  "latitude": 30.260151,
+                  "longitude": -97.718849
+                },
+                {
+                  "latitude": 30.249206,
+                  "longitude": -97.728494
+                },
+                {
+                  "latitude": 30.237281,
+                  "longitude": -97.716127
+                },
+                {
+                  "latitude": 30.224374,
+                  "longitude": -97.720708
+                },
+                {
+                  "latitude": 30.213773,
+                  "longitude": -97.732461
+                },
+                {
+                  "latitude": 30.208712,
+                  "longitude": -97.749445
+                },
+                {
+                  "latitude": 30.199127,
+                  "longitude": -97.773446
+                },
+                {
+                  "latitude": 30.220476,
+                  "longitude": -97.782691
+                },
+                {
+                  "latitude": 30.237277,
+                  "longitude": -97.782773
+                },
+                {
+                  "latitude": 30.249203,
+                  "longitude": -97.785352
+                },
+                {
+                  "latitude": 30.259919,
+                  "longitude": -97.779393
+                },
+                {
+                  "latitude": 30.270969,
+                  "longitude": -97.774645
+                },
+                {
+                  "latitude": 30.27629,
+                  "longitude": -97.762435
+                },
+                {
+                  "latitude": 30.281657,
+                  "longitude": -97.749445
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-26T20:49:15.117Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:49:15.112Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:57:27.087Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:12.194Z",
+    "decidedAt": null
+  },
+  {
+    "id": "home-slice-road-closure-dip-threat-watch",
+    "siteId": "home-slice",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 192.95818120393957,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-26T20:49:15.117Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:12.194Z",
+    "decidedAt": null
+  },
+  {
+    "id": "terry-blacks-road-closure-dip-advertising",
+    "siteId": "terry-blacks",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 17.6 points of the 22.0% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.2%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Terry Black's Barbecue - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Terry Black's Barbecue",
+              "polygon": [
+                {
+                  "latitude": 30.295447,
+                  "longitude": -97.754972
+                },
+                {
+                  "latitude": 30.29179,
+                  "longitude": -97.739657
+                },
+                {
+                  "latitude": 30.289115,
+                  "longitude": -97.721094
+                },
+                {
+                  "latitude": 30.272661,
+                  "longitude": -97.719192
+                },
+                {
+                  "latitude": 30.259859,
+                  "longitude": -97.712303
+                },
+                {
+                  "latitude": 30.245714,
+                  "longitude": -97.715438
+                },
+                {
+                  "latitude": 30.229687,
+                  "longitude": -97.720049
+                },
+                {
+                  "latitude": 30.229195,
+                  "longitude": -97.740269
+                },
+                {
+                  "latitude": 30.229162,
+                  "longitude": -97.754972
+                },
+                {
+                  "latitude": 30.225655,
+                  "longitude": -97.771372
+                },
+                {
+                  "latitude": 30.229924,
+                  "longitude": -97.789621
+                },
+                {
+                  "latitude": 30.247036,
+                  "longitude": -97.790815
+                },
+                {
+                  "latitude": 30.25986,
+                  "longitude": -97.793909
+                },
+                {
+                  "latitude": 30.277716,
+                  "longitude": -97.804899
+                },
+                {
+                  "latitude": 30.284139,
+                  "longitude": -97.783084
+                },
+                {
+                  "latitude": 30.291551,
+                  "longitude": -97.770172
+                },
+                {
+                  "latitude": 30.295447,
+                  "longitude": -97.754972
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-26T20:49:29.160Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:49:29.158Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:13.138Z",
+    "decidedAt": null
+  },
+  {
+    "id": "terry-blacks-road-closure-dip-threat-watch",
+    "siteId": "terry-blacks",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 1462.0242481193006,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-26T20:49:29.160Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:13.138Z",
+    "decidedAt": null
+  },
+  {
+    "id": "easy-tiger-road-closure-dip-advertising",
+    "siteId": "easy-tiger",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 16.6 points of the 23.6% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.6%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Easy Tiger - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Easy Tiger",
+              "polygon": [
+                {
+                  "latitude": 30.316584,
+                  "longitude": -97.735701
+                },
+                {
+                  "latitude": 30.321023,
+                  "longitude": -97.709207
+                },
+                {
+                  "latitude": 30.297994,
+                  "longitude": -97.698422
+                },
+                {
+                  "latitude": 30.288348,
+                  "longitude": -97.67265
+                },
+                {
+                  "latitude": 30.265803,
+                  "longitude": -97.687885
+                },
+                {
+                  "latitude": 30.250717,
+                  "longitude": -97.693532
+                },
+                {
+                  "latitude": 30.244176,
+                  "longitude": -97.710659
+                },
+                {
+                  "latitude": 30.227236,
+                  "longitude": -97.717209
+                },
+                {
+                  "latitude": 30.212449,
+                  "longitude": -97.735701
+                },
+                {
+                  "latitude": 30.227279,
+                  "longitude": -97.754173
+                },
+                {
+                  "latitude": 30.239662,
+                  "longitude": -97.765966
+                },
+                {
+                  "latitude": 30.253474,
+                  "longitude": -97.770173
+                },
+                {
+                  "latitude": 30.265807,
+                  "longitude": -97.771765
+                },
+                {
+                  "latitude": 30.280166,
+                  "longitude": -97.775845
+                },
+                {
+                  "latitude": 30.291669,
+                  "longitude": -97.76565
+                },
+                {
+                  "latitude": 30.294849,
+                  "longitude": -97.749631
+                },
+                {
+                  "latitude": 30.316584,
+                  "longitude": -97.735701
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-26T20:49:45.742Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:49:45.738Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:13.988Z",
+    "decidedAt": null
+  },
+  {
+    "id": "easy-tiger-road-closure-dip-threat-watch",
+    "siteId": "easy-tiger",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 2445.388297446147,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-26T20:49:45.743Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:13.988Z",
+    "decidedAt": null
+  },
+  {
+    "id": "kerbey-lane-road-closure-dip-advertising",
+    "siteId": "kerbey-lane",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 21.0 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Kerbey Lane Cafe - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Kerbey Lane Cafe",
+              "polygon": [
+                {
+                  "latitude": 30.364239,
+                  "longitude": -97.750451
+                },
+                {
+                  "latitude": 30.340101,
+                  "longitude": -97.735088
+                },
+                {
+                  "latitude": 30.335752,
+                  "longitude": -97.718398
+                },
+                {
+                  "latitude": 30.321379,
+                  "longitude": -97.713274
+                },
+                {
+                  "latitude": 30.308086,
+                  "longitude": -97.711608
+                },
+                {
+                  "latitude": 30.292512,
+                  "longitude": -97.70691
+                },
+                {
+                  "latitude": 30.281298,
+                  "longitude": -97.719428
+                },
+                {
+                  "latitude": 30.274412,
+                  "longitude": -97.734298
+                },
+                {
+                  "latitude": 30.261104,
+                  "longitude": -97.750451
+                },
+                {
+                  "latitude": 30.266661,
+                  "longitude": -97.77032
+                },
+                {
+                  "latitude": 30.281757,
+                  "longitude": -97.780943
+                },
+                {
+                  "latitude": 30.29619,
+                  "longitude": -97.783717
+                },
+                {
+                  "latitude": 30.308089,
+                  "longitude": -97.778341
+                },
+                {
+                  "latitude": 30.317788,
+                  "longitude": -97.777575
+                },
+                {
+                  "latitude": 30.332678,
+                  "longitude": -97.77894
+                },
+                {
+                  "latitude": 30.348793,
+                  "longitude": -97.769988
+                },
+                {
+                  "latitude": 30.364239,
+                  "longitude": -97.750451
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Kerbey Lane Cafe - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:49:59.945Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:16.348Z",
+    "decidedAt": null
+  },
+  {
+    "id": "uchi-road-closure-dip-advertising",
+    "siteId": "uchi",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 17.5 points of the 22.0% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.2%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Uchi - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Uchi",
+              "polygon": [
+                {
+                  "latitude": 30.282934,
+                  "longitude": -97.75982
+                },
+                {
+                  "latitude": 30.291102,
+                  "longitude": -97.743725
+                },
+                {
+                  "latitude": 30.280869,
+                  "longitude": -97.732816
+                },
+                {
+                  "latitude": 30.269578,
+                  "longitude": -97.726191
+                },
+                {
+                  "latitude": 30.257546,
+                  "longitude": -97.720705
+                },
+                {
+                  "latitude": 30.241965,
+                  "longitude": -97.716283
+                },
+                {
+                  "latitude": 30.233008,
+                  "longitude": -97.731415
+                },
+                {
+                  "latitude": 30.22581,
+                  "longitude": -97.744604
+                },
+                {
+                  "latitude": 30.221619,
+                  "longitude": -97.75982
+                },
+                {
+                  "latitude": 30.227046,
+                  "longitude": -97.774444
+                },
+                {
+                  "latitude": 30.229694,
+                  "longitude": -97.792057
+                },
+                {
+                  "latitude": 30.245051,
+                  "longitude": -97.794742
+                },
+                {
+                  "latitude": 30.257546,
+                  "longitude": -97.799505
+                },
+                {
+                  "latitude": 30.274079,
+                  "longitude": -97.806042
+                },
+                {
+                  "latitude": 30.283456,
+                  "longitude": -97.789822
+                },
+                {
+                  "latitude": 30.287854,
+                  "longitude": -97.774356
+                },
+                {
+                  "latitude": 30.282934,
+                  "longitude": -97.75982
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-26T20:50:11.069Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:50:11.062Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:17.148Z",
+    "decidedAt": null
+  },
+  {
+    "id": "uchi-road-closure-dip-threat-watch",
+    "siteId": "uchi",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 1474.996817683822,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-26T20:50:11.069Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:17.148Z",
+    "decidedAt": null
+  },
+  {
+    "id": "amys-ice-creams-road-closure-dip-advertising",
+    "siteId": "amys-ice-creams",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 19.2 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Amy's Ice Creams - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Amy's Ice Creams",
+              "polygon": [
+                {
+                  "latitude": 30.348053,
+                  "longitude": -97.7394
+                },
+                {
+                  "latitude": 30.342768,
+                  "longitude": -97.719568
+                },
+                {
+                  "latitude": 30.327808,
+                  "longitude": -97.708857
+                },
+                {
+                  "latitude": 30.31632,
+                  "longitude": -97.697794
+                },
+                {
+                  "latitude": 30.301443,
+                  "longitude": -97.699094
+                },
+                {
+                  "latitude": 30.286821,
+                  "longitude": -97.698522
+                },
+                {
+                  "latitude": 30.278081,
+                  "longitude": -97.712344
+                },
+                {
+                  "latitude": 30.273964,
+                  "longitude": -97.726218
+                },
+                {
+                  "latitude": 30.265873,
+                  "longitude": -97.7394
+                },
+                {
+                  "latitude": 30.27048,
+                  "longitude": -97.754253
+                },
+                {
+                  "latitude": 30.277211,
+                  "longitude": -97.767463
+                },
+                {
+                  "latitude": 30.288576,
+                  "longitude": -97.775378
+                },
+                {
+                  "latitude": 30.301444,
+                  "longitude": -97.775016
+                },
+                {
+                  "latitude": 30.310787,
+                  "longitude": -97.76552
+                },
+                {
+                  "latitude": 30.326141,
+                  "longitude": -97.76801
+                },
+                {
+                  "latitude": 30.343341,
+                  "longitude": -97.759507
+                },
+                {
+                  "latitude": 30.348053,
+                  "longitude": -97.7394
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Amy's Ice Creams - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:50:25.276Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:17.904Z",
+    "decidedAt": null
+  },
+  {
+    "id": "counter-cafe-road-closure-dip-advertising",
+    "siteId": "counter-cafe",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 16.0 points of the 18.0% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.2%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Counter Cafe - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Counter Cafe",
+              "polygon": [
+                {
+                  "latitude": 30.321232,
+                  "longitude": -97.753776
+                },
+                {
+                  "latitude": 30.305714,
+                  "longitude": -97.737922
+                },
+                {
+                  "latitude": 30.301055,
+                  "longitude": -97.720896
+                },
+                {
+                  "latitude": 30.285942,
+                  "longitude": -97.716657
+                },
+                {
+                  "latitude": 30.272663,
+                  "longitude": -97.70851
+                },
+                {
+                  "latitude": 30.25454,
+                  "longitude": -97.703128
+                },
+                {
+                  "latitude": 30.248826,
+                  "longitude": -97.726176
+                },
+                {
+                  "latitude": 30.237774,
+                  "longitude": -97.737045
+                },
+                {
+                  "latitude": 30.238598,
+                  "longitude": -97.753776
+                },
+                {
+                  "latitude": 30.238709,
+                  "longitude": -97.770058
+                },
+                {
+                  "latitude": 30.244634,
+                  "longitude": -97.786226
+                },
+                {
+                  "latitude": 30.255312,
+                  "longitude": -97.802268
+                },
+                {
+                  "latitude": 30.272666,
+                  "longitude": -97.788772
+                },
+                {
+                  "latitude": 30.284437,
+                  "longitude": -97.786682
+                },
+                {
+                  "latitude": 30.300503,
+                  "longitude": -97.786017
+                },
+                {
+                  "latitude": 30.307304,
+                  "longitude": -97.770393
+                },
+                {
+                  "latitude": 30.321232,
+                  "longitude": -97.753776
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-26T20:50:49.783Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:50:49.777Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:18.535Z",
+    "decidedAt": null
+  },
+  {
+    "id": "counter-cafe-road-closure-dip-threat-watch",
+    "siteId": "counter-cafe",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 2824.8220275619506,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-26T20:50:49.783Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:18.535Z",
+    "decidedAt": null
+  },
+  {
+    "id": "veracruz-all-natural-road-closure-dip-advertising",
+    "siteId": "veracruz-all-natural",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 16.6 points of the 23.6% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.6%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Veracruz All Natural - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Veracruz All Natural",
+              "polygon": [
+                {
+                  "latitude": 30.301007,
+                  "longitude": -97.726042
+                },
+                {
+                  "latitude": 30.291019,
+                  "longitude": -97.710174
+                },
+                {
+                  "latitude": 30.281315,
+                  "longitude": -97.698973
+                },
+                {
+                  "latitude": 30.272753,
+                  "longitude": -97.68462
+                },
+                {
+                  "latitude": 30.257935,
+                  "longitude": -97.682944
+                },
+                {
+                  "latitude": 30.242704,
+                  "longitude": -97.683477
+                },
+                {
+                  "latitude": 30.232486,
+                  "longitude": -97.696583
+                },
+                {
+                  "latitude": 30.227435,
+                  "longitude": -97.711418
+                },
+                {
+                  "latitude": 30.224058,
+                  "longitude": -97.726042
+                },
+                {
+                  "latitude": 30.213981,
+                  "longitude": -97.747113
+                },
+                {
+                  "latitude": 30.231885,
+                  "longitude": -97.756196
+                },
+                {
+                  "latitude": 30.246425,
+                  "longitude": -97.758218
+                },
+                {
+                  "latitude": 30.257936,
+                  "longitude": -97.765707
+                },
+                {
+                  "latitude": 30.268627,
+                  "longitude": -97.755921
+                },
+                {
+                  "latitude": 30.282887,
+                  "longitude": -97.754932
+                },
+                {
+                  "latitude": 30.29072,
+                  "longitude": -97.741766
+                },
+                {
+                  "latitude": 30.301007,
+                  "longitude": -97.726042
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-08-26T20:48:48.261Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-08-26T20:48:48.257Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-08-26T20:59:05.485Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:30.267Z",
+    "decidedAt": null
+  },
+  {
+    "id": "veracruz-all-natural-road-closure-dip-threat-watch",
+    "siteId": "veracruz-all-natural",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 2560.3997533697934,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-08-26T20:48:48.261Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-08-26T20:59:30.267Z",
+    "decidedAt": null
+  }
+]
