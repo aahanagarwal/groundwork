@@ -65,10 +65,19 @@ function nextId(): string {
   return `${Date.now().toString(36)}-${counter.toString(36)}`;
 }
 
+let memLedger: LedgerEntry[] | null = null;
+const MAX_MEM_ENTRIES = 1000;
+
 export function record(
   entry: Omit<LedgerEntry, "id" | "at">,
 ): LedgerEntry {
   const full: LedgerEntry = { id: nextId(), at: new Date().toISOString(), ...entry };
+  if (memLedger) {
+    memLedger.push(full);
+    if (memLedger.length > MAX_MEM_ENTRIES) {
+      memLedger.shift();
+    }
+  }
   try {
     ensureDir();
     appendFileSync(LEDGER_FILE, `${JSON.stringify(full)}\n`);
@@ -79,14 +88,27 @@ export function record(
 }
 
 export function readAll(): LedgerEntry[] {
+  if (memLedger) return memLedger;
   try {
-    if (!existsSync(LEDGER_FILE)) return [];
-    return readFileSync(LEDGER_FILE, "utf8")
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => JSON.parse(line) as LedgerEntry);
+    if (!existsSync(LEDGER_FILE)) {
+      memLedger = [];
+      return memLedger;
+    }
+    const raw = readFileSync(LEDGER_FILE, "utf8");
+    const lines = raw.split("\n").filter(Boolean).slice(-MAX_MEM_ENTRIES);
+    memLedger = lines
+      .map((line) => {
+        try {
+          return JSON.parse(line) as LedgerEntry;
+        } catch {
+          return null;
+        }
+      })
+      .filter((e): e is LedgerEntry => e !== null);
+    return memLedger;
   } catch {
-    return [];
+    memLedger = [];
+    return memLedger;
   }
 }
 
