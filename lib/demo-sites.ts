@@ -156,6 +156,51 @@ export const DEMO_SITES: DemoSite[] = [
       "Near the Lamar and 6th interchange, where congestion is the constraint rather than distance. Drive time and straight-line distance diverge most here at rush hour.",
     fallbackAt: { lat: 30.272671, lng: -97.753776 },
   },
+  {
+    slug: "cosmic-coffee",
+    label: "Cosmic Coffee + Beer Garden",
+    address: "121 Pickle Rd, Austin, TX 78704",
+    category: "Coffee & beer garden · South Austin",
+    whyThisOne:
+      "A low-density industrial pocket south of Ben White. The shed is choked by the highway's limited crossings, not by distance - the opposite failure mode from a dense grid.",
+    fallbackAt: { lat: 30.227301, lng: -97.763057 },
+  },
+  {
+    slug: "contigo",
+    label: "Contigo",
+    address: "2027 Anchor Ln, Austin, TX 78723",
+    category: "Restaurant · Mueller",
+    whyThisOne:
+      "Set back on a ranch-style lot east of the airport, reached by a handful of specific arterials. A circle here counts empty land the drive shed correctly excludes.",
+    fallbackAt: { lat: 30.288002, lng: -97.703344 },
+  },
+  {
+    slug: "nixta-taqueria",
+    label: "Nixta Taqueria",
+    address: "2114 Manor Rd, Austin, TX 78722",
+    category: "Taqueria · Cherrywood",
+    whyThisOne:
+      "On a narrow residential arterial in a dense East Austin grid. Slow local streets mean the 8-minute shed is far smaller than the circle despite the density.",
+    fallbackAt: { lat: 30.284053, lng: -97.719738 },
+  },
+  {
+    slug: "fonda-san-miguel",
+    label: "Fonda San Miguel",
+    address: "2330 W North Loop Blvd, Austin, TX 78756",
+    category: "Restaurant · North Loop",
+    whyThisOne:
+      "Backs onto Shoal Creek's greenbelt, which a circle happily draws through but no road crosses. The park is the same kind of dead area as Mozart's lake, just smaller.",
+    fallbackAt: { lat: 30.325503, lng: -97.74372 },
+  },
+  {
+    slug: "launderette",
+    label: "Launderette",
+    address: "2115 Holly St, Austin, TX 78702",
+    category: "Restaurant · Holly Street",
+    whyThisOne:
+      "Riverside in East Austin, close to downtown by the crow but separated from the west bank by the few bridges that cross Lady Bird Lake - the same bridge-count argument as Jo's, from the opposite shore.",
+    fallbackAt: { lat: 30.251864, lng: -97.722729 },
+  },
 ];
 
 export function demoSiteBySlug(slug: string): DemoSite | undefined {

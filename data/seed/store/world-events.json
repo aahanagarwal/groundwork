@@ -2550,5 +2550,880 @@
       "mocked": true,
       "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
     }
+  },
+  {
+    "id": "cosmic-coffee-road-closure-dip-0",
+    "siteId": "cosmic-coffee",
+    "scenarioKey": "road-closure-dip",
+    "kind": "road_closure",
+    "label": "S Congress Ave resurfacing, Elizabeth St to Monroe St",
+    "startDate": "2026-07-06",
+    "endDate": "2026-07-14",
+    "magnitude": 0.41,
+    "enabled": true,
+    "source": "City of Austin right-of-way permit portal (mock)",
+    "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+    "meta": {
+      "permit": "2026-071198 RW",
+      "filed": "2026-06-19",
+      "agency": "Austin Transportation & Public Works",
+      "work": "Mill and overlay, northbound lanes",
+      "polygonAreaLostPct": 41,
+      "scheduledReopen": "2026-07-15",
+      "at": {
+        "lat": 30.2535,
+        "lng": -97.7494
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 7.166666666666667,
+      "miles": 2.5,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:14:28.956Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "City of Austin right-of-way permit portal (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+      "fetchedAt": "2026-09-01T17:14:27.025Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "cosmic-coffee-road-closure-dip-1",
+    "siteId": "cosmic-coffee",
+    "scenarioKey": "road-closure-dip",
+    "kind": "holiday",
+    "label": "Independence Day",
+    "startDate": "2026-07-04",
+    "endDate": "2026-07-04",
+    "magnitude": 1,
+    "enabled": true,
+    "source": "Nager.Date public holidays (mock)",
+    "sourceUrl": "https://date.nager.at/",
+    "meta": {
+      "type": "federal",
+      "note": "Outside the analysis window - included so the baseline has to cope with it."
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": null,
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Nager.Date public holidays (mock)",
+      "sourceUrl": "https://date.nager.at/",
+      "fetchedAt": "2026-09-01T17:14:27.025Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "cosmic-coffee-road-closure-dip-2",
+    "siteId": "cosmic-coffee",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Summer Moon Coffee (0.3 mi south)",
+    "startDate": "2026-01-15",
+    "endDate": "2026-08-16",
+    "magnitude": 0.35,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Summer Moon Coffee",
+      "category": "Coffee shop",
+      "distanceM": 480,
+      "googleRating": 4.5,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 210,
+      "openedDate": "2024-03-01",
+      "note": "Established competitor on S Congress. Wood-fired coffee, strong local following.",
+      "at": {
+        "lat": 30.2475,
+        "lng": -97.7498
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 4.433333333333334,
+      "miles": 1.8,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:14:28.956Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:14:27.025Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "cosmic-coffee-road-closure-dip-3",
+    "siteId": "cosmic-coffee",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Mañana Coffee (0.4 mi north)",
+    "startDate": "2026-03-10",
+    "endDate": "2026-08-16",
+    "magnitude": 0.25,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Mañana Coffee",
+      "category": "Coffee & pastries",
+      "distanceM": 620,
+      "googleRating": 4.6,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 165,
+      "openedDate": "2022-08-15",
+      "note": "Trendy specialty coffee with strong Instagram presence. Attracts younger demographic.",
+      "at": {
+        "lat": 30.2558,
+        "lng": -97.7485
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 6.616666666666666,
+      "miles": 2.4,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:14:28.956Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:14:27.025Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "contigo-road-closure-dip-0",
+    "siteId": "contigo",
+    "scenarioKey": "road-closure-dip",
+    "kind": "road_closure",
+    "label": "S Congress Ave resurfacing, Elizabeth St to Monroe St",
+    "startDate": "2026-07-06",
+    "endDate": "2026-07-14",
+    "magnitude": 0.41,
+    "enabled": true,
+    "source": "City of Austin right-of-way permit portal (mock)",
+    "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+    "meta": {
+      "permit": "2026-071198 RW",
+      "filed": "2026-06-19",
+      "agency": "Austin Transportation & Public Works",
+      "work": "Mill and overlay, northbound lanes",
+      "polygonAreaLostPct": 41,
+      "scheduledReopen": "2026-07-15",
+      "at": {
+        "lat": 30.2535,
+        "lng": -97.7494
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 11.966666666666667,
+      "miles": 5,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:04.077Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "City of Austin right-of-way permit portal (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+      "fetchedAt": "2026-09-01T17:15:02.208Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "contigo-road-closure-dip-1",
+    "siteId": "contigo",
+    "scenarioKey": "road-closure-dip",
+    "kind": "holiday",
+    "label": "Independence Day",
+    "startDate": "2026-07-04",
+    "endDate": "2026-07-04",
+    "magnitude": 1,
+    "enabled": true,
+    "source": "Nager.Date public holidays (mock)",
+    "sourceUrl": "https://date.nager.at/",
+    "meta": {
+      "type": "federal",
+      "note": "Outside the analysis window - included so the baseline has to cope with it."
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": null,
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Nager.Date public holidays (mock)",
+      "sourceUrl": "https://date.nager.at/",
+      "fetchedAt": "2026-09-01T17:15:02.208Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "contigo-road-closure-dip-2",
+    "siteId": "contigo",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Summer Moon Coffee (0.3 mi south)",
+    "startDate": "2026-01-15",
+    "endDate": "2026-08-16",
+    "magnitude": 0.35,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Summer Moon Coffee",
+      "category": "Coffee shop",
+      "distanceM": 480,
+      "googleRating": 4.5,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 210,
+      "openedDate": "2024-03-01",
+      "note": "Established competitor on S Congress. Wood-fired coffee, strong local following.",
+      "at": {
+        "lat": 30.2475,
+        "lng": -97.7498
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 11.25,
+      "miles": 5.6,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:04.077Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:02.208Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "contigo-road-closure-dip-3",
+    "siteId": "contigo",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Mañana Coffee (0.4 mi north)",
+    "startDate": "2026-03-10",
+    "endDate": "2026-08-16",
+    "magnitude": 0.25,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Mañana Coffee",
+      "category": "Coffee & pastries",
+      "distanceM": 620,
+      "googleRating": 4.6,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 165,
+      "openedDate": "2022-08-15",
+      "note": "Trendy specialty coffee with strong Instagram presence. Attracts younger demographic.",
+      "at": {
+        "lat": 30.2558,
+        "lng": -97.7485
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 11.433333333333334,
+      "miles": 4.9,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:04.077Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:02.208Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "nixta-taqueria-road-closure-dip-0",
+    "siteId": "nixta-taqueria",
+    "scenarioKey": "road-closure-dip",
+    "kind": "road_closure",
+    "label": "S Congress Ave resurfacing, Elizabeth St to Monroe St",
+    "startDate": "2026-07-06",
+    "endDate": "2026-07-14",
+    "magnitude": 0.41,
+    "enabled": true,
+    "source": "City of Austin right-of-way permit portal (mock)",
+    "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+    "meta": {
+      "permit": "2026-071198 RW",
+      "filed": "2026-06-19",
+      "agency": "Austin Transportation & Public Works",
+      "work": "Mill and overlay, northbound lanes",
+      "polygonAreaLostPct": 41,
+      "scheduledReopen": "2026-07-15",
+      "at": {
+        "lat": 30.2535,
+        "lng": -97.7494
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 8.9,
+      "miles": 3.5,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:20.823Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "City of Austin right-of-way permit portal (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+      "fetchedAt": "2026-09-01T17:15:19.536Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "nixta-taqueria-road-closure-dip-1",
+    "siteId": "nixta-taqueria",
+    "scenarioKey": "road-closure-dip",
+    "kind": "holiday",
+    "label": "Independence Day",
+    "startDate": "2026-07-04",
+    "endDate": "2026-07-04",
+    "magnitude": 1,
+    "enabled": true,
+    "source": "Nager.Date public holidays (mock)",
+    "sourceUrl": "https://date.nager.at/",
+    "meta": {
+      "type": "federal",
+      "note": "Outside the analysis window - included so the baseline has to cope with it."
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": null,
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Nager.Date public holidays (mock)",
+      "sourceUrl": "https://date.nager.at/",
+      "fetchedAt": "2026-09-01T17:15:19.536Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "nixta-taqueria-road-closure-dip-2",
+    "siteId": "nixta-taqueria",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Summer Moon Coffee (0.3 mi south)",
+    "startDate": "2026-01-15",
+    "endDate": "2026-08-16",
+    "magnitude": 0.35,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Summer Moon Coffee",
+      "category": "Coffee shop",
+      "distanceM": 480,
+      "googleRating": 4.5,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 210,
+      "openedDate": "2024-03-01",
+      "note": "Established competitor on S Congress. Wood-fired coffee, strong local following.",
+      "at": {
+        "lat": 30.2475,
+        "lng": -97.7498
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 8.1,
+      "miles": 4.1,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:20.823Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:19.536Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "nixta-taqueria-road-closure-dip-3",
+    "siteId": "nixta-taqueria",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Mañana Coffee (0.4 mi north)",
+    "startDate": "2026-03-10",
+    "endDate": "2026-08-16",
+    "magnitude": 0.25,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Mañana Coffee",
+      "category": "Coffee & pastries",
+      "distanceM": 620,
+      "googleRating": 4.6,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 165,
+      "openedDate": "2022-08-15",
+      "note": "Trendy specialty coffee with strong Instagram presence. Attracts younger demographic.",
+      "at": {
+        "lat": 30.2558,
+        "lng": -97.7485
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 8.35,
+      "miles": 3.4,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:20.823Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:19.536Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "fonda-san-miguel-road-closure-dip-0",
+    "siteId": "fonda-san-miguel",
+    "scenarioKey": "road-closure-dip",
+    "kind": "road_closure",
+    "label": "S Congress Ave resurfacing, Elizabeth St to Monroe St",
+    "startDate": "2026-07-06",
+    "endDate": "2026-07-14",
+    "magnitude": 0.41,
+    "enabled": true,
+    "source": "City of Austin right-of-way permit portal (mock)",
+    "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+    "meta": {
+      "permit": "2026-071198 RW",
+      "filed": "2026-06-19",
+      "agency": "Austin Transportation & Public Works",
+      "work": "Mill and overlay, northbound lanes",
+      "polygonAreaLostPct": 41,
+      "scheduledReopen": "2026-07-15",
+      "at": {
+        "lat": 30.2535,
+        "lng": -97.7494
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 14.233333333333333,
+      "miles": 6.9,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:35.936Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "City of Austin right-of-way permit portal (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+      "fetchedAt": "2026-09-01T17:15:33.039Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "fonda-san-miguel-road-closure-dip-1",
+    "siteId": "fonda-san-miguel",
+    "scenarioKey": "road-closure-dip",
+    "kind": "holiday",
+    "label": "Independence Day",
+    "startDate": "2026-07-04",
+    "endDate": "2026-07-04",
+    "magnitude": 1,
+    "enabled": true,
+    "source": "Nager.Date public holidays (mock)",
+    "sourceUrl": "https://date.nager.at/",
+    "meta": {
+      "type": "federal",
+      "note": "Outside the analysis window - included so the baseline has to cope with it."
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": null,
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Nager.Date public holidays (mock)",
+      "sourceUrl": "https://date.nager.at/",
+      "fetchedAt": "2026-09-01T17:15:33.039Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "fonda-san-miguel-road-closure-dip-2",
+    "siteId": "fonda-san-miguel",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Summer Moon Coffee (0.3 mi south)",
+    "startDate": "2026-01-15",
+    "endDate": "2026-08-16",
+    "magnitude": 0.35,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Summer Moon Coffee",
+      "category": "Coffee shop",
+      "distanceM": 480,
+      "googleRating": 4.5,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 210,
+      "openedDate": "2024-03-01",
+      "note": "Established competitor on S Congress. Wood-fired coffee, strong local following.",
+      "at": {
+        "lat": 30.2475,
+        "lng": -97.7498
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 14.116666666666667,
+      "miles": 7.2,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:35.936Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:33.039Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "fonda-san-miguel-road-closure-dip-3",
+    "siteId": "fonda-san-miguel",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Mañana Coffee (0.4 mi north)",
+    "startDate": "2026-03-10",
+    "endDate": "2026-08-16",
+    "magnitude": 0.25,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Mañana Coffee",
+      "category": "Coffee & pastries",
+      "distanceM": 620,
+      "googleRating": 4.6,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 165,
+      "openedDate": "2022-08-15",
+      "note": "Trendy specialty coffee with strong Instagram presence. Attracts younger demographic.",
+      "at": {
+        "lat": 30.2558,
+        "lng": -97.7485
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 13.7,
+      "miles": 6.9,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:35.936Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:33.039Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "launderette-road-closure-dip-0",
+    "siteId": "launderette",
+    "scenarioKey": "road-closure-dip",
+    "kind": "road_closure",
+    "label": "S Congress Ave resurfacing, Elizabeth St to Monroe St",
+    "startDate": "2026-07-06",
+    "endDate": "2026-07-14",
+    "magnitude": 0.41,
+    "enabled": true,
+    "source": "City of Austin right-of-way permit portal (mock)",
+    "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+    "meta": {
+      "permit": "2026-071198 RW",
+      "filed": "2026-06-19",
+      "agency": "Austin Transportation & Public Works",
+      "work": "Mill and overlay, northbound lanes",
+      "polygonAreaLostPct": 41,
+      "scheduledReopen": "2026-07-15",
+      "at": {
+        "lat": 30.2535,
+        "lng": -97.7494
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 8.383333333333333,
+      "miles": 3,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:50.271Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "City of Austin right-of-way permit portal (mock)",
+      "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+      "fetchedAt": "2026-09-01T17:15:49.450Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "launderette-road-closure-dip-1",
+    "siteId": "launderette",
+    "scenarioKey": "road-closure-dip",
+    "kind": "holiday",
+    "label": "Independence Day",
+    "startDate": "2026-07-04",
+    "endDate": "2026-07-04",
+    "magnitude": 1,
+    "enabled": true,
+    "source": "Nager.Date public holidays (mock)",
+    "sourceUrl": "https://date.nager.at/",
+    "meta": {
+      "type": "federal",
+      "note": "Outside the analysis window - included so the baseline has to cope with it."
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": null,
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Nager.Date public holidays (mock)",
+      "sourceUrl": "https://date.nager.at/",
+      "fetchedAt": "2026-09-01T17:15:49.450Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "launderette-road-closure-dip-2",
+    "siteId": "launderette",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Summer Moon Coffee (0.3 mi south)",
+    "startDate": "2026-01-15",
+    "endDate": "2026-08-16",
+    "magnitude": 0.35,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Summer Moon Coffee",
+      "category": "Coffee shop",
+      "distanceM": 480,
+      "googleRating": 4.5,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 210,
+      "openedDate": "2024-03-01",
+      "note": "Established competitor on S Congress. Wood-fired coffee, strong local following.",
+      "at": {
+        "lat": 30.2475,
+        "lng": -97.7498
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 6.866666666666666,
+      "miles": 2.7,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:50.271Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:49.450Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
+  },
+  {
+    "id": "launderette-road-closure-dip-3",
+    "siteId": "launderette",
+    "scenarioKey": "road-closure-dip",
+    "kind": "competitor_open",
+    "label": "Mañana Coffee (0.4 mi north)",
+    "startDate": "2026-03-10",
+    "endDate": "2026-08-16",
+    "magnitude": 0.25,
+    "enabled": true,
+    "source": "Google Places API (mock)",
+    "sourceUrl": "https://maps.google.com",
+    "meta": {
+      "businessName": "Mañana Coffee",
+      "category": "Coffee & pastries",
+      "distanceM": 620,
+      "googleRating": 4.6,
+      "priceLevel": "$$",
+      "estimatedDailyTraffic": 165,
+      "openedDate": "2022-08-15",
+      "note": "Trendy specialty coffee with strong Instagram presence. Attracts younger demographic.",
+      "at": {
+        "lat": 30.2558,
+        "lng": -97.7485
+      }
+    },
+    "fixtureHash": "4-9qgtzw",
+    "driveTime": {
+      "minutes": 7.85,
+      "miles": 2.9,
+      "method": "mireye_distance",
+      "measuredAt": "2026-09-01T17:15:50.271Z"
+    },
+    "polygonMembership": {
+      "filtered": false,
+      "inside": true,
+      "distanceM": null,
+      "reason": "Authored for this address in the scenario fixture."
+    },
+    "provenance": {
+      "source": "Google Places API (mock)",
+      "sourceUrl": "https://maps.google.com",
+      "fetchedAt": "2026-09-01T17:15:49.450Z",
+      "confidence": "medium",
+      "mocked": true,
+      "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+    }
   }
 ]

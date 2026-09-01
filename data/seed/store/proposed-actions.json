@@ -2640,5 +2640,777 @@
     ],
     "createdAt": "2026-08-26T20:59:30.267Z",
     "decidedAt": null
+  },
+  {
+    "id": "cosmic-coffee-road-closure-dip-advertising",
+    "siteId": "cosmic-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 18.0 points of the 22.3% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.0%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Cosmic Coffee + Beer Garden - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Cosmic Coffee + Beer Garden",
+              "polygon": [
+                {
+                  "latitude": 30.261333,
+                  "longitude": -97.763057
+                },
+                {
+                  "latitude": 30.266932,
+                  "longitude": -97.74405
+                },
+                {
+                  "latitude": 30.251631,
+                  "longitude": -97.734888
+                },
+                {
+                  "latitude": 30.240477,
+                  "longitude": -97.726222
+                },
+                {
+                  "latitude": 30.227294,
+                  "longitude": -97.719086
+                },
+                {
+                  "latitude": 30.209387,
+                  "longitude": -97.713039
+                },
+                {
+                  "latitude": 30.199316,
+                  "longitude": -97.730683
+                },
+                {
+                  "latitude": 30.19117,
+                  "longitude": -97.745743
+                },
+                {
+                  "latitude": 30.184462,
+                  "longitude": -97.763057
+                },
+                {
+                  "latitude": 30.177029,
+                  "longitude": -97.787144
+                },
+                {
+                  "latitude": 30.197589,
+                  "longitude": -97.797429
+                },
+                {
+                  "latitude": 30.211753,
+                  "longitude": -97.806473
+                },
+                {
+                  "latitude": 30.227284,
+                  "longitude": -97.83092
+                },
+                {
+                  "latitude": 30.245285,
+                  "longitude": -97.813342
+                },
+                {
+                  "latitude": 30.247862,
+                  "longitude": -97.786861
+                },
+                {
+                  "latitude": 30.256543,
+                  "longitude": -97.77708
+                },
+                {
+                  "latitude": 30.261333,
+                  "longitude": -97.763057
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-09-01T17:14:27.025Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-09-01T17:14:27.019Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-09-01T17:16:25.282Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-09-01T17:16:45.661Z",
+    "decidedAt": null
+  },
+  {
+    "id": "cosmic-coffee-road-closure-dip-threat-watch",
+    "siteId": "cosmic-coffee",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 2581.9739352983242,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-09-01T17:14:27.025Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-09-01T17:16:45.662Z",
+    "decidedAt": null
+  },
+  {
+    "id": "contigo-road-closure-dip-advertising",
+    "siteId": "contigo",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 21.8 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Contigo - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Contigo",
+              "polygon": [
+                {
+                  "latitude": 30.339048,
+                  "longitude": -97.703344
+                },
+                {
+                  "latitude": 30.317212,
+                  "longitude": -97.689328
+                },
+                {
+                  "latitude": 30.314998,
+                  "longitude": -97.672068
+                },
+                {
+                  "latitude": 30.300537,
+                  "longitude": -97.668282
+                },
+                {
+                  "latitude": 30.287992,
+                  "longitude": -97.652954
+                },
+                {
+                  "latitude": 30.274787,
+                  "longitude": -97.666416
+                },
+                {
+                  "latitude": 30.269287,
+                  "longitude": -97.681676
+                },
+                {
+                  "latitude": 30.254536,
+                  "longitude": -97.687297
+                },
+                {
+                  "latitude": 30.246476,
+                  "longitude": -97.703344
+                },
+                {
+                  "latitude": 30.257989,
+                  "longitude": -97.717736
+                },
+                {
+                  "latitude": 30.257761,
+                  "longitude": -97.738349
+                },
+                {
+                  "latitude": 30.274826,
+                  "longitude": -97.740162
+                },
+                {
+                  "latitude": 30.287996,
+                  "longitude": -97.743696
+                },
+                {
+                  "latitude": 30.303232,
+                  "longitude": -97.745949
+                },
+                {
+                  "latitude": 30.32149,
+                  "longitude": -97.742145
+                },
+                {
+                  "latitude": 30.333152,
+                  "longitude": -97.725013
+                },
+                {
+                  "latitude": 30.339048,
+                  "longitude": -97.703344
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Contigo - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-09-01T17:15:02.203Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-09-01T17:16:25.282Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-09-01T17:17:40.773Z",
+    "decidedAt": null
+  },
+  {
+    "id": "fonda-san-miguel-road-closure-dip-advertising",
+    "siteId": "fonda-san-miguel",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Retarget the ad polygon to the measured 8-minute drive area",
+    "rationale": "Your ad audience is currently a 5-mile circle covering 78 square miles. The area that can actually reach you in 8 minutes is 18.9 square miles. Targeting the measured polygon instead removes the share of budget aimed at people who were never going to drive here.",
+    "expectedValueUsd": null,
+    "costUsd": 0,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Fonda San Miguel - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 43200
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Fonda San Miguel",
+              "polygon": [
+                {
+                  "latitude": 30.374682,
+                  "longitude": -97.74372
+                },
+                {
+                  "latitude": 30.362941,
+                  "longitude": -97.725747
+                },
+                {
+                  "latitude": 30.34962,
+                  "longitude": -97.715769
+                },
+                {
+                  "latitude": 30.336681,
+                  "longitude": -97.712443
+                },
+                {
+                  "latitude": 30.325498,
+                  "longitude": -97.707264
+                },
+                {
+                  "latitude": 30.310256,
+                  "longitude": -97.701102
+                },
+                {
+                  "latitude": 30.294488,
+                  "longitude": -97.707806
+                },
+                {
+                  "latitude": 30.294187,
+                  "longitude": -97.728697
+                },
+                {
+                  "latitude": 30.288717,
+                  "longitude": -97.74372
+                },
+                {
+                  "latitude": 30.278729,
+                  "longitude": -97.766154
+                },
+                {
+                  "latitude": 30.303405,
+                  "longitude": -97.769313
+                },
+                {
+                  "latitude": 30.317244,
+                  "longitude": -97.766812
+                },
+                {
+                  "latitude": 30.3255,
+                  "longitude": -97.771752
+                },
+                {
+                  "latitude": 30.339082,
+                  "longitude": -97.781721
+                },
+                {
+                  "latitude": 30.349968,
+                  "longitude": -97.772073
+                },
+                {
+                  "latitude": 30.357641,
+                  "longitude": -97.759148
+                },
+                {
+                  "latitude": 30.374682,
+                  "longitude": -97.74372
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "creative": {
+        "headline": "Fonda San Miguel - 8 minutes away",
+        "body": "You're inside our 8-minute drive area."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-09-01T17:15:33.032Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-09-01T17:17:41.501Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-09-01T17:18:37.079Z",
+    "decidedAt": null
+  },
+  {
+    "id": "launderette-road-closure-dip-advertising",
+    "siteId": "launderette",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 14.6 points of the 18.2% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.2%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Launderette - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Launderette",
+              "polygon": [
+                {
+                  "latitude": 30.298807,
+                  "longitude": -97.722729
+                },
+                {
+                  "latitude": 30.283244,
+                  "longitude": -97.707676
+                },
+                {
+                  "latitude": 30.276423,
+                  "longitude": -97.694288
+                },
+                {
+                  "latitude": 30.265308,
+                  "longitude": -97.685136
+                },
+                {
+                  "latitude": 30.251857,
+                  "longitude": -97.681189
+                },
+                {
+                  "latitude": 30.237374,
+                  "longitude": -97.682256
+                },
+                {
+                  "latitude": 30.240956,
+                  "longitude": -97.710103
+                },
+                {
+                  "latitude": 30.229311,
+                  "longitude": -97.711917
+                },
+                {
+                  "latitude": 30.22357,
+                  "longitude": -97.722729
+                },
+                {
+                  "latitude": 30.220643,
+                  "longitude": -97.737695
+                },
+                {
+                  "latitude": 30.231193,
+                  "longitude": -97.746652
+                },
+                {
+                  "latitude": 30.238807,
+                  "longitude": -97.759201
+                },
+                {
+                  "latitude": 30.251861,
+                  "longitude": -97.748389
+                },
+                {
+                  "latitude": 30.264223,
+                  "longitude": -97.757287
+                },
+                {
+                  "latitude": 30.277931,
+                  "longitude": -97.752917
+                },
+                {
+                  "latitude": 30.283277,
+                  "longitude": -97.737797
+                },
+                {
+                  "latitude": 30.298807,
+                  "longitude": -97.722729
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-09-01T17:15:49.450Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-09-01T17:15:49.443Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-09-01T17:17:41.501Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-09-01T17:19:32.470Z",
+    "decidedAt": null
+  },
+  {
+    "id": "launderette-road-closure-dip-threat-watch",
+    "siteId": "launderette",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 480m away",
+    "rationale": "Summer Moon Coffee (0.3 mi south), 480m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Summer Moon Coffee (0.3 mi south)",
+      "distanceM": 480,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 2645.1838588646256,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-09-01T17:15:49.450Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-09-01T17:19:32.470Z",
+    "decidedAt": null
+  },
+  {
+    "id": "nixta-taqueria-road-closure-dip-advertising",
+    "siteId": "nixta-taqueria",
+    "scenarioKey": "road-closure-dip",
+    "module": "advertising",
+    "title": "Move $177 of ad budget off the closed approach",
+    "rationale": "S Congress Ave resurfacing, Elizabeth St to Monroe St has taken 41% of the 8-minute drive area out of reach, and it accounts for 15.6 points of the 24.1% ticket drop. Ad spend into that side of the polygon is currently reaching people who cannot get to the door. Redeploy it to the reachable side and pause the discount code - basket size held at +0.9%, so price was never the problem. The value here is the $177 you stop wasting. We are not claiming this wins the tickets back - the road is still shut, and we have no measurement of what share of your tickets ads drive at all.",
+    "expectedValueUsd": 177,
+    "costUsd": 177,
+    "horizon": "9 days",
+    "requiresApproval": true,
+    "status": "pending",
+    "payload": {
+      "_warning": "DRAFT ONLY. This object is rendered for review and is never submitted to any ad platform. No ad account is connected.",
+      "platform": "meta.marketing.v21",
+      "objective": "OUTCOME_TRAFFIC",
+      "campaign": {
+        "name": "Groundwork - Nixta Taqueria - reachable audience",
+        "status": "PAUSED",
+        "daily_budget_cents": 4800,
+        "spend_cap_cents": 17700
+      },
+      "targeting": {
+        "geo_locations": {
+          "custom_locations": [
+            {
+              "name": "8-min drive area, Nixta Taqueria",
+              "polygon": [
+                {
+                  "latitude": 30.324664,
+                  "longitude": -97.719738
+                },
+                {
+                  "latitude": 30.32119,
+                  "longitude": -97.701917
+                },
+                {
+                  "latitude": 30.309176,
+                  "longitude": -97.690633
+                },
+                {
+                  "latitude": 30.303331,
+                  "longitude": -97.6658
+                },
+                {
+                  "latitude": 30.284035,
+                  "longitude": -97.651362
+                },
+                {
+                  "latitude": 30.269885,
+                  "longitude": -97.680149
+                },
+                {
+                  "latitude": 30.252963,
+                  "longitude": -97.683752
+                },
+                {
+                  "latitude": 30.249537,
+                  "longitude": -97.703188
+                },
+                {
+                  "latitude": 30.237842,
+                  "longitude": -97.719738
+                },
+                {
+                  "latitude": 30.233571,
+                  "longitude": -97.743939
+                },
+                {
+                  "latitude": 30.257212,
+                  "longitude": -97.750807
+                },
+                {
+                  "latitude": 30.269047,
+                  "longitude": -97.761665
+                },
+                {
+                  "latitude": 30.284045,
+                  "longitude": -97.765576
+                },
+                {
+                  "latitude": 30.296884,
+                  "longitude": -97.75563
+                },
+                {
+                  "latitude": 30.31146,
+                  "longitude": -97.75149
+                },
+                {
+                  "latitude": 30.320322,
+                  "longitude": -97.737142
+                },
+                {
+                  "latitude": 30.324664,
+                  "longitude": -97.719738
+                }
+              ]
+            }
+          ]
+        },
+        "excluded_geo_locations": {
+          "_note": "Approach severed by S Congress Ave resurfacing, Elizabeth St to Monroe St; excluded until reopening."
+        }
+      },
+      "creative": {
+        "headline": "Still open. Here's the way round.",
+        "body": "S Congress Ave resurfacing, Elizabeth St to Monroe St is on until 2026-07-15. We're open the whole time - come in from the south side."
+      }
+    },
+    "evidence": [
+      {
+        "source": "City of Austin right-of-way permit portal (mock)",
+        "sourceUrl": "https://www.austintexas.gov/department/right-way-permits",
+        "fetchedAt": "2026-09-01T17:15:19.536Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      },
+      {
+        "source": "Derived isochrone - Mireye /v1/proximity (op: screen)",
+        "fetchedAt": "2026-09-01T17:15:19.530Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "No routing provider in this stack returns polygon geometry. This boundary is computed by us from measured drive times and is labelled derived wherever it appears."
+      },
+      {
+        "source": "Groundwork decision module - derived",
+        "fetchedAt": "2026-09-01T17:17:41.501Z",
+        "confidence": "medium",
+        "mocked": false,
+        "note": "Computed from the attribution output and the persisted trade area. Not fetched from anywhere."
+      }
+    ],
+    "createdAt": "2026-09-01T17:20:30.447Z",
+    "decidedAt": null
+  },
+  {
+    "id": "nixta-taqueria-road-closure-dip-threat-watch",
+    "siteId": "nixta-taqueria",
+    "scenarioKey": "road-closure-dip",
+    "module": "threat_watch",
+    "title": "New competitor filed 620m away",
+    "rationale": "Mañana Coffee (0.4 mi north), 620m from your door. Certificate of occupancy on file, filed date not given, issued date not given. Too new to measure against your own series yet.",
+    "expectedValueUsd": null,
+    "costUsd": null,
+    "horizon": "standing watch",
+    "requiresApproval": false,
+    "status": "draft",
+    "payload": {
+      "alertType": "competitor_opened",
+      "subject": "Mañana Coffee (0.4 mi north)",
+      "distanceM": 620,
+      "permit": null,
+      "filed": null,
+      "polygonMembership": {
+        "filtered": true,
+        "inside": true,
+        "distanceM": 4183.192604882679,
+        "reason": "Inside the 8-minute drive polygon."
+      }
+    },
+    "evidence": [
+      {
+        "source": "Google Places API (mock)",
+        "sourceUrl": "https://maps.google.com",
+        "fetchedAt": "2026-09-01T17:15:19.536Z",
+        "confidence": "medium",
+        "mocked": true,
+        "note": "Scenario fixture - stands in for a live permit / 511 / events feed."
+      }
+    ],
+    "createdAt": "2026-09-01T17:20:30.447Z",
+    "decidedAt": null
   }
 ]

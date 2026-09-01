@@ -1,0 +1,54 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/lookup",
+  "recordedAt": "2026-09-01T17:15:07.681Z",
+  "request": {
+    "input": "2114 Manor Rd, Austin, TX 78722",
+    "include_parcel": true
+  },
+  "response": {
+    "disposition": "resolved",
+    "lat": 30.284053,
+    "lng": -97.719738,
+    "resolved_address": "2114 Manor Rd, Austin, TX 78722",
+    "resolved_location": {
+      "lat": 30.284053,
+      "lng": -97.719738,
+      "source": "address"
+    },
+    "county_fips": "48453",
+    "county": "Travis County",
+    "tract_geoid": "48453000402",
+    "state_fips": "48",
+    "state": "Texas",
+    "block_group_geoid": "484530004023",
+    "block_geoid": "484530004023003",
+    "congressional_district": "TX-35",
+    "cbsa_name": "Austin-Round Rock-San Marcos, TX Metro Area",
+    "cbsa_code": "12420",
+    "elevation_m": 185.72975158691406,
+    "fema_flood_zone": "X",
+    "within_floodplain": false,
+    "coastal_high_hazard": false,
+    "county_market": {
+      "population": 1389670,
+      "population_growth_1yr_pct": 1.0727,
+      "net_domestic_migration": -6590,
+      "building_permits_total_annual": 15059,
+      "building_permits_sf_annual": 4727,
+      "building_permits_yoy_pct": -11.3655,
+      "hpi_yoy_pct": -5.65,
+      "employment_total": 932839,
+      "employment_yoy_pct": 3.2663,
+      "median_household_income_usd": 97169
+    },
+    "in_opportunity_zone": false,
+    "timezone": "America/Chicago",
+    "parcel_unavailable": true,
+    "parcel_unavailable_reason": "no_parcel_for_address",
+    "match_method": "geocode_range_interpolation",
+    "confidence": 0.75,
+    "parcel_grade": false,
+    "precision_note": "Note: this location was estimated from the street address rather than matched to a rooftop, so it can be off by up to ~2,872 m in rural areas. Check `resolved_address` against the address you supplied — the geocoder resolves to the closest match it can find, which may be a different street or town. Confirm both before relying on parcel-specific conclusions."
+  }
+}
