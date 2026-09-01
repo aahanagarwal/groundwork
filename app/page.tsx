@@ -46,6 +46,7 @@ export default function Home() {
             <Link
               key={site.slug}
               href={`/site/${site.slug}`}
+              prefetch={true}
               className="card group block p-0 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
             >
               {/* Top accent bar */}

@@ -252,7 +252,7 @@ async function completeUncached(
         ...(thinks ? { reasoning_effort: cfg.reasoningEffort } : {}),
         ...(opts.json ? { response_format: { type: "json_object" as const } } : {}),
       },
-      { timeout: opts.timeoutMs ?? 45_000 },
+      { timeout: opts.timeoutMs ?? 3_500 },
     );
 
     const choice = response.choices[0];
@@ -302,8 +302,9 @@ async function completeUncached(
     // suggested time, the honest answer is the deterministic fallback rather
     // than a page that hangs while it queues.
     const retryAfter = /try again in ([\d.]+)s/i.exec(detail)?.[1];
-    if (retryAfter && attempt === 0) {
-      const waitMs = Math.min(Number(retryAfter) * 1000 + 250, 12_000);
+    const retrySec = retryAfter ? Number(retryAfter) : null;
+    if (retrySec !== null && retrySec <= 1.5 && attempt === 0) {
+      const waitMs = Math.min(retrySec * 1000 + 150, 1500);
       await new Promise((r) => setTimeout(r, waitMs));
       return completeUncached(opts, cfg, model, attempt + 1);
     }

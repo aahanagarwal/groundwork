@@ -179,23 +179,10 @@ export async function getMarketContext(
   site: SiteRecord,
   research: LocalResearch,
 ): Promise<string> {
-  if (research.hypotheses.length === 0) return "";
+  if (!research.hypotheses || research.hypotheses.length === 0) return "";
 
-  const result = await complete({
-    agent: "chat",
-    siteId: site.id,
-    cheap: true,
-    temperature: 0.3,
-    maxTokens: 220,
-    system: [
-      "Compress the following hypotheses into at most three short bullet points of local context for a consultant writing to a shop owner.",
-      "They are UNCONFIRMED possibilities. Preserve that framing - use 'may', 'could', 'worth checking'.",
-      "Do not add anything that is not in the input. Do not state any number.",
-    ].join("\n"),
-    user: research.hypotheses
-      .map((h, i) => `${i + 1}. ${h.hypothesis} (check: ${h.howToCheck})`)
-      .join("\n"),
-  });
-
-  return result.ok ? result.text : "";
+  return research.hypotheses
+    .slice(0, 3)
+    .map((h, i) => `${i + 1}. ${h.hypothesis} (Worth checking: ${h.howToCheck})`)
+    .join("\n");
 }

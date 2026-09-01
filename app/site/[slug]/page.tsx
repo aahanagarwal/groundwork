@@ -79,14 +79,20 @@ export default async function SitePage({
 
   const insight = attribution ? buildInsight(attribution, ledger) : null;
 
-  // --- The reasoning layer --------------------------------------------------
-  // Research runs first and is then handed to the narrator, so the brief and
-  // the panel that lists the hypotheses cannot tell different stories. Both
-  // degrade to their deterministic halves when no model is configured.
-  const research =
+  // --- The reasoning layer (Parallelized for sub-second rendering) -----------
+  // Research, week-ahead notes, and ad creative run concurrently.
+  // Narration consumes the research output to keep stories aligned.
+  const [research, weekAhead, adCreative] = await Promise.all([
     attribution && insight
-      ? await researchLocalContext({ site, attribution, insight, tradeArea, events })
-      : EMPTY_RESEARCH;
+      ? researchLocalContext({ site, attribution, insight, tradeArea, events })
+      : Promise.resolve(EMPTY_RESEARCH),
+    attribution && insight
+      ? writePrepNotes(site, projectWeekAhead(attribution, insight, ledger, events))
+      : Promise.resolve(null),
+    attribution && insight
+      ? draftAdCreative({ site, attribution, insight, tradeArea, events })
+      : Promise.resolve(null),
+  ]);
 
   const narration = attribution
     ? await narrate({
@@ -98,18 +104,6 @@ export default async function SitePage({
         research,
       })
     : null;
-
-  // Forward-looking, and computed from the attribution object rather than from
-  // a forecasting model - see lib/agent/week-ahead.ts.
-  const weekAhead =
-    attribution && insight
-      ? await writePrepNotes(site, projectWeekAhead(attribution, insight, ledger, events))
-      : null;
-
-  const adCreative =
-    attribution && insight
-      ? await draftAdCreative({ site, attribution, insight, tradeArea, events })
-      : null;
 
   // --- Decision modules -----------------------------------------------------
   const proposals: ProposedActionRecord[] = [];
