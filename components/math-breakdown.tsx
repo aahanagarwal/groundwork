@@ -79,10 +79,10 @@ export function MathBreakdown({
         <header className="px-6 py-5 border-b-[1.5px] border-ink bg-limestone/60 flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="font-mono text-[11px] uppercase tracking-widest px-2 py-0.5 bg-ink text-limestone font-bold">
+              <span className="font-mono text-[13px] uppercase tracking-widest px-2 py-0.5 bg-ink text-limestone font-bold">
                 Executive Math Brief
               </span>
-              <span className="font-mono text-[11.5px] uppercase tracking-wider text-survey">
+              <span className="font-mono text-[12.5px] uppercase tracking-wider text-survey">
                 Written by {narration.narratedBy}
               </span>
             </div>
@@ -90,7 +90,7 @@ export function MathBreakdown({
               The Full Breakdown &amp; Analysis
             </h2>
           </div>
-          <div className="text-right font-mono text-[12px] text-survey">
+          <div className="text-right font-mono text-[13px] text-survey">
             <div className="font-bold text-ink">{attribution.windowStart} &rarr; {attribution.windowEnd}</div>
             <div>{attribution.windowDays} Days &middot; {scenarioName}</div>
           </div>
@@ -99,7 +99,7 @@ export function MathBreakdown({
         {/* Big Headline Banner */}
         {narration.headline ? (
           <div className="px-6 py-4 bg-paper border-b border-rule">
-            <div className="text-[12px] font-mono uppercase tracking-widest text-ink/60 mb-1">
+            <div className="text-[13px] font-mono uppercase tracking-widest text-ink/60 mb-1">
               Core Conclusion:
             </div>
             <p className="font-display text-[20px] font-bold text-ink leading-snug">
@@ -115,7 +115,7 @@ export function MathBreakdown({
             <div className="mt-1 font-mono text-[22px] font-bold tabular text-ink">
               {attribution.observedTickets.toLocaleString()}
             </div>
-            <div className="text-[11.5px] text-ink/60 font-mono mt-0.5">Tickets in window</div>
+            <div className="text-[12.5px] text-ink/60 font-mono mt-0.5">Tickets in window</div>
           </div>
 
           <div className="px-5 py-4">
@@ -123,7 +123,7 @@ export function MathBreakdown({
             <div className="mt-1 font-mono text-[22px] font-bold tabular text-ink">
               {attribution.baselineTickets.toLocaleString()}
             </div>
-            <div className="text-[11.5px] text-ink/60 font-mono mt-0.5">Based on normal days</div>
+            <div className="text-[12.5px] text-ink/60 font-mono mt-0.5">Based on normal days</div>
           </div>
 
           <div className="px-5 py-4">
@@ -131,7 +131,7 @@ export function MathBreakdown({
             <div className={`mt-1 font-mono text-[22px] font-bold tabular ${down ? "text-ultra" : "text-survey"}`}>
               {pct(attribution.deltaPct)}
             </div>
-            <div className="text-[11.5px] text-ink/60 font-mono mt-0.5">
+            <div className="text-[12.5px] text-ink/60 font-mono mt-0.5">
               {Math.abs(attribution.observedTickets - attribution.baselineTickets)} tickets gap
             </div>
           </div>
@@ -141,7 +141,7 @@ export function MathBreakdown({
             <div className="mt-1 font-mono text-[22px] font-bold tabular text-ink">
               {pct(attribution.basketSizeDeltaPct)}
             </div>
-            <div className="text-[11.5px] text-ink/60 font-mono mt-0.5">
+            <div className="text-[12.5px] text-ink/60 font-mono mt-0.5">
               {Math.abs(attribution.basketSizeDeltaPct) < 2 ? "Flat (reach problem)" : "Mix shift"}
             </div>
           </div>
@@ -156,7 +156,7 @@ export function MathBreakdown({
                 What The Numbers Mean For Your Business
               </h3>
             </div>
-            <span className="font-mono text-[11px] uppercase tracking-wider text-ink/60">
+            <span className="font-mono text-[13px] uppercase tracking-wider text-ink/60">
               {narration.body.length} Actionable Points
             </span>
           </div>
@@ -172,17 +172,17 @@ export function MathBreakdown({
                   className="flex flex-col sm:flex-row items-start gap-3.5 p-4 rounded border border-rule bg-limestone/30 hover:bg-limestone/60 transition-colors"
                 >
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="font-mono text-[12px] font-bold px-2 py-1 bg-ink text-limestone rounded border border-ink">
+                    <span className="font-mono text-[13px] font-bold px-2 py-1 bg-ink text-limestone rounded border border-ink">
                       {numStr}
                     </span>
-                    <span className="sm:hidden font-mono text-[10.5px] uppercase tracking-wider px-2 py-0.5 bg-paper border border-rule text-survey font-bold">
+                    <span className="sm:hidden font-mono text-[12.5px] uppercase tracking-wider px-2 py-0.5 bg-paper border border-rule text-survey font-bold">
                       {tag}
                     </span>
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="hidden sm:inline-block mb-1.5">
-                      <span className="font-mono text-[10.5px] uppercase tracking-wider px-2 py-0.5 bg-paper border border-rule text-survey font-bold rounded">
+                      <span className="font-mono text-[12.5px] uppercase tracking-wider px-2 py-0.5 bg-paper border border-rule text-survey font-bold rounded">
                         {tag}
                       </span>
                     </div>

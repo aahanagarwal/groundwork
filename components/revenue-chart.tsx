@@ -39,7 +39,7 @@ export function RevenueChart({ attribution }: { attribution: AttributionResult }
     <div>
       <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3">
         <span className="label">Daily tickets vs expected</span>
-        <span className="font-mono text-[11.5px] text-survey">
+        <span className="font-mono text-[12.5px] text-survey">
           {active ? (
             <>
               {active.date} · {active.tickets} actual · {Math.round(active.baseline)} expected ·{" "}
@@ -116,7 +116,7 @@ export function RevenueChart({ attribution }: { attribution: AttributionResult }
         ))}
       </svg>
 
-      <div className="mt-1.5 flex flex-wrap gap-4 font-mono text-[11px] text-survey">
+      <div className="mt-1.5 flex flex-wrap gap-4 font-mono text-[13px] text-survey">
         <span className="flex items-center gap-1.5">
           <span className="inline-block h-0 w-4 border-t-[1.5px] border-ink" /> actual
         </span>

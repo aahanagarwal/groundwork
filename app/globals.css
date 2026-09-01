@@ -28,7 +28,7 @@
   --font-serif: var(--font-newsreader), "Newsreader", Georgia, serif;
   --font-mono: var(--font-dm-mono), "DM Mono", ui-monospace, monospace;
 
-  --text-label: 0.6875rem; /* 11px - the mono caps used on every data label */
+  --text-label: 0.75rem; /* 12px - the mono caps used on every data label */
 }
 
 /* The plat grid. 28px squares, barely there - it reads as paper texture at a

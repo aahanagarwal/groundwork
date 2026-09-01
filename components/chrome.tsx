@@ -37,7 +37,7 @@ export function Plate({
       <span className="label">{name}</span>
       <span className="plate-rule" />
       {of ? (
-        <span className="font-mono text-[12px] text-stone">{of}</span>
+        <span className="font-mono text-[13px] text-stone">{of}</span>
       ) : null}
     </div>
   );
@@ -78,7 +78,7 @@ export function MetaRow({
       {items.map((item, i) => (
         <div
           key={item.label}
-          className={`flex-1 basis-[170px] px-4 py-3.5 font-mono text-[12px] leading-relaxed ${
+          className={`flex-1 basis-[170px] px-4 py-3.5 font-mono text-[13px] leading-relaxed ${
             i < items.length - 1 ? "border-r border-rule" : ""
           }`}
         >
@@ -93,7 +93,7 @@ export function MetaRow({
 /** A small bordered tag, survey green. */
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-block border border-survey px-1.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-survey">
+    <span className="inline-block border border-survey px-1.5 py-0.5 font-mono text-[13px] uppercase tracking-[0.12em] text-survey">
       {children}
     </span>
   );
@@ -102,7 +102,7 @@ export function Tag({ children }: { children: ReactNode }) {
 export function Footer() {
   return (
     <Sheet>
-      <div className="mt-16 flex flex-wrap justify-between gap-5 border-t-[1.5px] border-ink py-5 pb-14 font-mono text-[11.5px] text-survey">
+      <div className="mt-16 flex flex-wrap justify-between gap-5 border-t-[1.5px] border-ink py-5 pb-14 font-mono text-[12.5px] text-survey">
         <span>Groundwork · concept demo</span>
         <span>Ground layer: Mireye Earth (live) · ledger &amp; world: fixtures</span>
       </div>

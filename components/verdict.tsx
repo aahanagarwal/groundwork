@@ -72,7 +72,7 @@ export function VerdictBlock({
     <section className={`card border-l-[5px] ${ACCENT[tone.accent]} p-0`}>
       <div className="px-6 pb-5 pt-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="border border-ink bg-ink px-2 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-limestone">
+          <span className="border border-ink bg-ink px-2 py-1 font-mono text-[12.5px] uppercase tracking-[0.18em] text-limestone">
             {tone.chip}
           </span>
           <span className="font-display text-[15px] font-bold uppercase tracking-widest text-ink ml-1">
@@ -164,7 +164,7 @@ function Tile({
       <div className="mt-1 font-mono text-[clamp(20px,2.4vw,28px)] leading-none tabular">
         {value}
       </div>
-      <div className="mt-1.5 font-mono text-[11px] leading-snug text-ink/55">{sub}</div>
+      <div className="mt-1.5 font-mono text-[13px] leading-snug text-ink/55">{sub}</div>
     </div>
   );
 }
@@ -243,11 +243,11 @@ function DriverCard({
               {EVENT_KIND_META[driver.kind]?.label ?? driver.kind}
             </span>
             <span
-              className={`border px-1.5 py-px font-mono text-[10px] uppercase tracking-[0.14em] ${style.className}`}
+              className={`border px-1.5 py-px font-mono text-[13px] uppercase tracking-[0.14em] ${style.className}`}
             >
               {style.label}
             </span>
-            <span className="font-mono text-[11px] text-stone">
+            <span className="font-mono text-[13px] text-stone">
               {driver.activeDays} of {insight.windowDays} days
             </span>
           </div>
@@ -288,7 +288,7 @@ function DriverCard({
               provenance={driver.provenance}
             />
           </div>
-          <div className="mt-1 font-mono text-[11px] text-ink/55">
+          <div className="mt-1 font-mono text-[13px] text-ink/55">
             customers · {money(driver.marginUsd)} margin
           </div>
         </div>
@@ -309,7 +309,7 @@ function DriverCard({
           {driver.certaintyReason}
         </p>
         {driver.components.length > 0 ? (
-          <p className="mt-1 font-mono text-[11.5px] leading-snug text-stone">
+          <p className="mt-1 font-mono text-[12.5px] leading-snug text-stone">
             {driver.components.map((c) => c.label).join(" · ")}
           </p>
         ) : null}
@@ -379,7 +379,7 @@ function UnexplainedCard({
               }}
             />
           </div>
-          <div className="mt-1 font-mono text-[11px] text-ink/55">
+          <div className="mt-1 font-mono text-[13px] text-ink/55">
             customers · {money(insight.unexplainedMarginUsd)} margin
           </div>
         </div>

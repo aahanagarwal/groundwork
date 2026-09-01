@@ -138,11 +138,11 @@ export function DailyCheckin({
               setDate(windowStart);
               setSaved(false);
             }}
-            className="border border-rule px-2 py-1 font-mono text-[10.5px] uppercase tracking-widest hover:border-ink"
+            className="border border-rule px-2 py-1 font-mono text-[12.5px] uppercase tracking-widest hover:border-ink"
           >
             Jump to {windowStart}
           </button>
-          <span className="font-mono text-[11px] text-stone">
+          <span className="font-mono text-[13px] text-stone">
             the period above is {windowStart} → {windowEnd}
           </span>
         </div>
@@ -158,7 +158,7 @@ export function DailyCheckin({
                   setPulse(pulse === option.id ? null : option.id);
                   setSaved(false);
                 }}
-                className={`border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest ${
+                className={`border px-3 py-1.5 font-mono text-[13px] uppercase tracking-widest ${
                   pulse === option.id
                     ? "border-ink bg-ink text-limestone"
                     : "border-rule hover:border-ink"
@@ -181,7 +181,7 @@ export function DailyCheckin({
                   toggleTag(tag.id);
                   setSaved(false);
                 }}
-                className={`border px-2.5 py-1.5 font-mono text-[11px] ${
+                className={`border px-2.5 py-1.5 font-mono text-[13px] ${
                   tags.includes(tag.id)
                     ? "border-ink bg-signal text-ink"
                     : "border-rule hover:border-ink"
@@ -215,21 +215,21 @@ export function DailyCheckin({
             type="button"
             disabled={!canSubmit || busy}
             onClick={submit}
-            className="border-[1.5px] border-ink bg-ink px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-limestone disabled:cursor-not-allowed disabled:opacity-40"
+            className="border-[1.5px] border-ink bg-ink px-4 py-2 font-mono text-[13px] uppercase tracking-widest text-limestone disabled:cursor-not-allowed disabled:opacity-40"
           >
             {busy ? "Saving…" : "Record it"}
           </button>
           {saved ? (
-            <span className="font-mono text-[11.5px] text-survey">
+            <span className="font-mono text-[12.5px] text-survey">
               Saved against {date}.
             </span>
           ) : null}
           {error ? (
-            <span className="font-mono text-[11.5px] text-ultra">{error}</span>
+            <span className="font-mono text-[12.5px] text-ultra">{error}</span>
           ) : null}
         </div>
 
-        <p className="mt-3 max-w-[62ch] font-mono text-[11px] leading-relaxed text-stone">
+        <p className="mt-3 max-w-[62ch] font-mono text-[13px] leading-relaxed text-stone">
           What you write here is shown next to the unexplained figure - it is not
           fed into the model. What you tell us is testimony, not a measurement, and
           turning it into a coefficient would invent precision nobody earned.
@@ -242,12 +242,12 @@ export function DailyCheckin({
           <ul className="space-y-1.5">
             {existing.slice(0, 4).map((entry) => (
               <li key={entry.id} className="flex gap-3 text-[14px] leading-snug">
-                <span className="shrink-0 font-mono text-[11.5px] text-survey">
+                <span className="shrink-0 font-mono text-[12.5px] text-survey">
                   {entry.date}
                 </span>
                 <span className="min-w-0">
                   {entry.pulse ? (
-                    <span className="mr-1.5 font-mono text-[11px] uppercase text-stone">
+                    <span className="mr-1.5 font-mono text-[13px] uppercase text-stone">
                       {entry.pulse}
                     </span>
                   ) : null}

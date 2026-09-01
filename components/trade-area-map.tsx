@@ -672,7 +672,7 @@ export function TradeAreaMap({
         <div ref={container} className="h-full w-full" />
 
         {basemapFailed ? (
-          <div className="pointer-events-none absolute bottom-3 right-3 max-w-[240px] border border-stone bg-paper/95 px-2.5 py-1.5 font-mono text-[10.5px] leading-snug text-stone">
+          <div className="pointer-events-none absolute bottom-3 right-3 max-w-[240px] border border-stone bg-paper/95 px-2.5 py-1.5 font-mono text-[12.5px] leading-snug text-stone">
             Street map unavailable - no connection. The drive area and the
             circle are drawn from stored geometry and are unaffected.
           </div>
@@ -680,29 +680,29 @@ export function TradeAreaMap({
 
         <div className="pointer-events-none absolute left-3 top-3 border-[1.5px] border-ink bg-paper/95 px-3 py-2.5">
           <div className="label mb-1.5">Trade area</div>
-          <div className="flex items-center gap-2 font-mono text-[11.5px]">
+          <div className="flex items-center gap-2 font-mono text-[12.5px]">
             <span className="inline-block h-2.5 w-4 border-2 border-[#2438C8] bg-[#2438C8]/20" />
             <span>{minutes}-minute drive - measured drive times</span>
           </div>
-          <div className="mt-1 flex items-center gap-2 font-mono text-[11.5px] text-ink/60">
+          <div className="mt-1 flex items-center gap-2 font-mono text-[12.5px] text-ink/60">
             <span className="inline-block h-0 w-4 border-t-2 border-dashed border-ink/60" />
             <span>{naiveRadiusMiles}-mile radius - what an ad tool buys</span>
           </div>
           <div className="mt-2 space-y-1 border-t border-ink/10 pt-2">
-            <div className="flex items-center gap-2 font-mono text-[11.5px]">
+            <div className="flex items-center gap-2 font-mono text-[12.5px]">
               <span className="inline-block h-2.5 w-2.5 rounded-full border border-white bg-[#C2321F]" />
               <span>Competitor - click to inspect</span>
             </div>
-            <div className="flex items-center gap-2 font-mono text-[11.5px]">
+            <div className="flex items-center gap-2 font-mono text-[12.5px]">
               <span className="inline-block h-2.5 w-2.5 rounded-sm border border-white bg-[#2438C8]" />
               <span>Road closure</span>
             </div>
-            <div className="flex items-center gap-2 font-mono text-[11.5px] text-ink/60">
+            <div className="flex items-center gap-2 font-mono text-[12.5px] text-ink/60">
               <span className="inline-block h-2.5 w-2.5 rounded-full border border-dashed border-[#C2321F] bg-[#C2321F]/10" />
               <span>Est. competitor catchment</span>
             </div>
             {discarded.length > 0 ? (
-              <div className="flex items-center gap-2 font-mono text-[11.5px] text-ink/60">
+              <div className="flex items-center gap-2 font-mono text-[12.5px] text-ink/60">
                 <span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-stone bg-transparent" />
                 <span>Considered, then discarded</span>
               </div>
@@ -714,14 +714,14 @@ export function TradeAreaMap({
           <button
             type="button"
             onClick={() => setShowCircle((v) => !v)}
-            className="border-[1.5px] border-ink bg-paper px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest hover:bg-limestone"
+            className="border-[1.5px] border-ink bg-paper px-3 py-1.5 font-mono text-[13px] uppercase tracking-widest hover:bg-limestone"
           >
             {showCircle ? "Hide" : "Show"} the circle
           </button>
           <button
             type="button"
             onClick={() => setTilted((v) => !v)}
-            className="border-[1.5px] border-ink bg-paper px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest hover:bg-limestone"
+            className="border-[1.5px] border-ink bg-paper px-3 py-1.5 font-mono text-[13px] uppercase tracking-widest hover:bg-limestone"
           >
             {tilted ? "Flat" : "3D"}
           </button>
@@ -791,13 +791,13 @@ function CompetitorRoster({
             <button
               type="button"
               onClick={onReset}
-              className="font-mono text-[10px] uppercase tracking-widest text-ink/50 underline hover:text-ink"
+              className="font-mono text-[13px] uppercase tracking-widest text-ink/50 underline hover:text-ink"
             >
               Reset
             </button>
           ) : null}
         </div>
-        <p className="mt-1 font-mono text-[11px] leading-snug text-ink/60">
+        <p className="mt-1 font-mono text-[13px] leading-snug text-ink/60">
           {competitors.length === 0
             ? "No competitors inside the drive polygon for this scenario."
             : measured.length === 0
@@ -827,7 +827,7 @@ function CompetitorRoster({
                 </span>
                 {distanceLabel(c) ? (
                   <span
-                    className="shrink-0 font-mono text-[11px] tabular text-ink/50"
+                    className="shrink-0 font-mono text-[13px] tabular text-ink/50"
                     title={distanceLabel(c)!.long}
                   >
                     {distanceLabel(c)!.short}
@@ -835,7 +835,7 @@ function CompetitorRoster({
                 ) : null}
               </div>
 
-              <div className="mt-0.5 font-mono text-[11px] text-ink/55">
+              <div className="mt-0.5 font-mono text-[13px] text-ink/55">
                 {[
                   meta["category"] as string,
                   meta["priceLevel"] as string,
@@ -848,19 +848,19 @@ function CompetitorRoster({
               {c.impact ? (
                 <div className="mt-2 flex items-center gap-2">
                   <span
-                    className="font-mono text-[10px] uppercase tracking-widest"
+                    className="font-mono text-[13px] uppercase tracking-widest"
                     style={{ color: cert!.color }}
                   >
                     {cert!.label}
                   </span>
-                  <span className="font-mono text-[12px] tabular font-bold text-ink">
+                  <span className="font-mono text-[13px] tabular font-bold text-ink">
                     {c.impact.certainty === "unproven"
                       ? "not sized"
                       : `${Math.round(c.impact.customers)} customers · ${money(c.impact.marginUsd)}`}
                   </span>
                 </div>
               ) : (
-                <div className="mt-2 font-mono text-[10.5px] leading-snug text-ink/45">
+                <div className="mt-2 font-mono text-[12.5px] leading-snug text-ink/45">
                   {c.unidentifiableReason
                     ? "Already inside your baseline - it predates this data, so nothing here separates it."
                     : "Present, but not separately measurable in this window."}
@@ -880,7 +880,7 @@ function CompetitorRoster({
                 key={d.id}
                 type="button"
                 onClick={() => onFocus(d)}
-                className="mt-1 block w-full text-left font-mono text-[11px] leading-snug text-ink/50 hover:text-ink"
+                className="mt-1 block w-full text-left font-mono text-[13px] leading-snug text-ink/50 hover:text-ink"
               >
                 <span className="underline decoration-dotted">{d.label}</span>
                 {distanceLabel(d) ? ` - ${distanceLabel(d)!.long} out` : ""}

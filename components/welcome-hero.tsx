@@ -87,7 +87,7 @@ export function WelcomeHero() {
         </div>
 
         {/* Trust strip */}
-        <div className="flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-wide text-survey">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] uppercase tracking-wide text-survey">
           <span>Every number cited</span>
           <span aria-hidden="true">·</span>
           <span>No foot-traffic guesses</span>

@@ -80,7 +80,7 @@ export function AttributionWaterfall({
               {pct(attribution.deltaPct)}% tickets
             </h2>
           </div>
-          <div className="text-right font-mono text-[11.5px] leading-relaxed text-survey">
+          <div className="text-right font-mono text-[12.5px] leading-relaxed text-survey">
             <div>
               {attribution.windowStart} → {attribution.windowEnd}
             </div>
@@ -136,7 +136,7 @@ export function AttributionWaterfall({
               <div key={row.key}>
                 <div className="mb-1 flex items-baseline justify-between gap-3">
                   <span
-                    className={`font-mono text-[11.5px] uppercase tracking-[0.14em] ${
+                    className={`font-mono text-[12.5px] uppercase tracking-[0.14em] ${
                       row.isUnexplained ? "text-ink" : "text-survey"
                     }`}
                   >

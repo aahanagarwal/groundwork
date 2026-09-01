@@ -174,11 +174,18 @@ export async function buildDashboard(
     data: {
       site,
       scenario,
-      scenarios: loadScenarios().map((s) => ({
-        key: s.key,
-        name: s.name,
-        description: s.description,
-      })),
+      // The three hand-authored scenarios are shared templates, deliberately
+      // offered on every site's picker. A user-built scenario (`custom`)
+      // describes one specific business from its own paragraph and has no
+      // business appearing as an option anywhere else - see the comment on
+      // `Scenario.custom` in lib/scenarios.ts.
+      scenarios: loadScenarios()
+        .filter((s) => !s.custom || s.site === slug)
+        .map((s) => ({
+          key: s.key,
+          name: s.name,
+          description: s.description,
+        })),
       tradeArea,
       events: filtered,
       discardedEvents,
@@ -195,7 +202,7 @@ export async function buildDashboard(
  * when a key is present; local OSRM draws it otherwise, and the record says
  * which - a polygon never pretends to be from an engine that didn't draw it.
  */
-async function ensureTradeArea(
+export async function ensureTradeArea(
   site: SiteRecord,
   stages: DashboardStageStatus[],
 ): Promise<TradeAreaRecord | null> {

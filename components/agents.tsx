@@ -23,7 +23,7 @@ function NotConfigured({ reason }: { reason: string }) {
   return (
     <div className="mt-3 border-l-[3px] border-stone bg-limestone/50 px-3 py-2">
       <div className="label mb-0.5 text-stone">Not generated</div>
-      <p className="font-mono text-[11.5px] leading-snug text-ink/60">{reason}</p>
+      <p className="font-mono text-[12.5px] leading-snug text-ink/60">{reason}</p>
     </div>
   );
 }
@@ -76,7 +76,7 @@ export function WeekAheadPanel({ plan }: { plan: WeekAhead }) {
                     {p.label}
                   </span>
                   <span
-                    className="font-mono text-[10px] uppercase tracking-widest"
+                    className="font-mono text-[13px] uppercase tracking-widest"
                     style={{ color: p.certainty === "confirmed" ? "#166534" : "#A16207" }}
                   >
                     {p.certainty}
@@ -86,7 +86,7 @@ export function WeekAheadPanel({ plan }: { plan: WeekAhead }) {
                   {p.customersPerDay.toFixed(1)} customers/day &middot;{" "}
                   {money(p.marginPerDayUsd)}/day
                 </div>
-                <div className="mt-0.5 font-mono text-[11px] text-ink/50">
+                <div className="mt-0.5 font-mono text-[13px] text-ink/50">
                   range {p.perDayLow.toFixed(1)} to {p.perDayHigh.toFixed(1)} a day
                   {p.endsOn
                     ? ` · ends ${p.endsOn} (${p.daysRemaining} days)`
@@ -116,17 +116,17 @@ export function WeekAheadPanel({ plan }: { plan: WeekAhead }) {
                     style={{ height: `${Math.max(4, (d.typicalTickets / max) * 56)}px` }}
                     title={`${d.label}: ${d.typicalTickets} tickets`}
                   />
-                  <div className="mt-1 font-mono text-[10px] text-ink/50">
+                  <div className="mt-1 font-mono text-[13px] text-ink/50">
                     {d.label.slice(0, 3)}
                   </div>
-                  <div className="font-mono text-[10px] tabular text-ink/70">
+                  <div className="font-mono text-[13px] tabular text-ink/70">
                     {d.typicalTickets}
                   </div>
                 </div>
               );
             })}
           </div>
-          <p className="mt-2 font-mono text-[11.5px] leading-snug text-ink/60">
+          <p className="mt-2 font-mono text-[12.5px] leading-snug text-ink/60">
             {plan.busiest.label} is your biggest day at {plan.busiest.typicalTickets}{" "}
             tickets; {plan.quietest.label} is your quietest at{" "}
             {plan.quietest.typicalTickets}. Measured on quiet days only, so a
@@ -141,7 +141,7 @@ export function WeekAheadPanel({ plan }: { plan: WeekAhead }) {
           <ul className="space-y-2">
             {plan.prep.map((line, i) => (
               <li key={i} className="flex gap-3 text-[15px] leading-snug text-ink">
-                <span className="font-mono text-[11px] text-ink/40">
+                <span className="font-mono text-[13px] text-ink/40">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span>{line}</span>
@@ -201,12 +201,12 @@ export function ResearchPanel({
               {research.hypotheses.map((h, i) => (
                 <li key={i} className="px-5 py-4">
                   <div className="flex gap-3">
-                    <span className="font-mono text-[11px] text-ink/40">
+                    <span className="font-mono text-[13px] text-ink/40">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div>
                       <p className="text-[16px] leading-snug text-ink">{h.hypothesis}</p>
-                      <p className="mt-1.5 font-mono text-[11.5px] leading-snug text-ink/55">
+                      <p className="mt-1.5 font-mono text-[12.5px] leading-snug text-ink/55">
                         How to check: {h.howToCheck}
                       </p>
                     </div>
@@ -225,7 +225,7 @@ export function ResearchPanel({
                     <p className="text-[15px] font-semibold leading-snug text-ink">
                       {q.question}
                     </p>
-                    <p className="mt-0.5 font-mono text-[11.5px] leading-snug text-ink/55">
+                    <p className="mt-0.5 font-mono text-[12.5px] leading-snug text-ink/55">
                       {q.whyItMatters}
                     </p>
                   </li>
@@ -263,7 +263,7 @@ export function AdCreativePanel({ creative }: { creative: AdCreative }) {
           {creative.concepts.map((c, i) => (
             <li key={i} className="px-5 py-4">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-[11px] text-ink/40">
+                <span className="font-mono text-[13px] text-ink/40">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="font-display text-[15px] font-bold uppercase tracking-wide text-ink">
@@ -273,10 +273,10 @@ export function AdCreativePanel({ creative }: { creative: AdCreative }) {
               <blockquote className="mt-2 border-l-[3px] border-signal pl-3 text-[17px] leading-snug text-ink">
                 {c.body}
               </blockquote>
-              <div className="mt-2 inline-block border border-ink px-2 py-1 font-mono text-[11px] uppercase tracking-widest">
+              <div className="mt-2 inline-block border border-ink px-2 py-1 font-mono text-[13px] uppercase tracking-widest">
                 {c.cta}
               </div>
-              <dl className="mt-3 space-y-1 font-mono text-[11.5px] leading-snug text-ink/55">
+              <dl className="mt-3 space-y-1 font-mono text-[12.5px] leading-snug text-ink/55">
                 <div>
                   <dt className="inline text-ink/40">Grounded in: </dt>
                   <dd className="inline">{c.groundedIn}</dd>

@@ -120,7 +120,7 @@ export function Capabilities({
                   &ldquo;{card.question}&rdquo;
                 </h3>
                 <span
-                  className={`shrink-0 border px-1.5 py-px font-mono text-[9.5px] uppercase tracking-[0.12em] ${style.className}`}
+                  className={`shrink-0 border px-1.5 py-px font-mono text-[12.5px] uppercase tracking-[0.12em] ${style.className}`}
                 >
                   {style.label}
                 </span>

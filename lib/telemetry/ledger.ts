@@ -26,7 +26,8 @@ export type AgentId =
   | "threat_watch"
   | "advertising"
   | "chat"
-  | "brief";
+  | "brief"
+  | "create";
 
 export interface LedgerEntry {
   id: string;

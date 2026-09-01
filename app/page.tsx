@@ -55,7 +55,7 @@ export default function Home() {
               <div className="p-5">
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className="label">{site.category}</span>
-                  <span className="inline-block border border-survey bg-survey px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-paper">
+                  <span className="inline-block border border-survey bg-survey px-1.5 py-0.5 font-mono text-[12.5px] uppercase tracking-[0.14em] text-paper">
                     Live demo
                   </span>
                 </div>
@@ -63,7 +63,7 @@ export default function Home() {
                 <div className="font-display text-[19px] font-bold uppercase leading-tight">
                   {site.label}
                 </div>
-                <div className="mt-2 font-mono text-[12px] leading-snug text-stone">
+                <div className="mt-2 font-mono text-[13px] leading-snug text-stone">
                   {site.address}
                 </div>
 
@@ -73,7 +73,7 @@ export default function Home() {
 
                 {/* Teaser CTA */}
                 <div className="mt-4 pt-3 border-t border-rule flex items-center justify-between">
-                  <span className="font-mono text-[11px] text-survey uppercase tracking-wide">
+                  <span className="font-mono text-[13px] text-survey uppercase tracking-wide">
                     See the full analysis
                   </span>
                   <span className="font-mono text-[14px] text-ink group-hover:translate-x-1 transition-transform duration-200">
@@ -83,6 +83,39 @@ export default function Home() {
               </div>
             </Link>
           ))}
+
+          {/* Create a new use case - purely additive, changes nothing about
+              the three demo cards above it. */}
+          <Link
+            href="/create"
+            prefetch={true}
+            className="card group block p-0 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+          >
+            <div className="h-1.5 w-full bg-ink/15" />
+            <div className="flex h-full flex-col p-5">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="label">Your own business</span>
+              </div>
+
+              <div className="font-display text-[19px] font-bold uppercase leading-tight">
+                Create a new use case
+              </div>
+              <p className="mt-3 text-[15px] leading-snug text-ink/75">
+                Describe your business in a sentence or two. We resolve the
+                address, draw the real drive-time area, and build the same
+                analysis you see above - for you.
+              </p>
+
+              <div className="mt-auto pt-3 border-t border-rule flex items-center justify-between">
+                <span className="font-mono text-[13px] text-survey uppercase tracking-wide">
+                  Start now
+                </span>
+                <span className="font-mono text-[14px] text-ink group-hover:translate-x-1 transition-transform duration-200">
+                  →
+                </span>
+              </div>
+            </div>
+          </Link>
         </div>
       </Sheet>
 

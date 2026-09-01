@@ -112,7 +112,7 @@ export function ScenarioSelector({
 
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono text-[12px] uppercase tracking-widest text-ink/60">
+      <span className="font-mono text-[13px] uppercase tracking-widest text-ink/60">
         Simulating Scenario:
       </span>
       <select

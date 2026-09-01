@@ -146,7 +146,7 @@ function CitationDrawer() {
             <button
               type="button"
               onClick={close}
-              className="shrink-0 border border-rule px-2 py-1 font-mono text-[11px] uppercase tracking-widest hover:border-ink"
+              className="shrink-0 border border-rule px-2 py-1 font-mono text-[13px] uppercase tracking-widest hover:border-ink"
             >
               Close
             </button>
@@ -215,7 +215,7 @@ function CitationDrawer() {
           {detail !== undefined && detail !== null ? (
             <section className="mt-6">
               <div className="label mb-2">Raw</div>
-              <pre className="max-h-[420px] overflow-auto border border-rule bg-limestone p-3 font-mono text-[11.5px] leading-relaxed">
+              <pre className="max-h-[420px] overflow-auto border border-rule bg-limestone p-3 font-mono text-[12.5px] leading-relaxed">
                 {JSON.stringify(detail, null, 2)}
               </pre>
             </section>

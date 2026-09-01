@@ -88,11 +88,11 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
         </div>
 
         {status === "approved" ? (
-          <span className="shrink-0 border-[1.5px] border-survey bg-survey px-2 py-1 font-mono text-[11px] uppercase tracking-widest text-paper">
+          <span className="shrink-0 border-[1.5px] border-survey bg-survey px-2 py-1 font-mono text-[13px] uppercase tracking-widest text-paper">
             Approved
           </span>
         ) : status === "rejected" ? (
-          <span className="shrink-0 border border-stone px-2 py-1 font-mono text-[11px] uppercase tracking-widest text-stone">
+          <span className="shrink-0 border border-stone px-2 py-1 font-mono text-[13px] uppercase tracking-widest text-stone">
             Declined
           </span>
         ) : null}
@@ -152,12 +152,12 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
             <button
               type="button"
               onClick={() => setShowPayload((v) => !v)}
-              className="font-mono text-[11px] uppercase tracking-widest text-ultra underline"
+              className="font-mono text-[13px] uppercase tracking-widest text-ultra underline"
             >
               {showPayload ? "Hide" : "Review"} the draft payload
             </button>
             {showPayload ? (
-              <pre className="mt-2 max-h-[300px] overflow-auto border border-rule bg-limestone p-3 font-mono text-[11px] leading-relaxed">
+              <pre className="mt-2 max-h-[300px] overflow-auto border border-rule bg-limestone p-3 font-mono text-[13px] leading-relaxed">
                 {JSON.stringify(action.payload, null, 2)}
               </pre>
             ) : null}
@@ -171,7 +171,7 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
                 key={`${provenance.source}-${i}`}
                 label="Evidence"
                 value={
-                  <span className="font-mono text-[11px]">{provenance.source}</span>
+                  <span className="font-mono text-[13px]">{provenance.source}</span>
                 }
                 provenance={provenance}
               />
@@ -195,7 +195,7 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
                     type="button"
                     disabled={busy}
                     onClick={() => decide("approved")}
-                    className="border-[1.5px] border-ink bg-ink px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-limestone disabled:opacity-50"
+                    className="border-[1.5px] border-ink bg-ink px-4 py-2 font-mono text-[13px] uppercase tracking-widest text-limestone disabled:opacity-50"
                   >
                     {busy ? "Working…" : "Yes, approve"}
                   </button>
@@ -203,7 +203,7 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
                     type="button"
                     disabled={busy}
                     onClick={() => setConfirming(false)}
-                    className="border border-rule px-4 py-2 font-mono text-[11px] uppercase tracking-widest"
+                    className="border border-rule px-4 py-2 font-mono text-[13px] uppercase tracking-widest"
                   >
                     Back
                   </button>
@@ -214,7 +214,7 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
                 <button
                   type="button"
                   onClick={() => setConfirming(true)}
-                  className="border-[1.5px] border-ink px-4 py-2 font-mono text-[11px] uppercase tracking-widest hover:bg-ink hover:text-limestone"
+                  className="border-[1.5px] border-ink px-4 py-2 font-mono text-[13px] uppercase tracking-widest hover:bg-ink hover:text-limestone"
                 >
                   Approve
                 </button>
@@ -222,7 +222,7 @@ function ActionCard({ action }: { action: ProposedActionRecord }) {
                   type="button"
                   disabled={busy}
                   onClick={() => decide("rejected")}
-                  className="border border-rule px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-stone hover:border-ink hover:text-ink"
+                  className="border border-rule px-4 py-2 font-mono text-[13px] uppercase tracking-widest text-stone hover:border-ink hover:text-ink"
                 >
                   Not now
                 </button>

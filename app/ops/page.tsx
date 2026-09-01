@@ -187,10 +187,10 @@ export default async function OpsPage() {
             {budgets.map((b) => (
               <div key={b.agent} className="border border-rule px-4 py-2.5">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <span className="font-mono text-[12px] uppercase tracking-[0.14em]">
+                  <span className="font-mono text-[13px] uppercase tracking-[0.14em]">
                     {b.agent}
                   </span>
-                  <span className="font-mono text-[12px] tabular text-survey">
+                  <span className="font-mono text-[13px] tabular text-survey">
                     {b.spent.toLocaleString()} / {b.ceiling.toLocaleString()} credits today
                   </span>
                 </div>
@@ -380,7 +380,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 function Th({ children, right = false }: { children: React.ReactNode; right?: boolean }) {
   return (
     <th
-      className={`border-b-[1.5px] border-ink pb-2 font-display text-[11px] font-bold uppercase tracking-[0.14em] ${
+      className={`border-b-[1.5px] border-ink pb-2 font-display text-[13px] font-bold uppercase tracking-[0.14em] ${
         right ? "text-right" : "text-left"
       }`}
     >

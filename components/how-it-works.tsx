@@ -54,7 +54,7 @@ export function HowItWorks() {
             <div className="pb-10 pt-2">
               <h3 className="font-display font-bold uppercase text-ink text-xl mb-3 flex items-center gap-3 flex-wrap">
                 Open the app → Instant verdict
-                <span className="bg-ink text-limestone px-2 py-1 font-mono text-[10px] uppercase rounded-sm whitespace-nowrap">NOT YOUR FAULT</span>
+                <span className="bg-ink text-limestone px-2 py-1 font-mono text-[13px] uppercase rounded-sm whitespace-nowrap">NOT YOUR FAULT</span>
               </h3>
               <p className="font-serif text-ink/80 text-base leading-relaxed">
                 Before you finish your coffee, you see the answer: &apos;This wasn’t you - it was the street.&apos; or &apos;You ran ahead, and it wasn’t luck.&apos; In customers and dollars, not percentages.
@@ -103,8 +103,8 @@ export function HowItWorks() {
                 Move $340 of ad spend off the closed approach. Hold your prices - basket size didn’t move. Push iced drinks to the afternoon shift. Each action comes with a cost and an expected value, and nothing fires until you approve it.
               </p>
               <div className="flex gap-2">
-                <button className="bg-survey text-limestone font-mono text-[10px] px-3 py-1.5 uppercase tracking-wider hover:opacity-90 transition-opacity">APPROVE</button>
-                <button className="bg-paper border border-ink/20 text-ink font-mono text-[10px] px-3 py-1.5 uppercase tracking-wider hover:bg-limestone transition-colors">NOT NOW</button>
+                <button className="bg-survey text-limestone font-mono text-[13px] px-3 py-1.5 uppercase tracking-wider hover:opacity-90 transition-opacity">APPROVE</button>
+                <button className="bg-paper border border-ink/20 text-ink font-mono text-[13px] px-3 py-1.5 uppercase tracking-wider hover:bg-limestone transition-colors">NOT NOW</button>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ export function HowItWorks() {
               <p className="font-serif text-ink/80 text-base leading-relaxed mb-4">
                 We show you exactly how much we can’t explain. You tell us what was happening - a broken grinder, a staff shortage, a menu change. Your knowledge fills the gap our data can’t, and the numbers stop blaming the street for something that happened inside.
               </p>
-              <div className="border border-ink/20 bg-paper px-3 py-2 font-mono text-[11px] text-stone w-full max-w-sm rounded-sm">
+              <div className="border border-ink/20 bg-paper px-3 py-2 font-mono text-[13px] text-stone w-full max-w-sm rounded-sm">
                 Grinder broke Tuesday...
               </div>
             </div>

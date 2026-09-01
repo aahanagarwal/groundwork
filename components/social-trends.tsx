@@ -102,7 +102,7 @@ export function SocialTrends() {
 
                 <div className="flex flex-col md:flex-row gap-6 md:gap-12 flex-grow">
                   <div className="flex-1 flex flex-col gap-2">
-                    <span className="label text-ink/60 text-[11px]">
+                    <span className="label text-ink/60 text-[13px]">
                       WHAT HAPPENED
                     </span>
                     <p className="font-sans text-[15px] leading-relaxed text-ink/80">
@@ -110,7 +110,7 @@ export function SocialTrends() {
                     </p>
                   </div>
                   <div className="flex-[1.5] flex flex-col gap-2">
-                    <span className="label text-ink/60 text-[11px]">
+                    <span className="label text-ink/60 text-[13px]">
                       YOUR MOVE
                     </span>
                     <p className="font-sans text-[15px] leading-relaxed text-ink font-medium">
@@ -120,7 +120,7 @@ export function SocialTrends() {
                 </div>
 
                 <div className="pt-4 border-t border-ink/10">
-                  <span className="font-mono text-[11px] text-ink/50 uppercase tracking-wider">
+                  <span className="font-mono text-[13px] text-ink/50 uppercase tracking-wider">
                     Channels: {scenario.channel}
                   </span>
                 </div>
@@ -146,7 +146,7 @@ export function SocialTrends() {
 
       {/* Summary Footer */}
       <div className="border-t border-ink/10 pt-4 mt-4">
-        <p className="font-mono text-[12px] text-survey">
+        <p className="font-mono text-[13px] text-survey">
           Every recommendation is grounded in measured data from your address - not
           generic advice. The numbers came first; the strategy follows.
         </p>

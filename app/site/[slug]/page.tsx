@@ -92,6 +92,9 @@ export default async function SitePage({
   const insight = attribution ? buildInsight(attribution, ledger) : null;
 
   // --- The reasoning layer (Cached in-memory for instant 0ms transitions) ----
+  // One timestamp for the whole check-and-write below, not two separate
+  // Date.now() calls - a single value that can't disagree with itself.
+  const now = Date.now();
   const cacheKey = `${site.id}:${scenario.key}`;
   const hit = siteReasoningCache.get(cacheKey);
 
@@ -100,7 +103,7 @@ export default async function SitePage({
   let adCreative = hit ? (hit.adCreative as Awaited<ReturnType<typeof draftAdCreative>>) : null;
   let narration = hit ? hit.narration : null;
 
-  if (!hit || Date.now() - hit.at > SITE_CACHE_TTL_MS) {
+  if (!hit || now - hit.at > SITE_CACHE_TTL_MS) {
     const [freshResearch, freshWeekAhead, freshAdCreative] = await Promise.all([
       attribution && insight
         ? researchLocalContext({ site, attribution, insight, tradeArea, events })
@@ -133,7 +136,7 @@ export default async function SitePage({
       weekAhead,
       adCreative,
       narration,
-      at: Date.now(),
+      at: now,
     });
   }
 
@@ -257,7 +260,7 @@ export default async function SitePage({
                   <div className="font-display text-[17px] font-bold uppercase leading-none">
                     {site.label}
                   </div>
-                  <div className="mt-1 font-mono text-[11.5px] text-survey">
+                  <div className="mt-1 font-mono text-[12.5px] text-survey">
                     {site.resolvedAddress ?? site.inputAddress}
                     {site.approximate ? (
                       <span className="ml-2 border border-stone px-1 py-px text-stone">
@@ -438,10 +441,10 @@ export default async function SitePage({
                   {events.map((event) => (
                     <li key={event.id} className="px-5 py-4">
                       <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                        <span className="font-mono text-[11px] uppercase tracking-widest px-2 py-1 bg-ink text-limestone">
+                        <span className="font-mono text-[13px] uppercase tracking-widest px-2 py-1 bg-ink text-limestone">
                           {EVENT_KIND_META[event.kind]?.label ?? event.kind}
                         </span>
-                        <span className="font-mono text-[12px] tabular text-stone">
+                        <span className="font-mono text-[13px] tabular text-stone">
                           {event.startDate}
                           {event.endDate !== event.startDate ? ` → ${event.endDate}` : ""}
                         </span>
@@ -474,7 +477,7 @@ export default async function SitePage({
                       {discardedEvents.map((event) => (
                         <li
                           key={event.id}
-                          className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-[12px] text-ink/55"
+                          className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-[13px] text-ink/55"
                         >
                           <span>{event.label}</span>
                           <span className="tabular">

@@ -60,7 +60,7 @@ export function RefusalPanel({
           </p>
         ) : null}
 
-        <p className="mt-4 font-mono text-[11.5px] leading-relaxed text-stone">
+        <p className="mt-4 font-mono text-[12.5px] leading-relaxed text-stone">
           {refusal.retryable
             ? "This one can be retried."
             : "Retrying will not change this. Something about the request has to change first."}

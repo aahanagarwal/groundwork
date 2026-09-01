@@ -1,0 +1,15 @@
+{
+  "_note": "Recorded from the live Mireye Earth API. Safe to delete - it is re-recorded on the next run in record mode.",
+  "endpoint": "/v1/lookup",
+  "recordedAt": "2026-09-01T20:41:50.451Z",
+  "request": {
+    "input": "asdkjaslkdj not a real place at all 99999",
+    "include_parcel": true
+  },
+  "response": {
+    "disposition": "no_match",
+    "parcel_unavailable": false,
+    "reason": "address_too_coarse",
+    "hint": "resolved only to place, which is not specific enough to identify a property."
+  }
+}

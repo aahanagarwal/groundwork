@@ -38,7 +38,7 @@ export function GettingStartedBanner({ siteLabel }: { siteLabel: string }) {
       <button
         type="button"
         onClick={dismiss}
-        className="absolute top-3 right-3 font-mono text-[11px] text-stone hover:text-ink transition-colors"
+        className="absolute top-3 right-3 font-mono text-[13px] text-stone hover:text-ink transition-colors"
         aria-label="Dismiss"
       >
         ✕
@@ -55,26 +55,26 @@ export function GettingStartedBanner({ siteLabel }: { siteLabel: string }) {
 
       <div className="grid gap-3 sm:grid-cols-3 mb-4">
         <div className="flex items-center gap-2">
-          <span className="shrink-0 border border-ink bg-ink px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-limestone">
+          <span className="shrink-0 border border-ink bg-ink px-1.5 py-0.5 font-mono text-[12.5px] uppercase tracking-[0.14em] text-limestone">
             Not your fault
           </span>
           <span className="text-[13px] text-ink/70">The street did it</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="shrink-0 border border-ink bg-signal px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-ink">
+          <span className="shrink-0 border border-ink bg-signal px-1.5 py-0.5 font-mono text-[12.5px] uppercase tracking-[0.14em] text-ink">
             Partly explained
           </span>
           <span className="text-[13px] text-ink/70">We found some of it</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="shrink-0 border border-stone px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-stone">
+          <span className="shrink-0 border border-stone px-1.5 py-0.5 font-mono text-[12.5px] uppercase tracking-[0.14em] text-stone">
             Unexplained
           </span>
           <span className="text-[13px] text-ink/70">Something we can&rsquo;t see</span>
         </div>
       </div>
 
-      <p className="font-mono text-[11px] text-survey leading-relaxed">
+      <p className="font-mono text-[13px] text-survey leading-relaxed">
         Tip: <span className="hl px-0.5">Yellow-highlighted numbers</span> are the ones
         that matter most. Click any number to see exactly where it came from.
       </p>
