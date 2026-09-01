@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { buildDashboard } from "@/lib/pipeline";
-import { narrate } from "@/lib/agent/narrate";
-import { researchLocalContext, EMPTY_RESEARCH } from "@/lib/agent/researcher";
+import { narrate, type Narration } from "@/lib/agent/narrate";
+import { researchLocalContext, EMPTY_RESEARCH, type LocalResearch } from "@/lib/agent/researcher";
 import { projectWeekAhead, writePrepNotes } from "@/lib/agent/week-ahead";
 import { WeekAheadPanel, ResearchPanel, AdCreativePanel } from "@/components/agents";
 import { draftAdCreative } from "@/lib/agent/ad-copy";
@@ -24,6 +24,18 @@ import { GettingStartedBanner } from "@/components/getting-started";
 import { DashboardTabs, ScenarioSelector } from "@/components/dashboard-client";
 
 export const dynamic = "force-dynamic";
+
+const SITE_CACHE_TTL_MS = 15 * 60 * 1000;
+const siteReasoningCache = new Map<
+  string,
+  {
+    research: LocalResearch;
+    weekAhead: Awaited<ReturnType<typeof writePrepNotes>> | null;
+    adCreative: Awaited<ReturnType<typeof draftAdCreative>> | null;
+    narration: Narration | null;
+    at: number;
+  }
+>();
 
 /**
  * THE CONSULTANT SURFACE
@@ -79,31 +91,51 @@ export default async function SitePage({
 
   const insight = attribution ? buildInsight(attribution, ledger) : null;
 
-  // --- The reasoning layer (Parallelized for sub-second rendering) -----------
-  // Research, week-ahead notes, and ad creative run concurrently.
-  // Narration consumes the research output to keep stories aligned.
-  const [research, weekAhead, adCreative] = await Promise.all([
-    attribution && insight
-      ? researchLocalContext({ site, attribution, insight, tradeArea, events })
-      : Promise.resolve(EMPTY_RESEARCH),
-    attribution && insight
-      ? writePrepNotes(site, projectWeekAhead(attribution, insight, ledger, events))
-      : Promise.resolve(null),
-    attribution && insight
-      ? draftAdCreative({ site, attribution, insight, tradeArea, events })
-      : Promise.resolve(null),
-  ]);
+  // --- The reasoning layer (Cached in-memory for instant 0ms transitions) ----
+  const cacheKey = `${site.id}:${scenario.key}`;
+  const hit = siteReasoningCache.get(cacheKey);
 
-  const narration = attribution
-    ? await narrate({
-        site,
-        attribution,
-        tradeArea,
-        events,
-        scenarioName: scenario.name,
-        research,
-      })
-    : null;
+  let research = hit ? hit.research : EMPTY_RESEARCH;
+  let weekAhead = hit ? (hit.weekAhead as Awaited<ReturnType<typeof writePrepNotes>>) : null;
+  let adCreative = hit ? (hit.adCreative as Awaited<ReturnType<typeof draftAdCreative>>) : null;
+  let narration = hit ? hit.narration : null;
+
+  if (!hit || Date.now() - hit.at > SITE_CACHE_TTL_MS) {
+    const [freshResearch, freshWeekAhead, freshAdCreative] = await Promise.all([
+      attribution && insight
+        ? researchLocalContext({ site, attribution, insight, tradeArea, events })
+        : Promise.resolve(EMPTY_RESEARCH),
+      attribution && insight
+        ? writePrepNotes(site, projectWeekAhead(attribution, insight, ledger, events))
+        : Promise.resolve(null),
+      attribution && insight
+        ? draftAdCreative({ site, attribution, insight, tradeArea, events })
+        : Promise.resolve(null),
+    ]);
+
+    research = freshResearch;
+    weekAhead = freshWeekAhead;
+    adCreative = freshAdCreative;
+
+    narration = attribution
+      ? await narrate({
+          site,
+          attribution,
+          tradeArea,
+          events,
+          scenarioName: scenario.name,
+          research,
+        })
+      : null;
+
+    siteReasoningCache.set(cacheKey, {
+      research,
+      weekAhead,
+      adCreative,
+      narration,
+      at: Date.now(),
+    });
+  }
 
   // --- Decision modules -----------------------------------------------------
   const proposals: ProposedActionRecord[] = [];
